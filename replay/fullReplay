@@ -7,4 +7,5 @@ then
 else
 	RUNNUM=$1
 fi
-analyzer 'replay_coinc_new.C('$RUNNUM',-1,0,kTRUE,kFALSE,kFALSE)'
+#analyzer 'replay_coinc_new.C('$RUNNUM',-1,0,kTRUE,kFALSE,kFALSE)'
+analyzer 'replay_coinc_new.C('$RUNNUM',1000,0,kTRUE,kFALSE,kFALSE)'

@@ -30,6 +30,7 @@
     printf("\nrootlogon.C: Loading Replay Core Library..."); 
     gSystem->Load(Form(replay_dir_prefix,"ReplayCore64_C.so"));
     gSystem->Load(Form(replay_dir_prefix,"libraries/Tritium_Xscin/libTritium_Xscin.so"));
+    gSystem->Load(Form(replay_dir_prefix,"libraries/TriFadcUnRasteredBeam/libTriFadcUnRasteredBeam.so"));
     gSystem->Load(Form(replay_dir_prefix,"libraries/TriFadcScin/libTriFadcScin.so"));
     gSystem->Load(Form(replay_dir_prefix,"libraries/TriFadcCherenkov/libTriFadcCherenkov.so"));
     gSystem->Load(Form(replay_dir_prefix,"libraries/TriFadcXscin/libTriFadcXscin.so"));
