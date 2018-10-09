@@ -49,6 +49,7 @@ scene.center = vector(0.,0.,0)
 scene.up = vector(-1.,0.,1.)
 scene.forward = vector(0.,0.,1.)
 
+
 ###############################################
 ## DEFINE FUNCTIONS TO DRAW AND CLEAR EVENTS ##
 ###############################################
@@ -75,6 +76,8 @@ def clear_event(currentTracks):
 		u2[i].visible = False
 		v2[i].visible = False
 
+
+# function to draw track[s]
 def draw_track(ntr, xtr, ytr, thtr, phtr):
 	track = []
 	for i in range(ntr):
@@ -117,6 +120,7 @@ def draw_event_vdc(vp, clb, cle, clt, clw):
 				vp[w].color=color.red
 			else:
 				vp[w].color=color.yellow 
+
 
 
 #########################
@@ -162,6 +166,8 @@ def get_event_vdc(vp, tree, eventNum):
 	w = getattr(tree, "R.vdc." + vp + ".wire")
 	return b, e, t, w
 	
+
+
 #########################
 ## DRAW TRACK AND HITS ##
 #########################

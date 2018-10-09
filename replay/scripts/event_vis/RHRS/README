@@ -10,6 +10,8 @@
 ## REQUIREMENTS ##
 ##################
 
+=======
+Requirements:
 	Python
 	vpython module
 	PyROOT
@@ -17,6 +19,8 @@
 ##############
 ## OVERVIEW ##
 ##############
+The main function is RHRS_event_vis.py.  It takes one (required) argument, the path of a ROOT file to visualize events from.
+
 
 Code for building an individual detector (e.g. shower, preshower) is contained in the script: 
 
@@ -56,4 +60,3 @@ This sets which VDC wires will be displayed.  If True, all active wires are disp
 3. evCuts 
 
 This sets the cuts that are used to build the event list.
-
