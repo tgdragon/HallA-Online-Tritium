@@ -4,7 +4,7 @@ replay/scripts/calibrate/BPM/HarpScans/*
 replay/scripts/calibrate/BPM/harp_results_*
 replay/scripts/FADC_decode/results/
 replay/scripts/calibrate/BPM/*.txt
-replay/Rootfiles*
+#replay/Rootfiles*
 replay/plots
 replay/*.pdf
 replay/*.eps
