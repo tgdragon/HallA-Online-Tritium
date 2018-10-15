@@ -1,0 +1,40 @@
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ | These are codes for A2 calibration. |
+ | Toshiyuki Gogami, Oct 6, 2018       |
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ (0) Prepare a ROOT file, tritium_93740.root (in this case)
+
+ (1) Execute accalib.cc to get new parameters for each channel (#ch):
+     $ root
+     $ .x accalib.cc (#ch)
+
+ (3) Copy a fitting results in "a2_fitresults.dat" in order of channel
+     (e.g.)
+     0 -0.547447 0.140275 26.0729 0.0786429 367.561 8.86045
+     1 -0.0848432 0.107007 28.9857 0.0873705 345.428 3.56334
+     2 -0.445481 0.135697 25.0699 0.0788297 406.101 3.11414
+        .
+	.
+     24 ...
+
+ (4) Copy the original parameters that were used to create the
+     original ROOT file to "org.dat".
+     (e.g.)
+     R.a2.adc.pedestals
+     13734  12730  14711  15319  12533
+     14033  14145  14849  13032  15759
+     14841  14235  18967  17333  16960
+     18565  17667  17316  17385  19568
+     17950  18968  18810  17598
+
+     R.a2.adc.gains
+     1.0  1.0  1.0  1.0  1.0
+     1.0  1.0  1.0  1.0  1.0
+     1.0  1.0  1.0  1.0  1.0
+     1.0  1.0  1.0  1.0  1.0 
+     1.0  1.0  1.0  1.0
+
+  (5) Execute "CreateParameters.cc" to create new parameters:
+      $ .x CreateParameters.cc
