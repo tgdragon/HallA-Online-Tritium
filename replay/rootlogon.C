@@ -33,6 +33,7 @@
     gSystem->Load(Form(replay_dir_prefix,"libraries/TriFadcUnRasteredBeam/libTriFadcUnRasteredBeam.so"));
     gSystem->Load(Form(replay_dir_prefix,"libraries/TriFadcScin/libTriFadcScin.so"));
     gSystem->Load(Form(replay_dir_prefix,"libraries/TriFadcCherenkov/libTriFadcCherenkov.so"));
+    gSystem->Load(Form(replay_dir_prefix,"libraries/TriFadcAerogelC/libTriFadcAerogelC.so"));
     gSystem->Load(Form(replay_dir_prefix,"libraries/TriFadcXscin/libTriFadcXscin.so"));
     gSystem->Load(Form("./libraries/Tritium_HRS/libTritium_HRS.so"));
     gSystem->Load(Form(replay_dir_prefix,"libraries/Tritium_TSScaler/libTritium_TSScaler.so"));
