@@ -1,8 +1,8 @@
 # Right HRS
 block R.s2.*
 block R.s0.*
-block R.ps.*
-block R.sh.*
+#block R.ps.*
+#block R.sh.*
 block R.cer.*
 block R.vdc.*
 block R.tr.*
@@ -19,7 +19,7 @@ block DR.*
 block RTDC.*
 #variable RTDC.F1nhits
 #variable RTDC.F1Warnings
-#variable RTDC.F1FirstHit
+variable RTDC.F1FirstHit
 #variable RTDC.F1AllHits_014
 #variable RTDC.vfnhits
 #variable RTDC.vfFirstHit
