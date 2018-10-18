@@ -38,7 +38,8 @@
 //This allows changing the directory in fewer places for ease of portability.
 const char* REPLAY_DIR_PREFIX = "./%s";
 //const char* ROOTFILE_DIR_PREFIX = "/volatile/halla/triton/eep_Rootfiles/%s";
-const char* ROOTFILE_DIR_PREFIX = "./t2root/%s";
+//const char* ROOTFILE_DIR_PREFIX = "./t2root/%s";
+const char* ROOTFILE_DIR_PREFIX = "./Rootfiles/%s";
 //const char* ROOTFILE_DIR_PREFIX = "./%s";
 
 
