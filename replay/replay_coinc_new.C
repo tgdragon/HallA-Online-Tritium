@@ -51,8 +51,15 @@ void replay_coinc_new(Int_t runnumber=0,Int_t numevents=0,Int_t fstEvt=0,Bool_t 
 	HRSL->AddDetector( new THaVDC          ("vdc" , "Vertical Drift Chamber" ));
 	HRSL->AddDetector( new TriFadcCherenkov("cer" , "Gas Cherenkov counter"  ));
 	HRSL->AddDetector( new TriFadcScin     ("s2"  , "S2 Scintillator"        ));
-	HRSL->AddDetector( new THaShower       ("prl1", "Pre-shower pion rej."   ));
-	HRSL->AddDetector( new THaShower       ("prl2", "Show pion rej."         )); 
+	if(runnumber<3200){
+	  HRSL->AddDetector( new THaShower("prl1", "Pre-shower pion rej." ));
+	  HRSL->AddDetector( new THaShower("prl2", "Shower pion rej." )); 
+	}
+	else{
+	  HRSL->AddDetector( new TriFadcShower("prl1", "Pre-shower pion rej." ));
+	  HRSL->AddDetector( new TriFadcShower("prl2", "Shower pion rej." )); 
+	}
+	
 
 	THaHRS* FbusHRSL = new THaHRS("FbusL", "Fastbus LHRS Readout");
 	FbusHRSL->AutoStandardDetectors(kFALSE);
@@ -74,8 +81,8 @@ void replay_coinc_new(Int_t runnumber=0,Int_t numevents=0,Int_t fstEvt=0,Bool_t 
 	HRSR->AddDetector( new TriFadcScin     ("s2" , "S2 Scintillator - FADC"       ));
 	HRSR->AddDetector( new THaShower       ("ps" , "Pre-shower pion rej."         ));
 	HRSR->AddDetector( new THaShower       ("sh" , "Show pion rej."               ));
-	HRSR->AddDetector( new TriFadcAerogelC ("a1", "Aerogel counter 1 - FADC" ));
-	HRSR->AddDetector( new TriFadcAerogelC ("a2", "Aerogel counter 2 - FADC" ));
+	HRSR->AddDetector( new TriFadcAerogelC ("a1", "Aerogel Cherenkov 1 - FADC" ));
+	HRSR->AddDetector( new TriFadcAerogelC ("a2", "Aerogel Cherenkov 2 - FADC" ));
 
 	THaHRS* FbusHRSR = new THaHRS("FbusR", "Fastbus RHRS Readout");
 	FbusHRSR->AutoStandardDetectors(kFALSE);
