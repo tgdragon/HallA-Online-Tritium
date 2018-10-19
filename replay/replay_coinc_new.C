@@ -34,7 +34,8 @@ void replay_coinc_new(Int_t runnumber=0,Int_t numevents=0,Int_t fstEvt=0,Bool_t 
 	else             rootname = "%s/tritium_%d.root"       ;
 	// ---------------------------
 	const char* RNAME=rootname.Data();
-	TString ODEF = "coinc.odef";
+	//TString ODEF = "coinc.odef";
+	TString ODEF = "eek.odef"; // odef file for the (e,e'K+) experiment
 	TString CUTS = "coinc.cuts";
 	if(autoreplay)  ODEF=Form(REPLAY_DIR_PREFIX,"coinc_auto.odef");
 
