@@ -5,6 +5,8 @@ replay/scripts/calibrate/BPM/harp_results_*
 replay/scripts/FADC_decode/results/
 replay/scripts/calibrate/BPM/*.txt
 replay/Rootfiles*
+replay/Rootfiles/nnL/*.root
+replay/Rootfiles/qe/*.root
 replay/plots
 replay/*.pdf
 replay/*.eps
