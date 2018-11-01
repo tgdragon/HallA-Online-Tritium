@@ -147,7 +147,7 @@ TClass *THaScalerDB::Dictionary()
 //______________________________________________________________________________
 TClass *THaScalerDB::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaScalerDB*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaScalerDB*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -333,10 +333,10 @@ namespace {
 0
     };
     static const char* includePaths[] = {
-"/adaqfs/apps/ROOT/pro/include",
+"/u/apps/root/6.10.02/root/include",
 "../hana_decode",
-"/adaqfs/apps/ROOT/6.12-06/include",
-"/adaqfs/home/a-onl/tritium/scaler/hana_scaler/",
+"/u/apps/root/6.10.02/root/include",
+"/w/hallc-scifs17exp/hes-hks/gogami/HallA-Online-Tritium/scaler/hana_scaler/",
 0
     };
     static const char* fwdDeclCode = R"DICTFWDDCLS(

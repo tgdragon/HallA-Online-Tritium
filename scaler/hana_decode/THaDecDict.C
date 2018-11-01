@@ -395,7 +395,7 @@ TClass *THaUsrstrutils::Dictionary()
 //______________________________________________________________________________
 TClass *THaUsrstrutils::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaUsrstrutils*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaUsrstrutils*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -430,7 +430,7 @@ TClass *THaCrateMap::Dictionary()
 //______________________________________________________________________________
 TClass *THaCrateMap::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaCrateMap*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaCrateMap*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -465,7 +465,7 @@ TClass *THaCodaData::Dictionary()
 //______________________________________________________________________________
 TClass *THaCodaData::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaCodaData*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaCodaData*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -500,7 +500,7 @@ TClass *THaHelicity::Dictionary()
 //______________________________________________________________________________
 TClass *THaHelicity::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaHelicity*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaHelicity*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -535,7 +535,7 @@ TClass *THaEpics::Dictionary()
 //______________________________________________________________________________
 TClass *THaEpics::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaEpics*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaEpics*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -570,7 +570,7 @@ TClass *THaFastBusWord::Dictionary()
 //______________________________________________________________________________
 TClass *THaFastBusWord::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaFastBusWord*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaFastBusWord*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -605,7 +605,7 @@ TClass *THaCodaFile::Dictionary()
 //______________________________________________________________________________
 TClass *THaCodaFile::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaCodaFile*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaCodaFile*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -640,7 +640,7 @@ TClass *THaSlotData::Dictionary()
 //______________________________________________________________________________
 TClass *THaSlotData::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaSlotData*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaSlotData*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -675,7 +675,7 @@ TClass *THaEvData::Dictionary()
 //______________________________________________________________________________
 TClass *THaEvData::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaEvData*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaEvData*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -710,7 +710,7 @@ TClass *THaCodaDecoder::Dictionary()
 //______________________________________________________________________________
 TClass *THaCodaDecoder::Class()
 {
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaCodaDecoder*)0x0)->GetClass(); }
+   if (!fgIsA.load()) { R__LOCKGUARD2(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::THaCodaDecoder*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -1048,10 +1048,10 @@ namespace {
 0
     };
     static const char* includePaths[] = {
-"/adaqfs/apps/ROOT/pro/include",
-"/adaqfs/apps/ROOT/pro/include",
-"/adaqfs/apps/ROOT/6.12-06/include",
-"/adaqfs/home/a-onl/tritium/scaler/hana_decode/",
+"/u/apps/root/6.10.02/root/include",
+"/u/apps/root/6.10.02/root/include",
+"/u/apps/root/6.10.02/root/include",
+"/w/hallc-scifs17exp/hes-hks/gogami/HallA-Online-Tritium/scaler/hana_decode/",
 0
     };
     static const char* fwdDeclCode = R"DICTFWDDCLS(
