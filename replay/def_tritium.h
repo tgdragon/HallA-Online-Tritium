@@ -61,6 +61,7 @@ static const char* PATHS[] = {
   "/cache/halla/triton/raw",
   "/w/cache/halla/triton/raw",
   "./rawdata/",
+  "/lustre/expphy/volatile/halla/triton/gogami/raw",
   //"/w/mss/halla/triton/raw",
    0
 };

@@ -17,12 +17,14 @@ double teng(double* x, double* par){
   return g+bg;
 }
 
-void zfit(int runnum = 93821){
+//void zfit(int runnum = 93821){
+void zfit(int runnum = 111132){
   // ================================== //
   // ======== Opening ROOT file ======= //
   // ================================== //
   char fname[500];
-  sprintf(fname,"./root/tritium_%d.root",runnum);
+  //sprintf(fname,"./root/tritium_%d.root",runnum);
+  sprintf(fname,"../../Rootfiles/nnL/tritium_%d.root",runnum);
   TFile* f1 = new TFile(fname);
   TTree* t1 = (TTree*)f1->Get("T");
 
