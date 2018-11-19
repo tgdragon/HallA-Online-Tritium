@@ -27384,3 +27384,3987 @@ R.off_x = 2.66e-03
 R.off_y = -1.80e-03
 R.off_z = 6.25e-04
 
+
+--------[ 2018-11-11 23:51:39 ]
+# parameters from EPICS run 111532
+ebeam = 4.31277
+L.theta = 13.2012
+L.pcentral = 2.09997
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.09997
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.09997
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.23e-04
+
+
+--------[ 2018-11-12 00:37:06 ]
+# parameters from EPICS run 111533
+ebeam = 4.31263
+L.theta = 13.2012
+L.pcentral = 2.09997
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.09997
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.09997
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.23e-04
+
+
+--------[ 2018-11-12 01:22:24 ]
+# parameters from EPICS run 111534
+ebeam = 4.31266
+L.theta = 13.2011
+L.pcentral = 2.09998
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.09998
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.09998
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-12 02:01:58 ]
+# parameters from EPICS run 111535
+ebeam = 4.31278
+L.theta = 13.2012
+L.pcentral = 2.09997
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.09997
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.09997
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.23e-04
+
+
+--------[ 2018-11-12 02:51:21 ]
+# parameters from EPICS run 111536
+ebeam = 4.31267
+L.theta = 13.2012
+L.pcentral = 2.09997
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.09997
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.09997
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-12 03:29:17 ]
+# parameters from EPICS run 111537
+ebeam = 4.31275
+L.theta = 13.2011
+L.pcentral = 2.09997
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.09997
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.09997
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-12 04:06:53 ]
+# parameters from EPICS run 111538
+ebeam = 4.31271
+L.theta = 13.2011
+L.pcentral = 2.09997
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.09997
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.09997
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-12 04:24:03 ]
+# parameters from EPICS run 111539
+ebeam = 4.31257
+L.theta = 13.2011
+L.pcentral = 2.09997
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.09997
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.09997
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-12 04:58:20 ]
+# parameters from EPICS run 111540
+ebeam = 4.31264
+L.theta = 13.2011
+L.pcentral = 2.09998
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.09998
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.09998
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-12 05:38:38 ]
+# parameters from EPICS run 111541
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.09997
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.09997
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.09997
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-12 06:48:18 ]
+# parameters from EPICS run 111542
+ebeam = 4.31262
+L.theta = 13.2011
+L.pcentral = 2.09997
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.09997
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.09997
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-12 21:03:53 ]
+# parameters from EPICS run 111543
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-12 23:37:32 ]
+# parameters from EPICS run 111544
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-13 02:34:53 ]
+# parameters from EPICS run 111545
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-13 05:28:42 ]
+# parameters from EPICS run 111546
+ebeam = 4.31266
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-13 05:52:16 ]
+# parameters from EPICS run 111547
+ebeam = 4.3121
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-13 05:57:33 ]
+# parameters from EPICS run 111548
+ebeam = 4.31179
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-13 06:09:31 ]
+# parameters from EPICS run 111549
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-13 06:22:27 ]
+# parameters from EPICS run 111550
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-13 09:28:14 ]
+# parameters from EPICS run 111551
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-13 09:45:02 ]
+# parameters from EPICS run 111552
+ebeam = 4.31268
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-13 14:07:04 ]
+# parameters from EPICS run 111553
+ebeam = 4.31264
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82313
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82313
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82313
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-13 16:29:37 ]
+# parameters from EPICS run 111554
+ebeam = 4.3126
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-13 16:51:43 ]
+# parameters from EPICS run 111555
+ebeam = 4.31283
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-13 18:01:14 ]
+# parameters from EPICS run 111556
+ebeam = 4.31265
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-13 18:41:36 ]
+# parameters from EPICS run 111557
+ebeam = 4.31277
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.62e-03
+R.off_y = -1.80e-03
+R.off_z = 6.16e-04
+
+
+--------[ 2018-11-13 19:22:56 ]
+# parameters from EPICS run 111558
+ebeam = 4.31278
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-13 20:11:25 ]
+# parameters from EPICS run 111559
+ebeam = 4.3134
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.62e-03
+R.off_y = -1.80e-03
+R.off_z = 6.16e-04
+
+
+--------[ 2018-11-13 21:04:09 ]
+# parameters from EPICS run 111560
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.62e-03
+R.off_y = -1.80e-03
+R.off_z = 6.16e-04
+
+
+--------[ 2018-11-13 21:37:13 ]
+# parameters from EPICS run 111561
+ebeam = 4.31265
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-13 22:19:28 ]
+# parameters from EPICS run 111562
+ebeam = 4.3127
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.62e-03
+R.off_y = -1.80e-03
+R.off_z = 6.16e-04
+
+
+--------[ 2018-11-13 22:53:46 ]
+# parameters from EPICS run 111563
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-13 23:32:20 ]
+# parameters from EPICS run 111564
+ebeam = 4.31283
+L.theta = 13.2012
+L.pcentral = 2.21807
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.62e-03
+R.off_y = -1.80e-03
+R.off_z = 6.16e-04
+
+
+--------[ 2018-11-14 00:06:31 ]
+# parameters from EPICS run 111565
+ebeam = 4.31266
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-14 00:50:03 ]
+# parameters from EPICS run 111566
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-14 01:25:57 ]
+# parameters from EPICS run 111567
+ebeam = 4.31268
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-14 02:05:29 ]
+# parameters from EPICS run 111568
+ebeam = 4.31262
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-14 02:42:08 ]
+# parameters from EPICS run 111569
+ebeam = 4.31274
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-14 03:24:08 ]
+# parameters from EPICS run 111570
+ebeam = 4.31269
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-14 03:58:54 ]
+# parameters from EPICS run 111571
+ebeam = 4.3127
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-14 04:39:22 ]
+# parameters from EPICS run 111572
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-14 05:25:15 ]
+# parameters from EPICS run 111573
+ebeam = 4.31268
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-14 05:58:41 ]
+# parameters from EPICS run 111574
+ebeam = 4.31271
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-14 06:33:18 ]
+# parameters from EPICS run 111575
+ebeam = 4.31274
+L.theta = 13.201
+L.pcentral = 2.21806
+FbusL.theta = 13.201
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.201
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.30e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-14 07:15:02 ]
+# parameters from EPICS run 111576
+ebeam = 4.3127
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-14 07:54:54 ]
+# parameters from EPICS run 111577
+ebeam = 4.31279
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-14 08:31:20 ]
+# parameters from EPICS run 111578
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-14 09:07:01 ]
+# parameters from EPICS run 111579
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-14 09:16:47 ]
+# parameters from EPICS run 111580
+ebeam = 4.3127
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-14 09:54:55 ]
+# parameters from EPICS run 111581
+ebeam = 4.31225
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-14 10:37:17 ]
+# parameters from EPICS run 111582
+ebeam = 4.31273
+L.theta = 13.2012
+L.pcentral = 2.21807
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-14 11:14:26 ]
+# parameters from EPICS run 111583
+ebeam = 4.31267
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-14 11:54:20 ]
+# parameters from EPICS run 111584
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-14 12:27:52 ]
+# parameters from EPICS run 111585
+ebeam = 4.31279
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.62e-03
+R.off_y = -1.80e-03
+R.off_z = 6.16e-04
+
+
+--------[ 2018-11-14 13:19:24 ]
+# parameters from EPICS run 111586
+ebeam = 4.31275
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-14 13:54:17 ]
+# parameters from EPICS run 111587
+ebeam = 4.31268
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-14 14:34:35 ]
+# parameters from EPICS run 111588
+ebeam = 4.31267
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-14 15:16:17 ]
+# parameters from EPICS run 111589
+ebeam = 4.31268
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-14 15:52:42 ]
+# parameters from EPICS run 111590
+ebeam = 4.31267
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-14 16:27:24 ]
+# parameters from EPICS run 111591
+ebeam = 4.31271
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-14 17:04:20 ]
+# parameters from EPICS run 111592
+ebeam = 4.31268
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-14 17:14:26 ]
+# parameters from EPICS run 111593
+ebeam = 4.31266
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-14 17:51:28 ]
+# parameters from EPICS run 111594
+ebeam = 4.31272
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-14 18:30:57 ]
+# parameters from EPICS run 111595
+ebeam = 4.31263
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-14 19:06:31 ]
+# parameters from EPICS run 111596
+ebeam = 4.31263
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-14 20:52:50 ]
+# parameters from EPICS run 111597
+ebeam = 4.31301
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-14 21:45:06 ]
+# parameters from EPICS run 111598
+ebeam = 4.31263
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-14 22:21:46 ]
+# parameters from EPICS run 111599
+ebeam = 4.31264
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-14 22:57:41 ]
+# parameters from EPICS run 111600
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-14 23:39:13 ]
+# parameters from EPICS run 111601
+ebeam = 4.31275
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 00:23:17 ]
+# parameters from EPICS run 111602
+ebeam = 4.31281
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-15 00:59:04 ]
+# parameters from EPICS run 111603
+ebeam = 4.31268
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 01:42:10 ]
+# parameters from EPICS run 111604
+ebeam = 4.31263
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 02:15:30 ]
+# parameters from EPICS run 111605
+ebeam = 4.31272
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 02:58:20 ]
+# parameters from EPICS run 111606
+ebeam = 4.31265
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-15 03:30:59 ]
+# parameters from EPICS run 111607
+ebeam = 4.31279
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 04:04:49 ]
+# parameters from EPICS run 111608
+ebeam = 4.31266
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.81e-03
+L.off_y = -1.20e-03
+L.off_z = -4.25e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 04:52:29 ]
+# parameters from EPICS run 111609
+ebeam = 4.31249
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-15 05:27:56 ]
+# parameters from EPICS run 111610
+ebeam = 4.31278
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 06:04:02 ]
+# parameters from EPICS run 111611
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-15 06:38:34 ]
+# parameters from EPICS run 111612
+ebeam = 4.31265
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-15 07:13:02 ]
+# parameters from EPICS run 111613
+ebeam = 4.31261
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 07:49:25 ]
+# parameters from EPICS run 111614
+ebeam = 4.31276
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 08:36:03 ]
+# parameters from EPICS run 111615
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 10:17:10 ]
+# parameters from EPICS run 111616
+ebeam = 4.3129
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-15 10:58:48 ]
+# parameters from EPICS run 111617
+ebeam = 4.31272
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-15 11:33:22 ]
+# parameters from EPICS run 111618
+ebeam = 4.31259
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-15 12:08:59 ]
+# parameters from EPICS run 111619
+ebeam = 4.31267
+L.theta = 13.2012
+L.pcentral = 2.21807
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-15 12:44:33 ]
+# parameters from EPICS run 111620
+ebeam = 4.31274
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-15 14:33:08 ]
+# parameters from EPICS run 111621
+ebeam = 4.31273
+L.theta = 13.2012
+L.pcentral = 2.21807
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.81e-03
+L.off_y = -1.20e-03
+L.off_z = -4.25e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-15 17:16:11 ]
+# parameters from EPICS run 111622
+ebeam = 4.31266
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-15 17:27:57 ]
+# parameters from EPICS run 111623
+ebeam = 4.31266
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-15 19:23:00 ]
+# parameters from EPICS run 111624
+ebeam = 4.31264
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-15 20:03:12 ]
+# parameters from EPICS run 111625
+ebeam = 4.31275
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-15 21:10:17 ]
+# parameters from EPICS run 111626
+ebeam = 4.31274
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-15 22:00:21 ]
+# parameters from EPICS run 111627
+ebeam = 4.31257
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-15 22:46:52 ]
+# parameters from EPICS run 111628
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-15 23:26:36 ]
+# parameters from EPICS run 111629
+ebeam = 4.31265
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-16 02:42:43 ]
+# parameters from EPICS run 111630
+ebeam = 4.31267
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-16 03:02:15 ]
+# parameters from EPICS run 111631
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-16 03:42:34 ]
+# parameters from EPICS run 111632
+ebeam = 4.31267
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-16 04:17:32 ]
+# parameters from EPICS run 111633
+ebeam = 4.31262
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-16 04:57:10 ]
+# parameters from EPICS run 111634
+ebeam = 4.31274
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-16 05:32:59 ]
+# parameters from EPICS run 111635
+ebeam = 4.3126
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.81e-03
+L.off_y = -1.20e-03
+L.off_z = -4.25e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-16 06:14:15 ]
+# parameters from EPICS run 111636
+ebeam = 4.31271
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.17e-04
+
+
+--------[ 2018-11-16 06:53:57 ]
+# parameters from EPICS run 111637
+ebeam = 4.31272
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-16 07:29:51 ]
+# parameters from EPICS run 111638
+ebeam = 4.31269
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-16 08:30:12 ]
+# parameters from EPICS run 111639
+ebeam = 4.31286
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.81e-03
+L.off_y = -1.20e-03
+L.off_z = -4.25e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-16 09:25:20 ]
+# parameters from EPICS run 111640
+ebeam = 4.31273
+L.theta = 13.2012
+L.pcentral = 2.21807
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.81e-03
+L.off_y = -1.20e-03
+L.off_z = -4.24e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-16 10:06:14 ]
+# parameters from EPICS run 111641
+ebeam = 4.31272
+L.theta = 13.2011
+L.pcentral = 2.21805
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21805
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21805
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-16 10:34:21 ]
+# parameters from EPICS run 111642
+ebeam = 4.31269
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-16 10:46:54 ]
+# parameters from EPICS run 111643
+ebeam = 4.31266
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.81e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-16 10:53:33 ]
+# parameters from EPICS run 111644
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-16 11:03:51 ]
+# parameters from EPICS run 111645
+ebeam = 4.3127
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-16 11:20:27 ]
+# parameters from EPICS run 111646
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-16 11:34:20 ]
+# parameters from EPICS run 111647
+ebeam = 4.31303
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-16 12:14:23 ]
+# parameters from EPICS run 111648
+ebeam = 4.31259
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-16 12:48:57 ]
+# parameters from EPICS run 111649
+ebeam = 4.31261
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-16 14:19:51 ]
+# parameters from EPICS run 111652
+ebeam = 4.31276
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.63e-03
+R.off_y = -1.80e-03
+R.off_z = 6.18e-04
+
+
+--------[ 2018-11-16 14:58:20 ]
+# parameters from EPICS run 111653
+ebeam = 4.3127
+L.theta = 13.2011
+L.pcentral = 2.21805
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21805
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21805
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-16 15:23:41 ]
+# parameters from EPICS run 111654
+ebeam = 4.31265
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-16 15:27:30 ]
+# parameters from EPICS run 111655
+ebeam = 4.31281
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-16 16:10:49 ]
+# parameters from EPICS run 111656
+ebeam = 4.31266
+L.theta = 13.2011
+L.pcentral = 2.21805
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21805
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21805
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-16 17:26:58 ]
+# parameters from EPICS run 111657
+ebeam = 4.31291
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.23e-04
+
+
+--------[ 2018-11-16 18:08:06 ]
+# parameters from EPICS run 111658
+ebeam = 4.31267
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.81e-03
+L.off_y = -1.20e-03
+L.off_z = -4.25e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-16 18:44:33 ]
+# parameters from EPICS run 111659
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-16 19:19:53 ]
+# parameters from EPICS run 111660
+ebeam = 4.31274
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-16 20:11:17 ]
+# parameters from EPICS run 111661
+ebeam = 4.31265
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-16 20:47:28 ]
+# parameters from EPICS run 111662
+ebeam = 4.31274
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-16 21:33:38 ]
+# parameters from EPICS run 111663
+ebeam = 4.31273
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.81e-03
+L.off_y = -1.20e-03
+L.off_z = -4.25e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-16 22:09:42 ]
+# parameters from EPICS run 111664
+ebeam = 4.31261
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.23e-04
+
+
+--------[ 2018-11-16 22:49:49 ]
+# parameters from EPICS run 111665
+ebeam = 4.31269
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-16 23:26:11 ]
+# parameters from EPICS run 111666
+ebeam = 4.31273
+L.theta = 13.2012
+L.pcentral = 2.21805
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21805
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21805
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.66e-03
+R.off_y = -1.80e-03
+R.off_z = 6.24e-04
+
+
+--------[ 2018-11-17 00:06:25 ]
+# parameters from EPICS run 111667
+ebeam = 4.31273
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-17 00:17:41 ]
+# parameters from EPICS run 111668
+ebeam = 4.3129
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-17 00:51:53 ]
+# parameters from EPICS run 111669
+ebeam = 4.31264
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-17 01:29:42 ]
+# parameters from EPICS run 111670
+ebeam = 4.31265
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-17 02:03:36 ]
+# parameters from EPICS run 111671
+ebeam = 4.31274
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-17 02:42:12 ]
+# parameters from EPICS run 111672
+ebeam = 4.31261
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.23e-04
+
+
+--------[ 2018-11-17 03:23:17 ]
+# parameters from EPICS run 111673
+ebeam = 4.31263
+L.theta = 13.2011
+L.pcentral = 2.21807
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21807
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21807
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 03:55:23 ]
+# parameters from EPICS run 111674
+ebeam = 4.3127
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-17 04:37:55 ]
+# parameters from EPICS run 111675
+ebeam = 4.31277
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 05:13:19 ]
+# parameters from EPICS run 111676
+ebeam = 4.31269
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.29e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 06:09:32 ]
+# parameters from EPICS run 111677
+ebeam = 4.31268
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-17 06:44:52 ]
+# parameters from EPICS run 111678
+ebeam = 4.31274
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 07:19:56 ]
+# parameters from EPICS run 111679
+ebeam = 4.31271
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-17 07:52:40 ]
+# parameters from EPICS run 111680
+ebeam = 4.31267
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-17 08:29:31 ]
+# parameters from EPICS run 111681
+ebeam = 4.3127
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-17 09:32:27 ]
+# parameters from EPICS run 111682
+ebeam = 4.31287
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-17 09:38:08 ]
+# parameters from EPICS run 111683
+ebeam = 4.31269
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-17 10:14:50 ]
+# parameters from EPICS run 111684
+ebeam = 4.31269
+L.theta = 13.2011
+L.pcentral = 2.21805
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21805
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21805
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-17 10:59:18 ]
+# parameters from EPICS run 111685
+ebeam = 4.31273
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-17 11:35:53 ]
+# parameters from EPICS run 111686
+ebeam = 4.31266
+L.theta = 13.2012
+L.pcentral = 2.21805
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21805
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21805
+L.off_x = -1.81e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 12:23:31 ]
+# parameters from EPICS run 111687
+ebeam = 4.31276
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 13:01:45 ]
+# parameters from EPICS run 111688
+ebeam = 4.31276
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 13:38:29 ]
+# parameters from EPICS run 111689
+ebeam = 4.31288
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 14:16:52 ]
+# parameters from EPICS run 111690
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-17 14:46:00 ]
+# parameters from EPICS run 111691
+ebeam = 4.31261
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-17 15:21:36 ]
+# parameters from EPICS run 111692
+ebeam = 4.31282
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-17 17:37:03 ]
+# parameters from EPICS run 111693
+ebeam = 4.31272
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 18:12:35 ]
+# parameters from EPICS run 111694
+ebeam = 4.31257
+L.theta = 13.2011
+L.pcentral = 2.21806
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82312
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82312
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82312
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.21e-04
+
+
+--------[ 2018-11-17 18:45:32 ]
+# parameters from EPICS run 111695
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 2.21805
+FbusL.theta = 13.2011
+FbusL.pcentral = 2.21805
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 2.21805
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.27e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.65e-03
+R.off_y = -1.80e-03
+R.off_z = 6.22e-04
+
+
+--------[ 2018-11-17 19:26:14 ]
+# parameters from EPICS run 111696
+ebeam = 4.31273
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-17 20:14:08 ]
+# parameters from EPICS run 111697
+ebeam = 4.3128
+L.theta = 13.2012
+L.pcentral = 2.21806
+FbusL.theta = 13.2012
+FbusL.pcentral = 2.21806
+OldTrackL.theta = 13.2012
+OldTrackL.pcentral = 2.21806
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.26e-04
+
+R.theta = -13.22
+R.pcentral = 1.82311
+FbusR.theta = -13.22
+FbusR.pcentral = 1.82311
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 1.82311
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.19e-04
+
+
+--------[ 2018-11-19 14:08:44 ]
+# parameters from EPICS run 111698
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 0.0026838
+FbusL.theta = 13.2011
+FbusL.pcentral = 0.0026838
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 0.0026838
+L.off_x = -1.82e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 0.00531164
+FbusR.theta = -13.22
+FbusR.pcentral = 0.00531164
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 0.00531164
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
+
+--------[ 2018-11-19 14:12:12 ]
+# parameters from EPICS run 111699
+ebeam = 4.31273
+L.theta = 13.2011
+L.pcentral = 0.00268547
+FbusL.theta = 13.2011
+FbusL.pcentral = 0.00268547
+OldTrackL.theta = 13.2011
+OldTrackL.pcentral = 0.00268547
+L.off_x = -1.83e-03
+L.off_y = -1.20e-03
+L.off_z = -4.28e-04
+
+R.theta = -13.22
+R.pcentral = 0.00528602
+FbusR.theta = -13.22
+FbusR.pcentral = 0.00528602
+OldTrackR.theta = -13.22
+OldTrackR.pcentral = 0.00528602
+R.off_x = 2.64e-03
+R.off_y = -1.80e-03
+R.off_z = 6.20e-04
+
