@@ -16,11 +16,12 @@
 #include <TVectorD.h>
 #include <TDecompSVD.h>
 #include <math.h>
+//#include "recon.h"
 using namespace std;
 
 ////////////////////////////////////////////////////////////
 int readvalue(TFile *f, int nMax, double fVal[][4], 
-	      double tVal[][6], double sVal[][4])
+	      double tVal[][7], double sVal[][4])
 ////////////////////////////////////////////////////////////
 {
   int nentries=0;
@@ -64,8 +65,11 @@ int readvalue(TFile *f, int nMax, double fVal[][4],
  int max = 100;
  double xdet[max], ydet[max], xpdet[max], ypdet[max];
  double xptar[max], yptar[max];
- double ztar[max], momentum[max], pathl[max];
+ //double ztar[max], momentum[max], pathl[max];
+ double momentum[max], pathl[max];
+ double ztarR[max], ztarL[max];
  double s2nhit;
+ int LR_flag = 2;
  
  //tree->SetBranchAddress("EXSPLP",&XSPLP);
  //tree->SetBranchAddress("EYSPLP",&YSPLP);
@@ -88,16 +92,31 @@ int readvalue(TFile *f, int nMax, double fVal[][4],
  tree->SetBranchAddress("XpEDCFP",&XpFP);
  tree->SetBranchAddress("YEDCFP",&YFP);
  tree->SetBranchAddress("YpEDCFP",&YpFP);*/
- tree->SetBranchAddress("R.tr.x" ,&xdet); // dispersive plane
- tree->SetBranchAddress("R.tr.th",&xpdet);
- tree->SetBranchAddress("R.tr.y", &ydet); // non-dispersive plane
- tree->SetBranchAddress("R.tr.ph",&ypdet);
- tree->SetBranchAddress("R.tr.tg_th",&xptar);
- tree->SetBranchAddress("R.tr.tg_ph",&yptar);
- tree->SetBranchAddress("R.tr.p",&momentum);
- tree->SetBranchAddress("R.tr.pathl",&pathl);
- tree->SetBranchAddress("R.tr.vz",&ztar);
- tree->SetBranchAddress("R.s2.nthit",&s2nhit);
+ tree->SetBranchAddress("R.tr.vz",&ztarR);
+ tree->SetBranchAddress("L.tr.vz",&ztarL);
+ if(LR_flag==2){
+   tree->SetBranchAddress("R.tr.x" ,&xdet); // dispersive plane
+   tree->SetBranchAddress("R.tr.th",&xpdet);
+   tree->SetBranchAddress("R.tr.y", &ydet); // non-dispersive plane
+   tree->SetBranchAddress("R.tr.ph",&ypdet);
+   tree->SetBranchAddress("R.tr.tg_th",&xptar);
+   tree->SetBranchAddress("R.tr.tg_ph",&yptar);
+   tree->SetBranchAddress("R.tr.p",&momentum);
+   tree->SetBranchAddress("R.tr.pathl",&pathl);
+ }
+ else{
+   tree->SetBranchAddress("L.tr.x" ,&xdet); // dispersive plane
+   tree->SetBranchAddress("L.tr.th",&xpdet);
+   tree->SetBranchAddress("L.tr.y", &ydet); // non-dispersive plane
+   tree->SetBranchAddress("L.tr.ph",&ypdet);
+   tree->SetBranchAddress("L.tr.tg_th",&xptar);
+   tree->SetBranchAddress("L.tr.tg_ph",&yptar);
+   tree->SetBranchAddress("L.tr.p",&momentum);
+   tree->SetBranchAddress("L.tr.pathl",&pathl);
+ }
+ 
+ 
+ //tree->SetBranchAddress("R.s2.nthit",&s2nhit);
  //tree->SetBranchAddress("KXFP",&XFP);
  //tree->SetBranchAddress("KXpFP",&XpFP);
  //tree->SetBranchAddress("KYFP",&YFP);
@@ -228,20 +247,37 @@ int readvalue(TFile *f, int nMax, double fVal[][4],
      YpFP  =  ypdet[0];
      Mom   =  momentum[0];
      Xpt   =  xptar[0];
-     Ypt   =  yptar[0] + 13.2/180. * 3.14159;
-     Zt    =  ztar[0];
+     if(LR_flag==2) Ypt   =  yptar[0] + 13.2/180. * 3.14159;
+     else Ypt   =  yptar[0] - 13.2/180. * 3.14159;
+     Zt    =  (ztarR[0]+ztarL[0])/2.0;
+     //Zt    =  ztarR[0];
+     //cout << "zzz" << Zt << endl;
      PL    =  pathl[0];
      
-     if(Mom>1.7 && Mom<2.0 
+     if(Mom>1.3 && Mom<3.0 
 	&& fabs(Zt)<0.25 
 	&& fabs(Xpt)<0.1
-	&& s2nhit == 1
+	//&& s2nhit == 1
+	&& fabs(ztarL[0]-ztarR[0])<0.05
 	){
        goodflag = true;
      }
+    
      else goodflag = false;
      
      if(goodflag==true){
+       //cout << "zzz" << Zt << endl;
+       // ---- y correction -------------------------------- //
+       // ---- This corrections are used for p, x', y' ----- //
+       //if(LR_flag == 2){
+       //	 YFP  = YFP  - 0.11 * Zt;
+       //	 YpFP = YpFP + 0.10 * Zt;
+       //}
+       //else{
+       //	 YFP  = YFP  + 0.12 * Zt;
+       //	 YpFP = YpFP - 0.09 * Zt;
+       //}
+       
        
        fVal[jj][0]=XFP;//[cm]
        fVal[jj][1]=XpFP;//[rad]

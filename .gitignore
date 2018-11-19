@@ -48,7 +48,7 @@ replay/RootFiles
 replay/RootFiles_chafs
 replay/ScratchRootFiles
 replay/summaryfiles/*
-#replay/analysis/*
+replay/analysis/*
 
 scaler/xscaler
 scaler/hana_decode/THaDecDict.C

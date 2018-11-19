@@ -19,8 +19,8 @@ void mm(){
   //TFile* f1 = new TFile("coin_H2_upto-111542.root");
   //TFile* f1 = new TFile("coin_111555_111561.root");
   //TFile* f1 = new TFile("coin_111555_111567.root");
-  TFile* f1 = new TFile("coin_111555_111576.root");
-  //TFile* f1 = new TFile("coin_H2_1.root");
+  //TFile* f1 = new TFile("coin_111555_111576.root");
+  TFile* f1 = new TFile("coin_H2_1.root");
   TTree* t1 = (TTree*)f1->Get("tree");
   Double_t trig5;
   Double_t trig4;
@@ -322,7 +322,7 @@ void mm(){
       mm = (mm-mL)*1000.; // Gen --> MeV
       
       //if(runnum>111554)  mm = mm - 79.0; // ? 
-      mm = mm - 79.0; // ? 
+      //mm = mm - 79.0; // ? 
       
       if(acc1_selection==true || 
 	 acc2_selection==true ||

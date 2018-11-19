@@ -20,12 +20,19 @@ const int nYpf=4;*/
 //const int nYpf=4;
 
 // --- For path length ---- //
-const int nParam=35; 
-const int nMat=3;
-const int nXf=3;
-const int nXpf=3;
-const int nYf=3;
-const int nYpf=3;
+//const int nParam=35; 
+//const int nMat=3;
+//const int nXf=3;
+//const int nXpf=3;
+//const int nYf=3;
+//const int nYpf=3;
+
+const int nParam=70;
+const int nMat=4;
+const int nXf=4;
+const int nXpf=4;
+const int nYf=4;
+const int nYpf=4;
 
 /*const int nParam=70;
 const int nMat=4;

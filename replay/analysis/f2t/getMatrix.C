@@ -68,16 +68,16 @@ int main()
     yf[i]   = fVal[i][2]; 
     ypf[i]  = fVal[i][3]; 
   }
-  //cout << "Momentum-reconstruction matrix is being calculated..." <<endl;
-  //calcMatrix(nTrig, mom, emom, xf, xpf, yf, ypf, name_Mmom);
-  //cout << "x'-reconstruction matrix is being calculated..." <<endl;
-  //calcMatrix(nTrig, xpt, expt, xf, xpf, yf, ypf, name_Mxpt);
-  //cout << "y'-reconstruction matrix is being calculated..." <<endl;
-  //calcMatrix(nTrig, ypt, eypt, xf, xpf, yf, ypf, name_Mypt);
+  cout << "Momentum-reconstruction matrix is being calculated..." <<endl;
+  calcMatrix(nTrig, mom, emom, xf, xpf, yf, ypf, name_Mmom);
+  cout << "x'-reconstruction matrix is being calculated..." <<endl;
+  calcMatrix(nTrig, xpt, expt, xf, xpf, yf, ypf, name_Mxpt);
+  cout << "y'-reconstruction matrix is being calculated..." <<endl;
+  calcMatrix(nTrig, ypt, eypt, xf, xpf, yf, ypf, name_Mypt);
   //cout << "Path-length reconstruction matrix is being calculated..." <<endl;
   //calcMatrix(nTrig, len, elen, xf, xpf, yf, ypf, name_Mlen);
-  cout << "Zt reconstruction matrix is being calculated..." <<endl;
-  calcMatrix(nTrig, zt, elen, xf, xpf, yf, ypf, name_Mzt);
+  //cout << "Zt reconstruction matrix is being calculated..." <<endl;
+  //calcMatrix(nTrig, zt, elen, xf, xpf, yf, ypf, name_Mzt);
   return 0;
 }
 

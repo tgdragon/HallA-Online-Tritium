@@ -11,7 +11,8 @@
 void npar_matrix(){
   
   int npar=0;
-  const int n=3; // order
+  //const int n=3; // order
+  const int n=4; // order
   
   for(int i=0; i<n+1 ; i++){
     for(int d=0 ; d<n+1 ; d++){

@@ -30,6 +30,14 @@ const int nXpf=3;
 const int nYf=3;
 const int nYpf=3;
 
+const int nParamT_4=70;
+const int nMatT_4=4;
+const int nXf_4=4;
+const int nXpf_4=4;
+const int nYf_4=4;
+const int nYpf_4=4;
+//int LR_flag = 2;
+
 /*const int nParamT=70;
 const int nMatT=4;
 const int nXf=4;
@@ -45,9 +53,13 @@ const Int_t nYpt = 4;
 const Int_t nMom = 4;
 
 int readvalue(TFile *f, int nMax, double fVal[][4], 
-					double tVal[][6], double sVal[][4]);
+	      double tVal[][7], double sVal[][4]);
 double calcf2t(double* P, double xf, double xpf, 
-                 double yf, double ypf);
+	       double yf, double ypf);
+double calcf2t_3rd(double* P, double xf, double xpf, 
+		   double yf, double ypf);
+double calcf2t_4th(double* P, double xf, double xpf, 
+		   double yf, double ypf);
 double calct2s(double* P, double xpt, double ypt, double mom);
 
 #endif

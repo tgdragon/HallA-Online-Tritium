@@ -21,9 +21,9 @@ int main()
   double p=0.,xp=0.,yp=0.;
   double PL=0.0;
   double momres=0.;
-  double Pmom[nParamT];
-  double Pxpt[nParamT];
-  double Pypt[nParamT];
+  double Pmom[nParamT_4];
+  double Pxpt[nParamT_4];
+  double Pypt[nParamT_4];
   double Plen[nParamT];
   double Pzt[nParamT];
   double Pxss[nParamS];
@@ -58,6 +58,7 @@ int main()
   const double  Xptr=0.15, Yptr=0.08, Momr=0.18;
   const double  PLm = 25.4, PLr=0.7;
   const double  Ztm = -0.15, Ztr=0.35;
+  int LR_flag = 2; // 2: Right, Others: Left
   
   ifstream input("parRecon.dat");
   input >> name_Mmom;
@@ -74,7 +75,7 @@ int main()
   input.close();
   
   ifstream Mmom(name_Mmom);
-  for (int i=0;i<nParamT;i++){
+  for (int i=0;i<nParamT_4;i++){
     double par=0.;
     int p=0;
     Mmom >> par >> p >> p >> p >> p; 
@@ -83,7 +84,7 @@ int main()
   Mmom.close();
   
   ifstream Mxpt(name_Mxpt);
-  for (int i=0;i<nParamT;i++){
+  for (int i=0;i<nParamT_4;i++){
     double par=0.;
     int p=0;
     Mxpt >> par >> p >> p >> p >> p; 
@@ -92,7 +93,7 @@ int main()
   Mxpt.close();
   
   ifstream Mypt(name_Mypt);
-  for (int i=0;i<nParamT;i++){
+  for (int i=0;i<nParamT_4;i++){
     double par=0.;
     int p=0;
     Mypt >> par >> p >> p >> p >> p; 
@@ -164,7 +165,7 @@ int main()
    nnn = 20000;
    const int nentries = nnn;
    double fVal[nentries][4];
-   double tVal[nentries][6];
+   double tVal[nentries][7];
    double sVal[nentries][4];
    //cout << "open root file" << endl;
    
@@ -200,16 +201,32 @@ int main()
    //nTrig=readvalue(ifile,0,fVal,tVal,sVal);
    nTrig=readvalue(ifile,nentries,fVal,tVal,sVal);
    cout <<"read "<< nTrig <<" events"<< endl;
-   
+   double YFP_cor, YpFP_cor;
    for (int i=0;i<nTrig;i++){
      int zzz=(int)((double)i/(double)nTrig*100.);
      if (i%1000==0){
        cout << zzz << "% finished"<<endl;
      }
+
+     Zt  = tVal[i][6];
+     //cout << Zt << endl;
+     YFP = fVal[i][2];
+     YpFP= fVal[i][3];
+     if(LR_flag == 2){
+       YFP_cor  = YFP  -( -0.11 * Zt);
+       YpFP_cor = YpFP -(  0.10 * Zt);
+     }
+     else{
+       YFP_cor  = YFP  -( 0.12 * Zt);
+       YpFP_cor = YpFP -(-0.09 * Zt);
+     }
      XFP=(fVal[i][0]-XFPm)/XFPr;
      XpFP=(fVal[i][1]-XpFPm)/XpFPr;
      YFP=(fVal[i][2]-YFPm)/YFPr;
      YpFP=(fVal[i][3]-YpFPm)/YpFPr;
+     YFP_cor=(YFP_cor-YFPm)/YFPr;
+     YpFP_cor=(YpFP_cor-YpFPm)/YpFPr;
+
      
      Xpt=(tVal[i][0]-Xptm)/Xptr;
      Ypt=(tVal[i][1]-Yptm)/Yptr;
@@ -217,21 +234,27 @@ int main()
      Len=(tVal[i][3]-PLm)/PLr;
      Xt=tVal[i][4];
      Yt=tVal[i][5];
-     Zt=(tVal[i][6]-Ztm)/Ztr;
-     //XSS=-sVal[i][0];
-     //XpSS=-sVal[i][1];
-     //YSS=-sVal[i][2];
-     //YpSS=-sVal[i][3];
-     MomR  = calcf2t(Pmom,XFP,XpFP,YFP,YpFP);
-     Xpt_R = calcf2t(Pxpt,XFP,XpFP,YFP,YpFP);
-     Ypt_R = calcf2t(Pypt,XFP,XpFP,YFP,YpFP);
-     LenR  = calcf2t(Plen,XFP,XpFP,YFP,YpFP);
-     Zt_R  = calcf2t(Pzt,XFP,XpFP,YFP,YpFP);
+     //Zt=(tVal[i][6]-Ztm)/Ztr;
+     
+     MomR  = calcf2t_4th(Pmom,XFP,XpFP,YFP_cor,YpFP_cor);
+     Xpt_R = calcf2t_4th(Pxpt,XFP,XpFP,YFP_cor,YpFP_cor);
+     Ypt_R = calcf2t_4th(Pypt,XFP,XpFP,YFP_cor,YpFP_cor);
+     LenR  = calcf2t_3rd(Plen,XFP,XpFP,YFP,YpFP);
+     Zt_R  = calcf2t_3rd(Pzt,XFP,XpFP,YFP,YpFP);
      XSSR  = calct2s(Pxss,Xpt,Ypt,Mom);
      XpSSR = calct2s(Pxpss,Xpt,Ypt,Mom);
      YSSR  = calct2s(Pyss,Xpt,Ypt,Mom);
      YpSSR = calct2s(Pypss,Xpt,Ypt,Mom);
+     //XSS=-sVal[i][0];
+     //XpSS=-sVal[i][1];
+     //YSS=-sVal[i][2];
+     //YpSS=-sVal[i][3];
      
+     
+     //XFP = XFP*XFPr+XFPm;
+     //XpFP = XpFP*XpFPr+XpFPm;
+     //YFP = YFP*YFPr+YFPm;
+     //YpFP = YpFP*YpFPr+YpFPm;
      XFP = XFP*XFPr+XFPm;
      XpFP = XpFP*XpFPr+XpFPm;
      YFP = YFP*YFPr+YFPm;
@@ -239,7 +262,7 @@ int main()
      Mom = Mom*Momr+Momm;
      Xpt = Xpt*Xptr+Xptm;
      Ypt = Ypt*Yptr+Yptm;
-     Zt = Zt*Ztr+Ztm;
+     //Zt = Zt*Ztr+Ztm;
      Len  = Len*PLr+PLm;
      
      MomR  = MomR*Momr+Momm;
@@ -247,6 +270,8 @@ int main()
      Ypt_R = Ypt_R*Yptr+Yptm;
      Zt_R  = Zt_R*Ztr+Ztm;
      LenR  = LenR*PLr+PLm;
+     
+     //cout << Zt << " " << Zt_R << endl;
      
      
      otree->Fill();

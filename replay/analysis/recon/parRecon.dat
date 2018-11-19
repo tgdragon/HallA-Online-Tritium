@@ -1,11 +1,11 @@
-matrices/mom_RHRS.dat
-matrices/xpt_RHRS.dat
-matrices/ypt_RHRS.dat
+matrices/mom_RHRS_3.dat
+matrices/xpt_RHRS_3.dat
+matrices/ypt_RHRS_3.dat
 matrices/len_RHRS_1.dat
-matrices/zt_LHRS_2.dat
+matrices/zt_RHRS_opt.dat
 matrices/xss4.dat
 matrices/xpss4_24Aug09.dat
 matrices/yss4_24Aug09.dat
 matrices/ypss4_24Aug09.dat
-tri_coin_111171_1.root
-tri_coin_111171_L.root
+tri_coin_111502_sum.root
+tri_coin_111502_R.root
