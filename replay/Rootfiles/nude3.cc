@@ -212,6 +212,15 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   t1->SetBranchAddress("R.a2.t_fadc", &a2_tdc);
   t1->SetBranchAddress("FbusRrb.Raster2.target.x", &rasterx);
   t1->SetBranchAddress("FbusRrb.Raster2.target.y", &rastery);
+  double rast_curx, rast_cury;
+  double rast_x, rast_y;
+  double rast_x2; // raster x with new parameters
+  double lcer_asum_c;
+  t1->SetBranchAddress("Lrb.Raster2.rawcur.x", &rast_curx); // raster current
+  t1->SetBranchAddress("Lrb.Raster2.rawcur.y", &rast_cury); // raster current
+  t1->SetBranchAddress("Lrb.x", &rast_x);
+  t1->SetBranchAddress("Lrb.y", &rast_y);
+  t1->SetBranchAddress("L.cer.asum_c",  &lcer_asum_c);
   
   bool t5flag = false;
   bool t4flag = false;
@@ -280,6 +289,13 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   tnew->Branch("FbusRrb.Raster2.target.x", &rasterx, "FbusRrb.Raster2.target.x/D");
   tnew->Branch("FbusRrb.Raster2.target.y", &rastery, "FbusRrb.Raster2.target.y/D");
   
+  //tnew->Branch("Lrb.Raster2.rawcur.x", &rast_curx, "Lrb.Raster2.rawcur.x/D");
+  //tnew->Branch("Lrb.Raster2.rawcur.y", &rast_cury, "Lrb.Raster2.rawcur.y/D");
+  tnew->Branch("Lrb.x",  &rast_x, "Lrb.x/D");
+  tnew->Branch("Lrb.x2", &rast_x2, "Lrb.x2/D");
+  tnew->Branch("Lrb.y", &rast_y, "Lrb.y/D");
+  tnew->Branch("L.cer.asum_c", &lcer_asum_c, "L.cer.asum_c/D");
+  
   
   char name_Mlen[100];
   sprintf(name_Mlen,"matrices/len_RHRS_1.dat"); // original
@@ -323,6 +339,7 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   ifstream* s2_R_data;
   ifstream* s2_L_data;
   ifstream* rtime_ycor_data_L;
+  ifstream* rastx_data;
   if(dataflag == 1){
     s2_R_data = new ifstream("data/s2_t0_R.dat");
     s2_L_data = new ifstream("data/s2_t0_L.dat");
@@ -338,7 +355,7 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     s2_L_data = new ifstream("data/s2_t0_L.dat");
     rtime_ycor_data_L = new ifstream("data/rtime_ycor_L.dat"); 
   }
-  
+  rastx_data = new ifstream("data/rasterx.dat");
   
   double s2_tzero_R[n];
   for(int i=0 ; i<n ; i++){
@@ -373,6 +390,13 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     //cout << par_rtime_ycor_L[i] << endl;
   }
   pathl_cor_data_L->close();
+  
+  
+  double rastx_param[2];
+  for(int i=0 ; i<2 ; i++){
+    *rastx_data >> rastx_param[i];
+  }
+  rastx_data->close();
   
   
   int seg_L, seg_R;
@@ -414,6 +438,14 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     a1 = -2222.0;
     a2 = -2222.0;
     ps_asum = -2222.0;
+    rast_x  = -2222.0;
+    rast_x2 = -2222.0;
+    rast_y  = -2222.0;
+    rast_curx = -2222.0;
+    rast_cury = -2222.0;
+    lcer_asum_c = -2222.0;
+    
+    
     t5flag = false;
     t4flag = false;
     t1flag = false;
@@ -526,6 +558,8 @@ int nude3(int run=111179, int nf=0, int tflag=5){
 	rvz[0]  = rvz[0]*Ztr + Ztm;
 	
 	//cout << LenL << " " << LenR << endl;
+	
+	rast_x2 = rast_curx * rastx_param[1] + rastx_param[0];
 	
 	double beta_L = mom2[0]/sqrt(pow(mom2[0],2.0)+pow(me,2.0));
 	double cor_L   = (LenL-3.18)/3.0e+8/beta_L * 1.0e+9; // (3.18 m; test)
