@@ -1,8 +1,8 @@
 /*
   angcalib.cc
-  This is a macro to optimize raster parameters.
+  This is a macro to optimize angle parameters.
   
-  Toshiyuki Gogami, Jan 25, 2019
+  Toshiyuki Gogami, Feb 20, 2019
 */
 
 extern double calcf2t_zt(double* P, 
