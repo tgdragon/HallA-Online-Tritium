@@ -1,8 +1,8 @@
 /*
-  angcalib.cc
-  This is a macro to optimize angle parameters.
+  check2.cc
+  This is a macro to optimize raster parameters.
   
-  Toshiyuki Gogami, Feb 20, 2019
+  Toshiyuki Gogami, Jan 25, 2019
 */
 
 extern double calcf2t_zt(double* P, 
@@ -12,11 +12,10 @@ extern double calcf2t_4th_2(double*,
 			    double, double, 
 			    double, double,
 			    double);
-extern double tune(double* pa, int j, int angflag);
-extern void fcn1(int &nPar, double* /*grad*/, 
-		 double &fval, double* param, int /*iflag*/);
-extern void fcn2(int &nPar, double* /*grad*/, 
-		 double &fval, double* param, int /*iflag*/);
+extern double tune(double* pa, int j);
+extern void fcn(int &nPar, double* /*grad*/, 
+		double &fval, double* param, int /*iflag*/);
+extern double calcRasterCor(double,double,double);
 
 
 // =================================================== //
@@ -37,19 +36,21 @@ double fcent[nfoil] = {-0.125, -0.100, -0.075, -0.050, -0.025,
 double fcent_real[nfoil] = {-0.125, -0.100, -0.075, -0.050, -0.025,
 			    0.000, 0.025, 0.050, 0.100, 0.125};
 //double selection_width = 0.0125; 
-double selection_width = 0.008; // event selection width for z
+double selection_width = 0.008;
 
 
 const double step = 0.492 * 2.54;
-const int nrow = 11; // the number of row in SS pattern
-const int ncol = 7;  // the number of column in SS pattern
-const int nsshole = nrow*ncol; // the number of holes to consider 
+const int nrow = 11;
+const int ncol = 7;
+const int nsshole = nrow*ncol;
+//double ssy_cent[nrow];
+//double ssx_cent[ncol];
 double ssy_cent_real[nrow];
 double ssx_cent_real[ncol];
 double refx[nsshole];
 double refy[nsshole];
-double selec_widthx = 0.60; // selection width in x (dispersive plane)
-double selec_widthy = 0.45; // selection width in y 
+double selec_widthx = 0.60;
+double selec_widthy = 0.45;
 
 
 const int nParamT = 126;  // Number of parameters
@@ -60,23 +61,24 @@ double z_recon[nmax]; // reconstructed z position
 int foil_flag[nmax];  
 int ntune_event = 0;
 int holegroup[nmax];
+int holeg_temp;
 
-double l[nfoil];
-double projectf[nfoil];
-double OptPar1[nParamT];
-double OptPar2[nParamT];
-
-//const int nParamT2 = 4; 
-//double parRaster[nParamT2];
-//double Opt_Par[nParamT2];
-//double Ras_curx[nmax];
-//double Ras_cury[nmax];
+const int nParamT2 = 4; 
+double parRaster[nParamT2];
+double Opt_Par[nParamT2];
+double Ras_curx[nmax];
+double Ras_cury[nmax];
 
 const double hrs_ang = 13.2 * 3.14159 / 180.;
 
-void angcalib(){
+//#include<stdlibs>
+//using namespace std;
 
-  const int nite = 3;  // The number of tuning iteration
+
+
+void check2(){
+
+  const int nite = 0;  // The number of tuning iteration
   
   // =================================== //
   // ======== General conditions ======= //
@@ -115,9 +117,8 @@ void angcalib(){
   TTree* t1 = (TTree*)f1->Get("tree");
   Double_t trig1;
   double ent = t1->GetEntries();
-  //ent = 50000; // for test
-  if(nite>0) ent = 400000;
-  
+  if(nite>0) ent = 200000;
+  ent = 50000; // for test
   cout << endl;
   cout << " The number of events read from a ROOT file: " << ent << endl;
   int evshift = 30000;
@@ -139,7 +140,7 @@ void angcalib(){
   t1->SetBranchAddress("XpFP", &XpFP);
   t1->SetBranchAddress("YpFP", &YpFP);
   
-  TFile* fnew = new TFile("check_angcalib.root","recreate");
+  TFile* fnew = new TFile("check.root","recreate");
   //TTree* tnew = new TTree("tree","check for LHRS SS");
   //tnew->Branch("Xt",   &Xt,   "Xt/D");
   //tnew->Branch("Yt",   &Yt,   "Yt/D");
@@ -153,10 +154,10 @@ void angcalib(){
   
 
   char name_Mxt_L[500], name_Myt_L[500];
-  //sprintf(name_Mxt_L,"../matrices/xpt_LHRS_4.dat"); // Original matrix (you need scale+offset for event selection)
-  //sprintf(name_Myt_L,"../matrices/ypt_LHRS_4.dat"); // Original matrix (you need scale+offset for event selection)
-  sprintf(name_Mxt_L,"./sample_matrix/newpar_xpt_2.dat"); // Better matrix
-  sprintf(name_Myt_L,"./sample_matrix/newpar_ypt_2.dat"); // Better matrix
+  //sprintf(name_Mxt_L,"../matrices/xpt_LHRS_4.dat");
+  //sprintf(name_Myt_L,"../matrices/ypt_LHRS_4.dat");
+  sprintf(name_Mxt_L,"./sample_matrix/newpar_xpt_2.dat");
+  sprintf(name_Myt_L,"./sample_matrix/newpar_ypt_2.dat");
   ifstream Mxt_L(name_Mxt_L);
   ifstream Myt_L(name_Myt_L);
   double Pxt_L[nParamT], Pyt_L[nParamT];
@@ -164,12 +165,10 @@ void angcalib(){
     double par=0.;
     int p=0;
     Mxt_L >> par >> p >> p >> p >> p >> p;
-    Pxt_L[i]  = par;
-    OptPar1[i] = par;
-    //cout << par << endl;
+    Pxt_L[i]=par;
+    cout << par << endl;
     Myt_L >> par >> p >> p >> p >> p >> p;
-    Pyt_L[i]   = par;
-    OptPar2[i] = par;
+    Pyt_L[i]=par;
   }
   Mxt_L.close();
   Myt_L.close();
@@ -203,12 +202,10 @@ void angcalib(){
   TH2F* h3[nfoil];
   TH2F* h3_;
   char tempc[500];
-  char tempc2[500];
   const double l0 = 100.3;
   double dth[nfoil];
-  int holeg_temp;
-  int foilg_temp;
-  bool filled=false;
+  double l[nfoil];
+  double projectf[nfoil];
    
   for(int i=0 ; i<nfoil ; i++){
     sprintf(tempc,"h2_%d",i);
@@ -261,10 +258,7 @@ void angcalib(){
     }
     Xt = -2222.0;
     Yt = -2222.0;
-    holeg_temp = -1;
-    foilg_temp = -1;
     holethrough = false;
-    filled = false;
     t1->GetEntry(i);
     //if(i+evshift<ent) t1->GetEntry(i+evshift); 
     //else t1->GetEntry(i-ent+evshift);
@@ -303,16 +297,15 @@ void angcalib(){
 	  
 	  h2[j]->Fill(-Ypt[0]*l[j]*projectf[j],-Xpt[0]*l[j]*projectf[j]);
 	  
-	  //if(offset_flag[j]==true){ 
-	  if(offset_flag[j]==true || offset_flag[j]==false){ // (in case you don't need scale+offset for event selection)
+	  //if(offset_flag[j]==true){
+	  if(offset_flag[j]==true || offset_flag[j]==false){
 	    
-	    //ssx = (-Xpt[0]*l[j]*projectf[j] + offs_xp[j])*scal_xp[j]; // for initial parameters (xpt_LHRS_4.dat)
-	    //ssy = (-Ypt[0]*l[j]*projectf[j] + offs_yp[j])*scal_yp[j]; // for initial parameters (ypt_LHRS_4.dat)
+	    //ssx = (-Xpt[0]*l[j]*projectf[j] + offs_xp[j])*scal_xp[j];
+	    //ssy = (-Ypt[0]*l[j]*projectf[j] + offs_yp[j])*scal_yp[j];
 	    ssx = -Xpt[0]*l[j]*projectf[j];
 	    ssy = -Ypt[0]*l[j]*projectf[j];
-
-	    //if(j==8) ssy = ssy * 1.08;  // for second parameters
-	    //if(j==9) ssy = ssy * 1.126; // for second parameters
+	    //if(j==8) ssy = ssy * 1.08;
+	    //if(j==9) ssy = ssy * 1.126;
 	    
 	    h2_new[j]->Fill(ssy,ssx);
 	    h2_      ->Fill(ssy,ssx);
@@ -322,7 +315,6 @@ void angcalib(){
 		if(pow(ssx-refx[nhole],2.0)/pow(selec_widthx,2.0)
 		   + pow(ssy-refy[nhole],2.0)/pow(selec_widthy,2.0)<1.0){
 		  holeg_temp = nhole;
-		  foilg_temp = j;
 		  holethrough = true;
 		}
 		nhole++;
@@ -330,19 +322,16 @@ void angcalib(){
 	    }
 	  }
 	  
-	  if(ntune_event<nmax && holethrough==true
-	     && filled==false ){
-	    //foil_flag[ntune_event] = j;
-	    foil_flag[ntune_event] = foilg_temp;
+	  if(ntune_event<nmax && holethrough==true){
+	    foil_flag[ntune_event] = j;
+	    x[ntune_event]  = XFP[0];
+	    y[ntune_event]  = YFP[0];
+	    xp[ntune_event] = XpFP[0];
+	    yp[ntune_event] = YpFP[0];
+	    z_recon[ntune_event] = Zt[0];
 	    holegroup[ntune_event] = holeg_temp;
-	    x[ntune_event]  = XFP[0];  // scaled 
-	    y[ntune_event]  = YFP[0];  // scaled
-	    xp[ntune_event] = XpFP[0]; // scaled
-	    yp[ntune_event] = YpFP[0]; // scaled
-	    z_recon[ntune_event] = Zt[0]; // not scaled
 	    ntune_event++;
 
-	    filled=true;
 	    h3[j]->Fill(ssy,ssx);
 	    h3_  ->Fill(ssy,ssx);
 	  }
@@ -354,76 +343,17 @@ void angcalib(){
   cout << " The number of events selected to be used for tuning: "
        << ntune_event << endl;
 
-  
-  
-  
-  
-  
-  
-  double chi_sq1[nite], chi_sq2[nite]; // A chi square for each tuning
-  double x[nite];
-  if (nite>0) cout << " Tuning started: " << endl;
-  
-  for(int i=0 ; i<nite ; i++){
-    // --------------------------- //
-    // ---- Parameter tuning ----- //
-    // --------------------------- //
-    x[i] = i+1;
-
-    chi_sq1[i] = tune(OptPar1,i,1);   // xpt
-    chi_sq2[i] = tune(OptPar2,i,22);  // ypt
-    cout << " Tuning# = " << i << ": chisq = "
-	 << chi_sq1[i] << " "
-	 << chi_sq2[i] << endl;
-    cout << endl;
-    
-    sprintf(tempc,  "./newpar/newpar_xpt_%d.dat",i); 
-    sprintf(tempc2, "./newpar/newpar_ypt_%d.dat",i); 
-
-    ofstream * ofs1 = new ofstream(tempc);
-    ofstream * ofs2 = new ofstream(tempc2);
-    int nppp = 0;
-    const int nn = 4; // 4th order matrix using xf, xpf, y, ypf, and zt
-    for(int i=0 ; i<nn+1 ; i++){
-      for(int e=0 ; e<nn+1 ; e++){
-	for(int d=0 ; d<nn+1 ; d++){
-	  for(int c=0 ; c<nn+1 ; c++){
-	    for(int b=0 ; b<nn+1 ; b++){
-	      for(int a=0 ; a<nn+1 ; a++){  
-		if(a+b+c+d+e==i){
-		  *ofs1 << OptPar1[nppp] 
-			<< " " << a 
-			<< " " << b
-			<< " " << c
-			<< " " << d
-			<< " " << e << endl;
-		  *ofs2 << OptPar2[nppp] 
-			<< " " << a 
-			<< " " << b
-			<< " " << c
-			<< " " << d
-			<< " " << e << endl;
-		  nppp++;
-		  //	      cout << Plen_opt[nppp] 
-		  //		   << " " << a 
-		  //		   << " " << b
-		  //		   << " " << c
-		  //		   << " " << d << endl;
-		}
-	      }
-	    }
-	  }
-	}
-      }
-    }
-    ofs1->close();
-    ofs1->clear();
-    ofs2->close();
-    ofs2->clear();
-
+  TObjArray h(1);
+  for(int i=0 ; i<nfoil ; i++){
+    h.Add(h2[i]);
+    h.Add(h2_new[i]);
+    h.Add(h3[i]);
   }
+  h.Add(h2_);
+  h.Add(h3_);
+  h.Write();
   
-
+  
   // =================================== //
   // ======== Draw histograms ========== //
   // =================================== //
@@ -458,33 +388,41 @@ void angcalib(){
   }
 
   //fnew->Close(); 
-
-  TObjArray h(1);
-  for(int i=0 ; i<nfoil ; i++){
-    h.Add(h2[i]);
-    h.Add(h2_new[i]);
-    h.Add(h3[i]);
-  }
-  h.Add(h2_);
-  h.Add(h3_);
-  h.Add(c1);
-  h.Add(c2);
   
-  if(nite>0){
-    TGraph * gr1 = new TGraph(nite,x,chi_sq1);
-    gr1->SetName("gr1");
-    TGraph * gr2 = new TGraph(nite,x,chi_sq2);
-    gr2->SetName("gr2");
-    TCanvas * c3 = new TCanvas("c3","c3",600,600);
-    c3->Divide(1,2);
-    c3->cd(1);gr1->Draw("*la");
-    c3->cd(2);gr2->Draw("*la");
-    h.Add(gr1);
-    h.Add(gr2);
-    h.Add(c3);
-  }
-  h.Write();
   
+  //double chi_sq[nite]; // A chi square for each tuning
+  //double x[nite];
+  //if (nite>0) cout << " Tuning started: " << endl;
+  
+  //for(int i=0 ; i<nite ; i++){
+  //  // --------------------------- //
+  //  // ---- Parameter tuning ----- //
+  //  // --------------------------- //
+  //  x[i] = i+1;
+  //  if(i==0){ 
+  //    chi_sq[i] = tune(parRaster,i); 
+  //  }
+  //  else { 
+  //    chi_sq[i] = tune(Opt_Par,i); 
+  //  }
+  //  cout << " Tuning# = " << i << ": chisq = " << chi_sq[i] << endl; // 
+  //  cout << endl;
+  //  
+  //  sprintf(tempc, "./data/newpar_%d.dat",i); //new matrix will be stored here
+  //  ofstream * ofs = new ofstream(tempc);
+  //  *ofs << Opt_Par[0] << " " << Opt_Par[1] << " " << Opt_Par[2] << " "<< Opt_Par[3] << endl;
+  //  cout << Opt_Par[0] << " " << Opt_Par[1] << " " << Opt_Par[2] << " "<< Opt_Par[3] << endl;
+  //  
+  //  ofs->close();
+  //  ofs->clear();
+  //}
+  //
+  //if(nite>0){
+  //  TGraph * gr = new TGraph(nite,x,chi_sq);
+  //  gr->SetName("gr");
+  //  TCanvas * c2 = new TCanvas("c2","c2",600,600);
+  //  gr->Draw("*la");
+  //}
 } 
 
 //////////////////////////////////////////////////
@@ -538,9 +476,7 @@ double calcf2t_4th_2(double* P, double xf, double xpf,
 		     double yf, double ypf, double zt)
 //////////////////////////////////////////////////
 {
-  // ------------------------------------------------ //
-  // ----- 4rd order using xf, xpf, yf, ypf, zt ----- //
-  // ------------------------------------------------ //
+  // -----4rd order ----- 
   const int nMatT=4;  
   const int nXf=4;
   const int nXpf=4;
@@ -584,80 +520,49 @@ double calcf2t_4th_2(double* P, double xf, double xpf,
 }
 
 // #############################################################
-double tune(double* pa, int j, int angflag) 
+double tune(double* pa, int j) // tune fun defn
 // #############################################################
 {
   double chi2 = 0.0;
   double arglist[10]; 
   int ierflg = 0;
-  int allparam = nParamT;
+  int allparam = nParamT2;
   //cout << allparam << endl;
   TMinuit* minuit = new TMinuit(allparam);
-  if(angflag==1){
-    minuit->SetFCN(fcn1);
-  }
-  else minuit->SetFCN(fcn2);
-
-
-  double start[allparam];
-  double step[allparam];
-  const int nMatT=4;  
-  const int nXf=4;
-  const int nXpf=4;
-  const int nYf=4;
-  const int nYpf=4;
-  const int nZt=2; // The number of order is reduced for test (4-->2)
-  int npar=0;
-  int a=0,b=0,c=0,d=0,e=0;
-  for (int n=0;n<nMatT+1;n++){
-    for(e=0;e<n+1;e++){
-      for (d=0;d<n+1;d++){
-	for (c=0;c<n+1;c++){ 
-	  for (b=0;b<n+1;b++){
-	    for (a=0;a<n+1;a++){ 
-	      if (a+b+c+d+e==n){
-		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
-		  start[npar] = pa[npar];
-		  step[npar] = 1.0e-3;  
-		}
-		else{
-		  start[npar] = 0.0;
-		  step[npar] = 0.0;
-		}
-		npar++;
-	      }
-	    }
-	  }
-	}
-      }    
-    }
-  }
+  minuit->SetFCN(fcn);
   
   // ~~~ Chi-square ~~~~
   arglist[0] = 1;
   minuit -> mnexcm("SET ERR",arglist,1,ierflg);
   
   minuit -> SetPrintLevel(-1);
-  
+  double start[allparam];
+  double step[allparam];
   double LLim[allparam];// Lower limit for all of the parameter
   double ULim[allparam];// Upper limit for all of the parameter
   char pname[500];
+  
   for(int i=0 ; i<allparam ; i++){
     sprintf(pname,"param_%d",i+1);
-    //start[i] = pa[i]; 
-    //step[i] = 1.0e-3;
+    start[i] = pa[i]; // initial parameters
+    //step[i] = 1.0e-5;  
+    
+    if(i==0){       // offset parameter for raster x
+      step[i] = 1.0e-5;
+    }
+    else if(i==2){  // gradient parameters for raster x
+      step[i] = 1.0e-10;
+    }
+    else step[i] = 0.0; // raster y is not tuned here
     
     //LLim[i] = pa[i] - pa[i]*0.8;
     //ULim[i] = pa[i] + pa[i]*0.8;
-    LLim[i] = pa[i] - 5.0; // temp
-    ULim[i] = pa[i] + 5.0; // temp
-    
+    LLim[i] = pa[i] -1.0; // temporary 
+    ULim[i] = pa[i] +1.0; // temporary 
     minuit -> mnparm(i,pname,start[i],step[i],LLim[i],ULim[i],ierflg);
   }
   // ~~~~ Strategy ~~~~
-  arglist[0] = 2.0; // original
-  //arglist[0] = 1.0; // test
-  //arglist[0] = 0.0;   // test
+  arglist[0] = 2.0;
   minuit->mnexcm("SET STR",arglist,1,ierflg);
   
   
@@ -668,7 +573,7 @@ double tune(double* pa, int j, int angflag)
   
   double amin,edm,errdef;
   int nvpar,nparx,icstat;
-  double er;
+  double e;
   
   minuit -> mnstat(amin,edm,errdef,nvpar,nparx,icstat);
   minuit -> mnprin(0,amin);
@@ -677,159 +582,65 @@ double tune(double* pa, int j, int angflag)
   
   for(int i=0 ; i<allparam ; i++){
     //minuit -> GetParameter(i,par[i],e);
-    if(angflag==1){
-      minuit -> GetParameter(i,OptPar1[i],er);
-    }
-    else minuit -> GetParameter(i,OptPar2[i],er);
+    minuit -> GetParameter(i,Opt_Par[i],e);
   }
   
   return chi2;
 }
 
 // #############################################################
-void fcn1(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/)
+void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/)
 // #############################################################
 {
   
-  const double sigma = 1.0;
-  double ztR      = 0.0;
-  double refpos   = 0.0;
-  double residual = 0.0;
-  double ang      = 0.0;
-  double sspos    = 0.0;
+  const double sigma = 0.00035;
+  double ztR  = 0.0;
+  double refz = 0.0;
+  double nev[nfoil];
+  double residual;
+  double chi2[nfoil];
+  double w[nfoil];
   double total_chi2 = 0.0;
   
-  double nev[nfoil][nsshole];
-  double chi2[nfoil][nsshole];
-  double w[nfoil][nsshole];
-
-  
   for(int i=0 ; i<nfoil ; i++){
-    for(int j=0 ; j<nsshole ; j++){
-      nev[i][j]  = 0.0;
-      chi2[i][j] = 0.0;
-      w[i][j]    = 1.0;
-    }
+    nev[i]  = 0.0;
+    chi2[i] = 0.0;
+    w[i]    = 1.0;
   }
   
   for(int i=0 ; i<ntune_event ; i++){
     residual = 0.0;
-    ang    = 0.0;
-    sspos  = 0.0;
-    refpos = 0.0;  refpos = refx[holegroup[i]];
-    ztR    = 0.0;  ztR    = z_recon[i];
-    
-    //if(foil_flag[i]==i) nev[i]++;
+    refz = 0.0;  refz = fcent_real[foil_flag[i]];
+    ztR  = 0.0;  ztR  = z_recon[i];
 
-    ztR= (ztR-Ztm)/Ztr; // only zt was not scaled, so apply scaling here
-    ang = calcf2t_4th_2(param,
-			x[i], xp[i],
-			y[i], yp[i],
-			ztR);
-    ang = ang*Xptr +Xptm;
-    sspos = -ang*l[foil_flag[i]]*projectf[foil_flag[i]]; // in centimeter
+    if(foil_flag[i]==i) nev[i]++;
+    
+    // ----------------------------- //
+    // ----- Raster correction ----- //
+    // ----------------------------- //
+    double RasterCor = calcRasterCor(Ras_curx[i], param[2], param[0]); 
+    RasterCor = RasterCor/tan(hrs_ang);
+    double ztR_wRC; 
+    ztR_wRC = ztR + RasterCor; // z with raster correction
     
     // ------------------- //
     // --- Residual ------ //
     // ------------------- //
-    residual = sspos - refpos;
-    //cout << i << ": " << sspos << "-(" << refpos << ")=" << residual << endl;
-    
-    chi2[foil_flag[i]][holegroup[i]]
-      = chi2[foil_flag[i]][holegroup[i]] + pow(residual,2.0);
-    
-    nev[foil_flag[i]][holegroup[i]]++;
+    residual = ztR_wRC - refz; 
+    chi2[foil_flag[i]] = chi2[foil_flag[i]] + pow(residual,2.0);
   }
   
   for(int i=0 ; i<nfoil ; i++){
-    for(int j=0 ; j<nsshole ; j++){
-      
-      //if(nev[i][j]>0){
-      if(nev[i][j]>10){ 
-      //if(nev[i][j]>50){ // using only holes with more than 50 events
-	chi2[i][j] = chi2[i][j]/nev[i][j]/pow(sigma,2.0);
-      }
-      else chi2[i][j] = 0.0;
-      
-      total_chi2 = total_chi2 + chi2[i][j]*w[i][j];
+    if(nev[i]!=0){
+      chi2[i] = sqrt(chi2[i])/nev[i]/sigma;
     }
+    total_chi2 = total_chi2 + chi2[i]*w[i];
   }
   
-  fval = total_chi2/(double)nfoil/(double)nsshole;
+  fval = total_chi2/(double)nfoil;
 }
 
 
-// #############################################################
-void fcn2(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/)
-// #############################################################
-{
-  
-  const double sigma = 1.0;
-  double ztR      = 0.0;
-  double refpos   = 0.0;
-  double residual = 0.0;
-  double ang      = 0.0;
-  double sspos    = 0.0;
-  double total_chi2 = 0.0;
-  
-  double nev[nfoil][nsshole];
-  double chi2[nfoil][nsshole];
-  double w[nfoil][nsshole];
-
-  
-  for(int i=0 ; i<nfoil ; i++){
-    for(int j=0 ; j<nsshole ; j++){
-      nev[i][j]  = 0.0;
-      chi2[i][j] = 0.0;
-      w[i][j]    = 1.0;
-    }
-  }
-  
-  for(int i=0 ; i<ntune_event ; i++){
-    residual = 0.0;
-    ang    = 0.0;
-    sspos  = 0.0;
-    refpos = 0.0;  refpos = refy[holegroup[i]];
-    ztR    = 0.0;  ztR    = z_recon[i];
-    
-    //if(foil_flag[i]==i) nev[i]++;
-
-    ztR= (ztR-Ztm)/Ztr; // only zt was not scaled, so apply scaling here
-    ang = calcf2t_4th_2(param,
-			x[i], xp[i],
-			y[i], yp[i],
-			ztR);
-    ang = ang*Yptr +Yptm;
-    sspos = -ang*l[foil_flag[i]]*projectf[foil_flag[i]]; // in centimeter
-    
-    // ------------------- //
-    // --- Residual ------ //
-    // ------------------- //
-    residual = sspos - refpos;
-    //cout << i << ": " << sspos << "-(" << refpos << ")=" << residual << endl;
-    
-    chi2[foil_flag[i]][holegroup[i]]
-      = chi2[foil_flag[i]][holegroup[i]] + pow(residual,2.0);
-    
-    nev[foil_flag[i]][holegroup[i]]++;
-  }
-  
-  for(int i=0 ; i<nfoil ; i++){
-    for(int j=0 ; j<nsshole ; j++){
-      
-      //if(nev[i][j]>0){
-      if(nev[i][j]>10){ 
-      //if(nev[i][j]>50){ // using only holes with more than 50 events
-	chi2[i][j] = chi2[i][j]/nev[i][j]/pow(sigma,2.0);
-      }
-      else chi2[i][j] = 0.0;
-      
-      total_chi2 = total_chi2 + chi2[i][j]*w[i][j];
-    }
-  }
-  
-  fval = total_chi2/(double)nfoil/(double)nsshole;
+double calcRasterCor(double a, double b, double c){
+  return a * b + c;
 }
-
-
-
