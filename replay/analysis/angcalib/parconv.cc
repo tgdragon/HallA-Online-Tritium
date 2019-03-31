@@ -42,7 +42,7 @@ void parconv(){
 	      for (a=0;a<n+1;a++){
 		
 		if (a+b+c+d+e+f==n){
-		  par_int = 0.0;
+		  par = 0.0;
 		  if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt && f<=nXt){
 		    *ifs >> par >> temp >> temp >> temp >> temp >> temp;
 		    //cout << par << endl;
@@ -51,7 +51,7 @@ void parconv(){
 		  else{
 		    //x = 0.;
 		  }
-		  *ofs << par_int << " "
+		  *ofs << par << " "
 		       << a << " " << b << " " << c << " "
 		       << d << " " << e << " " << f << endl;
 		  npar++;
