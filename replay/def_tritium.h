@@ -62,6 +62,7 @@ static const char* PATHS[] = {
   "/w/cache/halla/triton/raw",
   "./rawdata/",
   "/lustre/expphy/volatile/halla/triton/gogami/raw",
+  "/data/nnL/raw", // this is a directory to analyze data in hyperdragon11 @Kyoto
   //"/w/mss/halla/triton/raw",
    0
 };
