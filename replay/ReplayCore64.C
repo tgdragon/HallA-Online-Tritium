@@ -321,7 +321,7 @@ cout << endl
 
 
   // insert info to msql
-  if (nev<0) mysql_start(runnumber);
+  //if (nev<0) mysql_start(runnumber);
 
 
 
@@ -423,7 +423,7 @@ cout << endl
 
  
   // insert info to msql
-  if (nev<0) mysql_end(runnumber);
+  //if (nev<0) mysql_end(runnumber);
 
 }
 
