@@ -103,9 +103,9 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   }
   
   TTree* t1 = (TTree*)f1->Get("T");
-  Double_t trig5;
-  Double_t trig4;
-  Double_t trig1;
+  Double_t trig5[max];
+  Double_t trig4[max];
+  Double_t trig1[max];
   double ent = t1->GetEntries();
   //ent = 20000; // for test
   cout << endl;
@@ -411,9 +411,9 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   double valval[max];
   
   for(int i=0 ; i<ent ; i++){
-    trig1 = 0.0;
-    trig4 = 0.0;
-    trig5 = 0.0;
+    trig1[0] = 0.0;
+    trig4[0] = 0.0;
+    trig5[0] = 0.0;
     for(int j=0 ; j<max ;j++){
       rtime_s0[j] = -2222.0;
       ltime_s0[j] = -2222.0;
@@ -464,13 +464,13 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     // ------------------------------------ //
     // ------- Trigger conditions  -------- //
     // ------------------------------------ //
-    if(trig5 > 0 && tflag==5) t5flag = true;
+    if(trig5[0] > 0 && tflag==5) t5flag = true;
     else t5flag = false;
     
-    if(trig4 > 0 && tflag==4) t4flag = true;
+    if(trig4[0] > 0 && tflag==4) t4flag = true;
     else t4flag = false;
     
-    if(trig1 > 0 && tflag==1) t1flag = true;
+    if(trig1[0] > 0 && tflag==1) t1flag = true;
     else t1flag = false;
     
     if(t1flag==true || t4flag==true || t5flag==true) trig_fire = true;
