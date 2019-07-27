@@ -71,8 +71,7 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     sprintf(inputfname,"./nnL/tritium_%d.root",run);
     sprintf(newfname,"./nnL/nude_dir2/nude_%d.root",run);
     if(tflag==5){
-      //sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d.root",run);
-      sprintf(newfname,"./nnL_/coin/tri_coin_%d.root",run);
+      sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d.root",run);
     }
     else if(tflag==4){
       sprintf(newfname,"./nnL/RHRS_single_dragon/tri_Rsignle_%d.root",run);
@@ -89,8 +88,7 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     //sprintf(newfname,"nude_dir2/nude_%d_%d.root",run,nf);
     
     if(tflag==5){
-      //sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d_%d.root",run,nf);
-      sprintf(newfname,"./nnL_/coin/tri_coin_%d_%d.root",run,nf);
+      sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d_%d.root",run,nf);
     }
     else if(tflag==4){
       sprintf(newfname,"./nnL/RHRS_single_dragon/tri_Rsingle_%d_%d.root",run,nf);
@@ -249,28 +247,28 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   tnew->Branch("runid", &run,   "runid/I");
   tnew->Branch("evid",  &evid,  "evid/I" );
   tnew->Branch("HALLA_p",  &hallap,    "HALLA_p/D");
-  tnew->Branch("HALLA_dpp", &dpp ,     "HALLA_dpp/D");
+  //tnew->Branch("HALLA_dpp", &dpp ,     "HALLA_dpp/D");
   tnew->Branch("R.a1.asum_c", &a1,     "R.a1.asum_c/D");
   tnew->Branch("R.a2.asum_c", &a2,     "R.a2.asum_c/D");
-  tnew->Branch("RTDC.F1FirstHit", &rf1tdc, "RTDC.F1FirstHit[64]/D");
-  tnew->Branch("LTDC.F1FirstHit", &lf1tdc, "LTDC.F1FirstHit[64]/D");
+  //tnew->Branch("RTDC.F1FirstHit", &rf1tdc, "RTDC.F1FirstHit[64]/D");
+  //tnew->Branch("LTDC.F1FirstHit", &lf1tdc, "LTDC.F1FirstHit[64]/D");
   tnew->Branch("R.tr.tg_th", &th1,      "R.tr.tg_th[100]/D");
   tnew->Branch("R.tr.tg_ph", &ph1,      "R.tr.tg_ph[100]/D");
   tnew->Branch("L.tr.tg_th", &th2,      "L.tr.tg_th[100]/D");
   tnew->Branch("L.tr.tg_ph", &ph2,      "L.tr.tg_ph[100]/D");
-  tnew->Branch("R.s0.time", &rtime_s0,  "R.s0.time[100]/D");
-  tnew->Branch("L.s0.time", &ltime_s0,  "L.s0.time[100]/D");
-  tnew->Branch("R.s2.time", &rtime_s2,  "R.s2.time[100]/D");
-  tnew->Branch("L.s2.time", &ltime_s2,  "L.s2.time[100]/D");
-  tnew->Branch("R.tr.time", &rtime,     "R.tr.time[100]/D");
-  tnew->Branch("L.tr.time", &ltime,     "L.tr.time[100]/D");
+  //tnew->Branch("R.s0.time", &rtime_s0,  "R.s0.time[100]/D");
+  //tnew->Branch("L.s0.time", &ltime_s0,  "L.s0.time[100]/D");
+  //tnew->Branch("R.s2.time", &rtime_s2,  "R.s2.time[100]/D");
+  //tnew->Branch("L.s2.time", &ltime_s2,  "L.s2.time[100]/D");
+  //tnew->Branch("R.tr.time", &rtime,     "R.tr.time[100]/D");
+  //tnew->Branch("L.tr.time", &ltime,     "L.tr.time[100]/D");
   tnew->Branch("R.tr.vz", &rvz,         "R.tr.vz[100]/D");
   tnew->Branch("L.tr.vz", &lvz,         "L.tr.vz[100]/D");
   tnew->Branch("vz_mean", &vz_mean,     "vz_mean[100]/D");
   tnew->Branch("R.tr.p", &mom1,        "R.tr.p[100]/D");
   tnew->Branch("L.tr.p", &mom2,        "L.tr.p[100]/D");
-  tnew->Branch("R.tr.pathl", &rpathl,  "R.tr.pathl[100]/D" );
-  tnew->Branch("L.tr.pathl", &lpathl,  "L.tr.pathl[100]/D" );
+  //tnew->Branch("R.tr.pathl", &rpathl,  "R.tr.pathl[100]/D" );
+  //tnew->Branch("L.tr.pathl", &lpathl,  "L.tr.pathl[100]/D" );
   //tnew->Branch("R.s2.trpath", &rpathl_s2,  "R.s2.trpath[100]/D" );
   //tnew->Branch("L.s2.trpath", &lpathl_s2,  "L.s2.trpath[100]/D" );
   //tnew->Branch("R.s2.t_pads", &r_s2_t_pads, "R.s2.t_pads[100]/D" );
@@ -295,8 +293,8 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   tnew->Branch("R.ps.asum_c", &ps_asum, "R.ps.asum_c/D");
   //tnew->Branch("R.a1.t_fadc", &a1_tdc, "R.a1.t_fadc[24]/D");
   //tnew->Branch("R.a2.t_fadc", &a2_tdc, "R.a2.t_fadc[26]/D");
-  tnew->Branch("FbusRrb.Raster2.target.x", &rasterx, "FbusRrb.Raster2.target.x/D");
-  tnew->Branch("FbusRrb.Raster2.target.y", &rastery, "FbusRrb.Raster2.target.y/D");
+  //tnew->Branch("FbusRrb.Raster2.target.x", &rasterx, "FbusRrb.Raster2.target.x/D");
+  //tnew->Branch("FbusRrb.Raster2.target.y", &rastery, "FbusRrb.Raster2.target.y/D");
   
   //tnew->Branch("Lrb.Raster2.rawcur.x", &rast_curx, "Lrb.Raster2.rawcur.x/D");
   //tnew->Branch("Lrb.Raster2.rawcur.y", &rast_cury, "Lrb.Raster2.rawcur.y/D");
