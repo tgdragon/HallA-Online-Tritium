@@ -22,9 +22,14 @@ const double  Ztm = -0.15, Ztr=0.35;
 extern double calcf2t_plen(double* P, 
 			   double xf, double xpf,
 			   double yf, double ypf);
-double Calc_FPcor(double* val, double* par);
+extern double calcf2t_4th_2(double* P, double xf, double xpf, 
+			    double yf, double ypf, double zt);
+extern double Calc_FPcor(double* val, double* par);
+
 const int nParamT=35;     // For path length matrix (3rd order)
-double Plen_opt[nParamT]; // For path length matrix (3rd order)
+//double Plen_opt[nParamT]; // For path length matrix (3rd order)
+const int nParamT_4=126;  // For xpt, ypt with z (4th order)
+
 const int npar_rtime_ycor = 2;
 double par_rtime_ycor[npar_rtime_ycor];
 const int npar_rtime_ycor_L = 2;
@@ -66,7 +71,8 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     sprintf(inputfname,"./nnL/tritium_%d.root",run);
     sprintf(newfname,"./nnL/nude_dir2/nude_%d.root",run);
     if(tflag==5){
-      sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d.root",run);
+      //sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d.root",run);
+      sprintf(newfname,"./nnL_/coin/tri_coin_%d.root",run);
     }
     else if(tflag==4){
       sprintf(newfname,"./nnL/RHRS_single_dragon/tri_Rsignle_%d.root",run);
@@ -83,7 +89,8 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     //sprintf(newfname,"nude_dir2/nude_%d_%d.root",run,nf);
     
     if(tflag==5){
-      sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d_%d.root",run,nf);
+      //sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d_%d.root",run,nf);
+      sprintf(newfname,"./nnL_/coin/tri_coin_%d_%d.root",run,nf);
     }
     else if(tflag==4){
       sprintf(newfname,"./nnL/RHRS_single_dragon/tri_Rsingle_%d_%d.root",run,nf);
@@ -103,6 +110,7 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   }
   
   TTree* t1 = (TTree*)f1->Get("T");
+  const int max = 100;
   Double_t trig5[max];
   Double_t trig4[max];
   Double_t trig1[max];
@@ -114,7 +122,6 @@ int nude3(int run=111179, int nf=0, int tflag=5){
        << ") --> " << newfname 
        << endl;
   
-  const int max = 100;
   double rtime_s0[max], ltime_s0[max];
   double rtime_s2[max], ltime_s2[max];
   double rtime[max], ltime[max];
@@ -126,6 +133,7 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   double rf1tdc[f1n];
   double lf1tdc[f1n];
   double rvz[max], lvz[max];
+  double vz_mean[max];
   double th1[max], ph1[max];
   double th2[max], ph2[max];
   Int_t runnum;
@@ -233,8 +241,8 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   TFile* fnew = new TFile(newfname,"recreate");
   TTree* tnew = new TTree("tree","3H(e,e'K+)nnL experiment (2018)");
   
-  //tnew->Branch("DR.T1", &trig1, "DR.T1/D"   );
-  //tnew->Branch("DR.T4", &trig4, "DR.T4/D"  );
+  tnew->Branch("DR.T1", &trig1, "DR.T1/D"   );
+  tnew->Branch("DR.T4", &trig4, "DR.T4/D"  );
   tnew->Branch("DR.T5", &trig5, "DR.T5/D"   );
   
   //tnew->Branch("fEvtHdr.fRun", &runnum,   "fEvtHdr.fRun/I");
@@ -258,6 +266,7 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   tnew->Branch("L.tr.time", &ltime,     "L.tr.time[100]/D");
   tnew->Branch("R.tr.vz", &rvz,         "R.tr.vz[100]/D");
   tnew->Branch("L.tr.vz", &lvz,         "L.tr.vz[100]/D");
+  tnew->Branch("vz_mean", &vz_mean,     "vz_mean[100]/D");
   tnew->Branch("R.tr.p", &mom1,        "R.tr.p[100]/D");
   tnew->Branch("L.tr.p", &mom2,        "L.tr.p[100]/D");
   tnew->Branch("R.tr.pathl", &rpathl,  "R.tr.pathl[100]/D" );
@@ -276,16 +285,16 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   tnew->Branch("L.tr.th",  &l_th_fp, "L.tr.th[100]/D");
   tnew->Branch("R.tr.ph",  &r_ph_fp, "R.tr.ph[100]/D");
   tnew->Branch("L.tr.ph",  &l_ph_fp, "L.tr.ph[100]/D");
-  tnew->Branch("R.s2.la_c",  &r_s2_la_c, "R.s2.la_c[16]/D");
-  tnew->Branch("R.s2.ra_c",  &r_s2_ra_c, "R.s2.ra_c[16]/D");
-  tnew->Branch("L.s2.la_c",  &l_s2_la_c, "L.s2.la_c[16]/D");
-  tnew->Branch("L.s2.ra_c",  &l_s2_ra_c, "L.s2.ra_c[16]/D");
+  //tnew->Branch("R.s2.la_c",  &r_s2_la_c, "R.s2.la_c[16]/D");
+  //tnew->Branch("R.s2.ra_c",  &r_s2_ra_c, "R.s2.ra_c[16]/D");
+  //tnew->Branch("L.s2.la_c",  &l_s2_la_c, "L.s2.la_c[16]/D");
+  //tnew->Branch("L.s2.ra_c",  &l_s2_ra_c, "L.s2.ra_c[16]/D");
   tnew->Branch("R.tr.beta",  &rbeta, "R.tr.beta[100]/D");
   tnew->Branch("L.tr.beta",  &lbeta, "L.tr.beta[100]/D");
   tnew->Branch("ctime",      &ctime, "ctime[100]/D");
   tnew->Branch("R.ps.asum_c", &ps_asum, "R.ps.asum_c/D");
-  tnew->Branch("R.a1.t_fadc", &a1_tdc, "R.a1.t_fadc[24]/D");
-  tnew->Branch("R.a2.t_fadc", &a2_tdc, "R.a2.t_fadc[26]/D");
+  //tnew->Branch("R.a1.t_fadc", &a1_tdc, "R.a1.t_fadc[24]/D");
+  //tnew->Branch("R.a2.t_fadc", &a2_tdc, "R.a2.t_fadc[26]/D");
   tnew->Branch("FbusRrb.Raster2.target.x", &rasterx, "FbusRrb.Raster2.target.x/D");
   tnew->Branch("FbusRrb.Raster2.target.y", &rastery, "FbusRrb.Raster2.target.y/D");
   
@@ -335,6 +344,30 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     Pzt_R[i]=par;
   }
   Mzt_R.close();
+  
+  char name_Mxp_L[500];
+  sprintf(name_Mxp_L,"matrices/xp_LHRS_opt.dat");
+  ifstream Mxp_L(name_Mxp_L);
+  double Pxp_L[nParamT_4];
+  for (int i=0;i<nParamT_4;i++){
+    double par=0.;
+    int p=0;
+    Mxp_L >> par >> p >> p >> p >> p; 
+    Pxp_L[i]=par;
+  }
+  Mxp_L.close();
+  
+  char name_Myp_L[500];
+  sprintf(name_Myp_L,"matrices/yp_LHRS_opt.dat");
+  ifstream Myp_L(name_Myp_L);
+  double Pyp_L[nParamT_4];
+  for (int i=0;i<nParamT_4;i++){
+    double par=0.;
+    int p=0;
+    Myp_L >> par >> p >> p >> p >> p; 
+    Pyp_L[i]=par;
+  }
+  Myp_L.close();
   
   ifstream* s2_R_data;
   ifstream* s2_L_data;
@@ -411,10 +444,11 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   double valval[max];
   
   for(int i=0 ; i<ent ; i++){
-    trig1[0] = 0.0;
-    trig4[0] = 0.0;
-    trig5[0] = 0.0;
+    
     for(int j=0 ; j<max ;j++){
+      trig1[j] = 0.0;
+      trig4[j] = 0.0;
+      trig5[j] = 0.0;
       rtime_s0[j] = -2222.0;
       ltime_s0[j] = -2222.0;
       rpathl[j]   = -2222.0;
@@ -434,6 +468,7 @@ int nude3(int run=111179, int nf=0, int tflag=5){
       ctime[j]  = -2222.0;
       rvz[j]   = -2222.0;
       lvz[j]   = -2222.0;
+      vz_mean[j] = -2222.0;
     }
     a1 = -2222.0;
     a2 = -2222.0;
@@ -480,9 +515,11 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     // ------------------------------------------------ //
     // ------- General event selection ---------------- //
     // ------------------------------------------------ //
-    if( nhit == 1 && nhit_R ==1  // Single hit
+    if( nhit == 1 
+	&& nhit_R ==1  // Single hit
         && mom1[0]>1.5 && mom1[0]<2.0
-	&& mom2[0]>1.5 && mom2[0]<3.0) {
+	&& mom2[0]>1.5 && mom2[0]<3.0
+	) {
       
       seg_L  = l_s2_t_pads[0];
       seg_R  = r_s2_t_pads[0];
@@ -512,7 +549,10 @@ int nude3(int run=111179, int nf=0, int tflag=5){
     }
     else acflag = false;
     
-    if (trig_fire==true	&& genflag==true && acflag==true ){
+    if (trig_fire==true	
+	&& genflag==true 
+	&& acflag==true 
+	){
       tref_L  = lf1tdc[40]       * ch2time;
       timeL_L = lf1tdc[seg_L]    * ch2time;
       timeR_L = lf1tdc[seg_L+48] * ch2time;
@@ -557,9 +597,28 @@ int nude3(int run=111179, int nf=0, int tflag=5){
 	YpFP_R  = YpFP_R*YpFPr + YpFPm;
 	rvz[0]  = rvz[0]*Ztr + Ztm;
 	
+	
 	//cout << LenL << " " << LenR << endl;
 	
 	rast_x2 = rast_curx * rastx_param[1] + rastx_param[0];
+	double cor_rast = rast_x2/tan(13.2/180.*3.14159);
+	double rvz_cor = rvz[0] - cor_rast;
+	double lvz_cor = lvz[0] + cor_rast;
+	vz_mean[0] = (rvz_cor + lvz_cor)/2.0;
+	
+	// ----- Left arm angle ----- //
+	XFP_L   = (XFP_L -XFPm)/XFPr;
+	XpFP_L  = (XpFP_L-XpFPm)/XpFPr;
+	YFP_L   = (YFP_L -YFPm)/YFPr;
+	YpFP_L  = (YpFP_L-YpFPm)/YpFPr;
+	double vzt = (vz_mean[0] - Ztm)/Ztr;
+	th2[0]  = calcf2t_4th_2(Pxp_L, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
+	ph2[0]  = calcf2t_4th_2(Pyp_L, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
+	XFP_L   = XFP_L*XFPr + XFPm;
+	XpFP_L  = XpFP_L*XpFPr + XpFPm;
+	YFP_L   = YFP_L*YFPr + YFPm;
+	YpFP_L  = YpFP_L*YpFPr + YpFPm;
+	
 	
 	double beta_L = mom2[0]/sqrt(pow(mom2[0],2.0)+pow(me,2.0));
 	double cor_L   = (LenL-3.18)/3.0e+8/beta_L * 1.0e+9; // (3.18 m; test)
@@ -582,10 +641,15 @@ int nude3(int run=111179, int nf=0, int tflag=5){
 	meantime_R = meantime_R-cor_L+75.4;
 	ctime[0] = -meantime_R;
 	
-	if(fabs(ctime[0])<20.0){
-	  // ---- Filling data ------ //
-	  tnew->Fill(); // ---------- //
-	  //------------------------- //
+	if(tflag==5){
+	  if(fabs(ctime[0])<20.0){
+	    // ---- Filling data ------ //
+	    tnew->Fill(); // ---------- //
+	    //------------------------- //
+	  }
+	}
+	else{
+	  tnew->Fill();
 	}
       }
       
@@ -664,3 +728,56 @@ double Calc_FPcor(double* val, double* par){
   return cor;
   
 }
+
+
+//////////////////////////////////////////////////
+double calcf2t_4th_2(double* P, double xf, double xpf, 
+		     double yf, double ypf, double zt)
+//////////////////////////////////////////////////
+{
+  // ------------------------------------------------ //
+  // ----- 4rd order using xf, xpf, yf, ypf, zt ----- //
+  // ------------------------------------------------ //
+  const int nMatT=4;  
+  const int nXf=4;
+  const int nXpf=4;
+  const int nYf=4;
+  const int nYpf=4;
+  const int nZt=4;
+  
+  double Y=0.;
+  double x=1.; 
+  int npar=0;
+  int a=0,b=0,c=0,d=0,e=0;
+  
+  for (int n=0;n<nMatT+1;n++){
+    for(e=0;e<n+1;e++){
+      for (d=0;d<n+1;d++){
+	for (c=0;c<n+1;c++){ 
+	  for (b=0;b<n+1;b++){
+	    for (a=0;a<n+1;a++){ 
+	      
+	      if (a+b+c+d+e==n){
+		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
+		  x = pow(xf,double(a))*pow(xpf,double(b))*
+		    pow(yf,double(c))*pow(ypf,double(d))*pow(zt,double(e));
+		}
+		else{
+		  x = 0.;
+		}
+		Y += x*P[npar]; 
+	      npar++;
+	      }
+	      
+	    }
+	  }
+	}
+      }    
+    }
+  }
+  
+  return Y; 
+  
+}
+
+
