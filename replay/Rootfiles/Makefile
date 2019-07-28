@@ -11,15 +11,24 @@ CCFLAGS = $(ROOTINCLUDE)
 #LD = g++
 #LD = /home/gogami/gcc/gcc-6.3.0-install/bin/g++
 LDFLAGS = -g
+
 TARGET1 = nude_coin
 OBJS1 = nude_coin.o
 
-all: ${TARGET1} 
+TARGET2 = merge_rootfiles
+OBJS2 = merge_rootfiles.o
+
+all: ${TARGET1} ${TARGET2}
 
 ${TARGET1}: ${OBJS1}
 	${CC} ${CCFLAGS} -o $@ ${OBJS1} ${GLIBS}
 ${OBJS1}: nude_coin.cc
 	${CC} ${CCFLAGS} -c  nude_coin.cc ${GLIBS}
+
+${TARGET2}: ${OBJS2}
+	${CC} ${CCFLAGS} -o $@ ${OBJS2} ${GLIBS}
+${OBJS2}: merge_rootfiles.cc
+	${CC} ${CCFLAGS} -c  merge_rootfiles.cc ${GLIBS}
 
 
 
@@ -27,5 +36,5 @@ ${OBJS1}: nude_coin.cc
 #	${CC} ${CCFLAGS} -c $<
 
 clean:
-	rm -rf *.o core ${TARGET1}
+	rm -rf *.o core ${TARGET1} ${TARGET2}
 
