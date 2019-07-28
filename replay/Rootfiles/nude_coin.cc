@@ -183,7 +183,7 @@ int main(int argc, char** argv){
   UInt_t evid;
   
   //t1->SetBranchAddress("fEvtHdr.fRun", &runnum    );
-  //t1->SetBranchAddress("fEvtHdr.fEvtNum", &evid    );
+  t1->SetBranchAddress("fEvtHdr.fEvtNum", &evid    );
   t1->SetBranchAddress("HALLA_p", &hallap );
   t1->SetBranchAddress("HALLA_dpp", &dpp );
   t1->SetBranchAddress("DR.T1", &trig1    );
@@ -262,7 +262,7 @@ int main(int argc, char** argv){
   tnew->Branch("DR.T4", &trig4, "DR.T4/D"  );
   tnew->Branch("DR.T5", &trig5, "DR.T5/D"   );
   
-  //tnew->Branch("fEvtHdr.fRun", &runnum,   "fEvtHdr.fRun/I");
+  tnew->Branch("fEvtHdr.fRun", &runnum,   "fEvtHdr.fRun/I");
   tnew->Branch("runid", &run,   "runid/I");
   tnew->Branch("evid",  &evid,  "evid/I" );
   tnew->Branch("HALLA_p",  &hallap,    "HALLA_p/D");
