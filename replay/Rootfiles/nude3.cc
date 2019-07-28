@@ -243,7 +243,7 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   tnew->Branch("DR.T4", &trig4, "DR.T4/D"  );
   tnew->Branch("DR.T5", &trig5, "DR.T5/D"   );
   
-  //tnew->Branch("fEvtHdr.fRun", &runnum,   "fEvtHdr.fRun/I");
+  tnew->Branch("fEvtHdr.fRun", &runnum,   "fEvtHdr.fRun/I");
   tnew->Branch("runid", &run,   "runid/I");
   tnew->Branch("evid",  &evid,  "evid/I" );
   tnew->Branch("HALLA_p",  &hallap,    "HALLA_p/D");
@@ -273,8 +273,8 @@ int nude3(int run=111179, int nf=0, int tflag=5){
   //tnew->Branch("L.s2.trpath", &lpathl_s2,  "L.s2.trpath[100]/D" );
   //tnew->Branch("R.s2.t_pads", &r_s2_t_pads, "R.s2.t_pads[100]/D" );
   //tnew->Branch("L.s2.t_pads", &l_s2_t_pads, "L.s2.t_pads[100]/D");
-  //tnew->Branch("R.s2.nthit",   &r_s2_nthit,   "R.s2.nthit/D");
-  //tnew->Branch("L.s2.nthit",   &l_s2_nthit,   "L.s2.nthit/D");
+  tnew->Branch("R.s2.nthit",   &r_s2_nthit,   "R.s2.nthit/D");
+  tnew->Branch("L.s2.nthit",   &l_s2_nthit,   "L.s2.nthit/D");
   tnew->Branch("R.tr.x",   &r_x_fp,  "R.tr.x[100]/D");
   tnew->Branch("L.tr.x",   &l_x_fp,  "L.tr.x[100]/D");
   tnew->Branch("R.tr.y",   &r_y_fp,  "R.tr.y[100]/D");
