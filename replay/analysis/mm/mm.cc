@@ -20,7 +20,9 @@ void mm(){
   //TFile* f1 = new TFile("coin_111555_111561.root");
   //TFile* f1 = new TFile("coin_111555_111567.root");
   //TFile* f1 = new TFile("coin_111555_111576.root");
-  TFile* f1 = new TFile("coin_H2_1.root");
+  //TFile* f1 = new TFile("coin_H2_1.root");
+  //TFile* f1 = new TFile("h22.root");
+  TFile* f1 = new TFile("h2.root");
   TTree* t1 = (TTree*)f1->Get("tree");
   Double_t trig5;
   Double_t trig4;
@@ -68,6 +70,8 @@ void mm(){
   double a1_tdc[24];
   double a2_tdc[26];
   double ctime[max];
+  double vz_mean[max];
+  double l_cer;
   const double hrs_ang = 13.2 * 3.14159 / 180.;
   
   t1->SetBranchAddress("fEvtHdr.fRun", &runnum    );
@@ -81,6 +85,8 @@ void mm(){
   //t1->SetBranchAddress("L.tr.pathl", &lpathl);
   t1->SetBranchAddress("R.a1.asum_c", &a1);
   t1->SetBranchAddress("R.a2.asum_c", &a2);
+  t1->SetBranchAddress("L.cer.asum_c", &l_cer);
+  t1->SetBranchAddress("vz_mean", &vz_mean);
   t1->SetBranchAddress("R.tr.p", &mom1);
   t1->SetBranchAddress("L.tr.p", &mom2);
   //t1->SetBranchAddress("RTDC.F1FirstHit", &rf1tdc);
@@ -91,10 +97,10 @@ void mm(){
   t1->SetBranchAddress("R.tr.tg_ph", &ph1);
   t1->SetBranchAddress("L.tr.tg_th", &th2);
   t1->SetBranchAddress("L.tr.tg_ph", &ph2);
-  t1->SetBranchAddress("R.s0.time", &rtime_s0);
-  t1->SetBranchAddress("L.s0.time", &ltime_s0);
-  t1->SetBranchAddress("R.s2.time", &rtime_s2);
-  t1->SetBranchAddress("L.s2.time", &ltime_s2);
+  //t1->SetBranchAddress("R.s0.time", &rtime_s0);
+  //t1->SetBranchAddress("L.s0.time", &ltime_s0);
+  //t1->SetBranchAddress("R.s2.time", &rtime_s2);
+  //t1->SetBranchAddress("L.s2.time", &ltime_s2);
   //t1->SetBranchAddress("R.s2.t_pads", &r_s2_t_pads);
   //t1->SetBranchAddress("L.s2.t_pads", &l_s2_t_pads);
   //t1->SetBranchAddress("R.s2.nthit",   &r_s2_nthit);
@@ -115,8 +121,8 @@ void mm(){
   //t1->SetBranchAddress("R.s2.nthit",&nhit_R);
   t1->SetBranchAddress("R.ps.asum_c", &ps_asum);
   t1->SetBranchAddress("ctime", &ctime);
-  t1->SetBranchAddress("R.a1.t_fadc", &a1_tdc);
-  t1->SetBranchAddress("R.a2.t_fadc", &a2_tdc);
+  //t1->SetBranchAddress("R.a1.t_fadc", &a1_tdc);
+  //t1->SetBranchAddress("R.a2.t_fadc", &a2_tdc);
   
   
   //TCanvas* c1 = new TCanvas("c1","c1");
@@ -216,14 +222,16 @@ void mm(){
   bool ctime_selection = false;
   bool ac1_selection = false;
   bool ac2_selection = false;
+  bool lcer_selection = false;
   bool zR_selection = false;
   bool zL_selection = false;
+  bool vz_selection =false;
   bool acc1_selection = false;
   bool acc2_selection = false;
   bool acc3_selection = false;
   bool acc4_selection = false;
   bool acc5_selection = false;
-  const double kcenter = 3.0;
+  const double kcenter = 3.1;
   const double rf_sep = 2.0;
   double par_ep[3];
   double par_k[3];
@@ -245,8 +253,11 @@ void mm(){
     hallap = -2222.0;
     zR_selection    = false;
     zL_selection    = false;
+    vz_selection    = false;
     ac1_selection   = false;
     ac2_selection   = false;
+    lcer_selection  = false;
+    
     ctime_selection = false;
     acc1_selection  = false;
     acc2_selection  = false;
@@ -267,11 +278,20 @@ void mm(){
     //if(lvz[0]>0.1 || lvz[0]<-0.1) zL_selection = true;
     else zL_selection = false;
     
+    if (fabs(rvz[0]-lvz[0])<0.05
+	&& fabs(vz_mean[0])<0.1){
+      vz_selection =true;
+    }
+    else vz_selection = false;
+    
     if(a1 < 0.5) ac1_selection = true;
     else ac1_selection = false;
     
     if(a2 > 3.0 && a2 <18.0 ) ac2_selection = true;
     else ac2_selection = false;
+    
+    if(l_cer>1500.0) lcer_selection = true;
+    else lcer_selection = false;
     
     if(fabs(ctime[0])<1.0) ctime_selection = true;
     else  ctime_selection = false;
@@ -288,7 +308,8 @@ void mm(){
     else acc5_selection = false;
     
     
-    if(zR_selection==true && zL_selection==true){
+    //if(zR_selection==true && zL_selection==true){
+    if(vz_selection==true){
       h3->Fill(a1,a2);
       h4->Fill(ctime[0],a1);
       h5->Fill(ctime[0],a2);
@@ -298,10 +319,12 @@ void mm(){
     }
     
     
-    if( zR_selection     == true
-	&& zL_selection  == true
+    if( //zR_selection     == true
+	//&& zL_selection  == true
+       vz_selection == true
 	&& ac1_selection == true
-	&& ac2_selection == true ){
+	&& ac2_selection == true 
+	&& lcer_selection==true ){
       
       par_ep[0] = mom2[0];
       par_ep[1] = th2[0];
@@ -314,10 +337,10 @@ void mm(){
       hallap = hallap/1000.0; // MeV-->GeV
       
       mm = CalcMM(hallap, par_ep, par_k, mp);
-      mm_1st_cor = (mm-mL)*1000. + (436.30*l_ph_fp[0] - 22.3);
-      mm_1st_cor = mm_1st_cor - (2.3625*lvz[0]);
-      mm_1st_cor = mm_1st_cor + (131.1*l_y_fp[0]);
-      mm = mm_1st_cor/1000.0 + mL;
+      //mm_1st_cor = (mm-mL)*1000. + (436.30*l_ph_fp[0] - 22.3);
+      //mm_1st_cor = mm_1st_cor - (2.3625*lvz[0]);
+      //mm_1st_cor = mm_1st_cor + (131.1*l_y_fp[0]);
+      //mm = mm_1st_cor/1000.0 + mL;
       
       mm = (mm-mL)*1000.; // Gen --> MeV
       
