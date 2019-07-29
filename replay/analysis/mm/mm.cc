@@ -477,7 +477,7 @@ void mm(){
 double CalcMM(double ee, double* par_ep, double* par_k, double mt){
   
   double pe = ee;
-  double Ee = sqrt(mk*mk + pe*pe);
+  double Ee = sqrt(me*me + pe*pe);
   TVector3 vec_e (0.0, 0.0, pe);
   
   double pep  = par_ep[0];
