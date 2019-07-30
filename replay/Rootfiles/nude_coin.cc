@@ -363,7 +363,7 @@ int main(int argc, char** argv){
   Mzt_R.close();
   
   char name_Mxp_L[500];
-  sprintf(name_Mxp_L,"matrices/xp_LHRS_opt.dat");
+  sprintf(name_Mxp_L,"matrices/xpt_LHRS_4_opt.dat");
   ifstream Mxp_L(name_Mxp_L);
   double Pxp_L[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
@@ -375,7 +375,7 @@ int main(int argc, char** argv){
   Mxp_L.close();
   
   char name_Myp_L[500];
-  sprintf(name_Myp_L,"matrices/yp_LHRS_opt.dat");
+  sprintf(name_Myp_L,"matrices/ypt_LHRS_4_opt.dat");
   ifstream Myp_L(name_Myp_L);
   double Pyp_L[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
