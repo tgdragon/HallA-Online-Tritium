@@ -363,25 +363,28 @@ int main(int argc, char** argv){
   Mzt_R.close();
   
   char name_Mxp_L[500];
-  sprintf(name_Mxp_L,"matrices/xpt_LHRS_4_opt.dat");
+  //sprintf(name_Mxp_L,"matrices/xpt_LHRS_4_opt.dat");
+  sprintf(name_Mxp_L,"matrices/newpar_xpt_2.dat");
   ifstream Mxp_L(name_Mxp_L);
   double Pxp_L[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
     double par=0.;
     int p=0;
-    Mxp_L >> par >> p >> p >> p >> p; 
+    Mxp_L >> par >> p >> p >> p >> p >> p; 
     Pxp_L[i]=par;
+    //cout << par << endl;
   }
   Mxp_L.close();
   
   char name_Myp_L[500];
-  sprintf(name_Myp_L,"matrices/ypt_LHRS_4_opt.dat");
+  //sprintf(name_Myp_L,"matrices/ypt_LHRS_4_opt.dat");
+  sprintf(name_Myp_L,"matrices/newpar_ypt_2.dat");
   ifstream Myp_L(name_Myp_L);
   double Pyp_L[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
     double par=0.;
     int p=0;
-    Myp_L >> par >> p >> p >> p >> p; 
+    Myp_L >> par >> p >> p >> p >> p >> p; 
     Pyp_L[i]=par;
   }
   Myp_L.close();
@@ -629,8 +632,12 @@ int main(int argc, char** argv){
 	YFP_L   = (YFP_L -YFPm)/YFPr;
 	YpFP_L  = (YpFP_L-YpFPm)/YpFPr;
 	double vzt = (vz_mean[0] - Ztm)/Ztr;
-	th2[0]  = calcf2t_4th_2(Pxp_L, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
-	ph2[0]  = calcf2t_4th_2(Pyp_L, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
+	th2[0]  = calcf2t_4th_2(Pxp_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
+	ph2[0]  = calcf2t_4th_2(Pyp_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
+	th2[0]  = th2[0]*Xptr + Xptm;
+	ph2[0]  = ph2[0]*Yptr + Yptm;
+	//th2[0]  = th2[0]*YpFPr + YpFPr;
+	//ph2[0]  = ph2[0]*XpFPr + XpFPr;
 	XFP_L   = XFP_L*XFPr + XFPm;
 	XpFP_L  = XpFP_L*XpFPr + XpFPm;
 	YFP_L   = YFP_L*YFPr + YFPm;
