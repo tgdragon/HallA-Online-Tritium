@@ -372,7 +372,7 @@ int main(int argc, char** argv){
     int p=0;
     Mxp_L >> par >> p >> p >> p >> p >> p; 
     Pxp_L[i]=par;
-    cout << par << endl;
+    //cout << par << endl;
   }
   Mxp_L.close();
   
