@@ -146,6 +146,7 @@ int main(int argc, char** argv){
   double rpathl_s2[max], lpathl_s2[max];
   double a1, a2;
   double mom1[max], mom2[max];
+  double mom1_own[max], mom2_own[max];
   const int f1n = 64;
   double rf1tdc[f1n];
   double lf1tdc[f1n];
@@ -259,8 +260,8 @@ int main(int argc, char** argv){
   TTree* tnew = new TTree("tree","3H(e,e'K+)nnL experiment (2018)");
   
   tnew->Branch("DR.T1", &trig1, "DR.T1/D"   );
-  tnew->Branch("DR.T4", &trig4, "DR.T4/D"  );
-  tnew->Branch("DR.T5", &trig5, "DR.T5/D"   );
+  //tnew->Branch("DR.T4", &trig4, "DR.T4/D"  );
+  //tnew->Branch("DR.T5", &trig5, "DR.T5/D"   );
   
   tnew->Branch("fEvtHdr.fRun", &runnum,   "fEvtHdr.fRun/I");
   tnew->Branch("runid", &run,   "runid/I");
@@ -284,16 +285,20 @@ int main(int argc, char** argv){
   tnew->Branch("R.tr.vz", &rvz,         "R.tr.vz[100]/D");
   tnew->Branch("L.tr.vz", &lvz,         "L.tr.vz[100]/D");
   tnew->Branch("vz_mean", &vz_mean,     "vz_mean[100]/D");
-  tnew->Branch("R.tr.p", &mom1,        "R.tr.p[100]/D");
-  tnew->Branch("L.tr.p", &mom2,        "L.tr.p[100]/D");
+  //tnew->Branch("R.tr.p", &mom1,        "R.tr.p[100]/D");
+  //tnew->Branch("L.tr.p", &mom2,        "L.tr.p[100]/D");
+  tnew->Branch("R.tr.p", &mom1_own,      "R.tr.p[100]/D");
+  tnew->Branch("L.tr.p", &mom2_own,      "L.tr.p[100]/D");
+  //tnew->Branch("momr", &mom1_own,      "momr[100]/D");
+  //tnew->Branch("moml", &mom2_own,      "moml[100]/D");
   //tnew->Branch("R.tr.pathl", &rpathl,  "R.tr.pathl[100]/D" );
   //tnew->Branch("L.tr.pathl", &lpathl,  "L.tr.pathl[100]/D" );
   //tnew->Branch("R.s2.trpath", &rpathl_s2,  "R.s2.trpath[100]/D" );
   //tnew->Branch("L.s2.trpath", &lpathl_s2,  "L.s2.trpath[100]/D" );
   //tnew->Branch("R.s2.t_pads", &r_s2_t_pads, "R.s2.t_pads[100]/D" );
   //tnew->Branch("L.s2.t_pads", &l_s2_t_pads, "L.s2.t_pads[100]/D");
-  tnew->Branch("R.s2.nthit",   &r_s2_nthit,   "R.s2.nthit/D");
-  tnew->Branch("L.s2.nthit",   &l_s2_nthit,   "L.s2.nthit/D");
+  //tnew->Branch("R.s2.nthit",   &r_s2_nthit,   "R.s2.nthit/D");
+  //tnew->Branch("L.s2.nthit",   &l_s2_nthit,   "L.s2.nthit/D");
   tnew->Branch("R.tr.x",   &r_x_fp,  "R.tr.x[100]/D");
   tnew->Branch("L.tr.x",   &l_x_fp,  "L.tr.x[100]/D");
   tnew->Branch("R.tr.y",   &r_y_fp,  "R.tr.y[100]/D");
@@ -306,8 +311,8 @@ int main(int argc, char** argv){
   //tnew->Branch("R.s2.ra_c",  &r_s2_ra_c, "R.s2.ra_c[16]/D");
   //tnew->Branch("L.s2.la_c",  &l_s2_la_c, "L.s2.la_c[16]/D");
   //tnew->Branch("L.s2.ra_c",  &l_s2_ra_c, "L.s2.ra_c[16]/D");
-  tnew->Branch("R.tr.beta",  &rbeta, "R.tr.beta[100]/D");
-  tnew->Branch("L.tr.beta",  &lbeta, "L.tr.beta[100]/D");
+  //tnew->Branch("R.tr.beta",  &rbeta, "R.tr.beta[100]/D");
+  //tnew->Branch("L.tr.beta",  &lbeta, "L.tr.beta[100]/D");
   tnew->Branch("ctime",      &ctime, "ctime[100]/D");
   tnew->Branch("R.ps.asum_c", &ps_asum, "R.ps.asum_c/D");
   //tnew->Branch("R.a1.t_fadc", &a1_tdc, "R.a1.t_fadc[24]/D");
@@ -388,6 +393,30 @@ int main(int argc, char** argv){
     Pyp_L[i]=par;
   }
   Myp_L.close();
+  
+  char name_Mmom_L[500];
+  sprintf(name_Mmom_L,"matrices/mom_LHRS_4.dat");
+  ifstream Mmom_L(name_Mmom_L);
+  double Pmom_L[nParamT_4];
+  for (int i=0;i<nParamT_4;i++){
+    double par=0.;
+    int p=0;
+    Mmom_L >> par >> p >> p >> p >> p >> p; 
+    Pmom_L[i]=par;
+  }
+  Mmom_L.close();
+  
+  char name_Mmom_R[500];
+  sprintf(name_Mmom_R,"matrices/mom_RHRS_4.dat");
+  ifstream Mmom_R(name_Mmom_R);
+  double Pmom_R[nParamT_4];
+  for (int i=0;i<nParamT_4;i++){
+    double par=0.;
+    int p=0;
+    Mmom_R >> par >> p >> p >> p >> p >> p; 
+    Pmom_R[i]=par;
+  }
+  Mmom_R.close();
   
   ifstream* s2_R_data;
   ifstream* s2_L_data;
@@ -478,6 +507,8 @@ int main(int argc, char** argv){
       ltime[j]    = -2222.0;
       mom1[j]   = -2222.0;
       mom2[j]   = -2222.0;
+      mom1_own[j] = -2222.0;
+      mom2_own[j] = -2222.0;
       th1[j]   = -2222.0;
       ph1[j]   = -2222.0;
       th2[j]   = -2222.0;
@@ -631,18 +662,40 @@ int main(int argc, char** argv){
 	XpFP_L  = (XpFP_L-XpFPm)/XpFPr;
 	YFP_L   = (YFP_L -YFPm)/YFPr;
 	YpFP_L  = (YpFP_L-YpFPm)/YpFPr;
+	XFP_R   = (XFP_R -XFPm)/XFPr;
+	XpFP_R  = (XpFP_R-XpFPm)/XpFPr;
+	YFP_R   = (YFP_R -YFPm)/YFPr;
+	YpFP_R  = (YpFP_R-YpFPm)/YpFPr;
 	double vzt = (vz_mean[0] - Ztm)/Ztr;
+	
+	// --- Left ---
+	mom2_own[0] = calcf2t_4th_2(Pmom_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
 	th2[0]  = calcf2t_4th_2(Pxp_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
 	ph2[0]  = calcf2t_4th_2(Pyp_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
-	th2[0]  = th2[0]*Xptr + Xptm;
-	ph2[0]  = ph2[0]*Yptr + Yptm;
-	//th2[0]  = th2[0]*YpFPr + YpFPr;
-	//ph2[0]  = ph2[0]*XpFPr + XpFPr;
+	
 	XFP_L   = XFP_L*XFPr + XFPm;
 	XpFP_L  = XpFP_L*XpFPr + XpFPm;
 	YFP_L   = YFP_L*YFPr + YFPm;
 	YpFP_L  = YpFP_L*YpFPr + YpFPm;
+	mom2_own[0] = mom2_own[0] * Momr + Momm;
+	th2[0]  = th2[0]*Xptr + Xptm;
+	ph2[0]  = ph2[0]*Yptr + Yptm;
 	
+	if(run<111221 || (111479<run && run<111552) ){ // H2 kinematics
+	  mom2_own[0] = mom2_own[0];
+	}
+	else{ // T2 kinematics
+	  mom2_own[0] = mom2_own[0] * 2.218/2.100;    
+	}
+	
+	// --- Right ---
+	mom1_own[0] = calcf2t_4th_2(Pmom_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
+	
+	XFP_R   = XFP_R*XFPr + XFPm;
+	XpFP_R  = XpFP_R*XpFPr + XpFPm;
+	YFP_R   = YFP_R*YFPr + YFPm;
+	YpFP_R  = YpFP_R*YpFPr + YpFPm;
+	mom1_own[0] = mom1_own[0] * Momr + Momm;
 	
 	double beta_L = mom2[0]/sqrt(pow(mom2[0],2.0)+pow(me,2.0));
 	double cor_L   = (LenL-3.18)/3.0e+8/beta_L * 1.0e+9; // (3.18 m; test)
@@ -666,7 +719,8 @@ int main(int argc, char** argv){
 	ctime[0] = -meantime_R;
 	
 	if(tflag==5){
-	  if(fabs(ctime[0])<20.0){
+	  if(fabs(ctime[0])<20.0 && 
+	     fabs(rvz_cor - lvz_cor)<0.1){
 	    // ---- Filling data ------ //
 	    tnew->Fill(); // ---------- //
 	    //------------------------- //
