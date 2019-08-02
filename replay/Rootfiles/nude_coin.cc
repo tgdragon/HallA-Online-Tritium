@@ -364,7 +364,7 @@ int main(int argc, char** argv){
   
   char name_Mxp_L[500];
   //sprintf(name_Mxp_L,"matrices/xpt_LHRS_4_opt.dat");
-  sprintf(name_Mxp_L,"matrices/newpar_xpt_2.dat");
+  sprintf(name_Mxp_L,"matrices/xpt_LHRS_4_upto2.dat");
   ifstream Mxp_L(name_Mxp_L);
   double Pxp_L[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
@@ -372,13 +372,13 @@ int main(int argc, char** argv){
     int p=0;
     Mxp_L >> par >> p >> p >> p >> p >> p; 
     Pxp_L[i]=par;
-    //cout << par << endl;
+    cout << par << endl;
   }
   Mxp_L.close();
   
   char name_Myp_L[500];
   //sprintf(name_Myp_L,"matrices/ypt_LHRS_4_opt.dat");
-  sprintf(name_Myp_L,"matrices/newpar_ypt_2.dat");
+  sprintf(name_Myp_L,"matrices/ypt_LHRS_4_upto2.dat");
   ifstream Myp_L(name_Myp_L);
   double Pyp_L[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
