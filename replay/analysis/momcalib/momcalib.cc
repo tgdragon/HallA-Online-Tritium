@@ -5,6 +5,22 @@
   Toshiyuki Gogami, Aug 4, 2019
 */
 
+#include "TFile.h"
+#include "TTree.h"
+#include "TH1F.h"
+#include "TROOT.h"
+#include "TStyle.h"
+#include "TGraph.h"
+#include "TObjArray.h"
+#include "TApplication.h"
+#include "TMinuit.h"
+#include "TCanvas.h"
+#include "TVector3.h"
+
+#include <fstream>
+#include <iostream>
+using namespace std;
+
 const double me = 0.000511;
 const double mk = 0.493677;
 const double mp = 0.938272;
@@ -24,9 +40,6 @@ extern double tune(double* pa, int j);
 extern void fcn(int &nPar, double* /*grad*/, 
 		double &fval, double* param, int /*iflag*/);
 
-
-
-
 // =================================================== //
 // ==== Offset and scaling factors for matrices ====== //
 // =================================================== //
@@ -42,9 +55,7 @@ const double  Ztm = -0.15,Ztr=0.35;
 const int npeak = 2;
 double pcent[npeak] = {-8.05, 67.44}; 
 double pcent_real[npeak] = {0.0, 76.959};
-//double selection_width = 0.0125; 
 double selection_width[npeak] = {12.0, 20.0};
-
 
 //const int nParamT = 126;  // Number of parameters
 const int nParamT = 252;  // Number of parameters (126 x 2)
@@ -59,36 +70,40 @@ double tgang_xp2[nmax], tgang_yp2[nmax];
 double avz[nmax];          // averated vertex z
 double beam_mom[nmax];
 
-//double z_recon[nmax]; // reconstructed z position
-//int foil_flag[nmax];
 int peak_flag[nmax];
 int ntune_event = 0;
-//int holegroup[nmax];
-
-//double l[nfoil];
-//double projectf[nfoil];
-double OptPar[nParamT]; // Momemtum parameters for RHRS
-//double OptPar2[nParamT]; // Momemtum parameters for LHRS
-
-//const int nParamT2 = 4; 
-//double parRaster[nParamT2];
-//double Opt_Par[nParamT2];
-//double Ras_curx[nmax];
-//double Ras_cury[nmax];
+double OptPar[nParamT]; 
 
 const double hrs_ang = 13.2 * 3.14159 / 180.;
 
-void momcalib(){
+int main(int argc, char** argv){
+  TApplication* app = new TApplication("app", &argc, argv);
+  int nite = 0;  // The number of tuning iteration
+  char RootFileName[500];
+  if(argc==1){
+    sprintf(RootFileName,"h2_20190803.root");
+    nite = 0;
+  }
+  else if(argc==2){
+    nite = atoi(argv[1]);
+  }
+  else if(argc==3){
+    nite = atoi(argv[1]);
+    sprintf(RootFileName,"%s",argv[2]);
+  }
+  else{
+    cout << " Please type " << endl;
+    cout << " ./momcalib (ROOTFIILE) (NITE)" << endl;
+    return 99;
+  }
 
-  const int nite = 1;  // The number of tuning iteration
+    //const int nite = 1;  // The number of tuning iteration
   
   // =================================== //
   // ======== General conditions ======= //
   // =================================== //
   gROOT->SetStyle("Plain");
   gStyle->SetOptStat(0);
-
-
   
   // ======================================== //
   // ======= Opening a ROOT file ============ //
@@ -97,7 +112,7 @@ void momcalib(){
   TTree* t1 = (TTree*)f1->Get("tree");
   //Double_t trig1;
   double ent = t1->GetEntries();
-  ent = 500000; // for test
+  ent = 50000; // for test
   //if(nite>0) ent = 400000;
   
   cout << endl;
@@ -470,7 +485,10 @@ void momcalib(){
     h.Add(c3);
   }
   h.Write();
+
+  app->Run();
   
+  return 0;
 } 
 
 //////////////////////////////////////////////////
@@ -721,7 +739,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
     par_k[1] = tgang_xp[i];
     par_k[2] = tgang_yp[i];
       
-    beam_mom[i] = beam_mom[i]/1000.0; // MeV/c --> GeV/c
+    beam_mom[i] = beam_mom[i];
     
     avz[i] = avz[i] * Ztr + Ztm;
 
@@ -749,8 +767,9 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
       double mm;
       mm = CalcMM(beam_mom[i], par_ep, par_k, mp);
       mm = (mm-mL)*1000.0;
-      //cout << par_ep[0] << " " << par_ep[1] << " " << par_ep[2] << endl;
-      //cout << par_k[0] << " "  << par_k[1]  << " " << par_k[2] << endl;
+      //cout << beam_mom[i] << " "
+      //   << par_ep[0] << " " << par_ep[1] << " " << par_ep[2] << " "
+      //   << par_k[0] << " "  << par_k[1]  << " " << par_k[2] << endl;
       residual = mm - pcent_real[(int)peak_flag[i]];
       //cout << mm << " " << pcent_real[peak_flag[i]] << " " << residual << endl;
       chi2 = chi2 + pow(residual,2.0);
