@@ -26,6 +26,7 @@ const double mk = 0.493677;
 const double mp = 0.938272;
 const double mL = 1.115683;
 const double mS = 1.192642;
+const double HTkin_mom_scale = 2.218/2.100;
 
 extern double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt);
 
@@ -52,15 +53,16 @@ const double  Xptr=0.15,  Yptr=0.08, Momr=0.18;
 const double  PLm = 25.4, PLr=0.7; 
 const double  Ztm = -0.15,Ztr=0.35; 
 
-int tune_id;
+
 const int npeak = 2;
 double pcent[npeak] = {0.0, 77.}; 
 double pcent_real[npeak] = {0.0, 76.959};
-double selection_width[npeak] = {12.0, 20.0};
-const int npeak_2 = 2;
-double pcent_2[npeak_2] = {-5.0}; 
-double pcent_real_2[npeak_2] = {0.0};
-double selection_width[npeak_2] = {10.0};
+double selection_width[npeak] = {15.0, 15.0};
+const int npeak2 = 1;
+double pcent_2[npeak2] = {-5.0}; 
+double pcent_real_2[npeak2] = {0.0};
+double selection_width_2[npeak2] = {15.0};
+int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
 const int nParamT = 252;  // Number of parameters (126 x 2)
@@ -74,6 +76,7 @@ double xp2[nmax],yp2[nmax];
 double tgang_xp2[nmax], tgang_yp2[nmax];
 double avz[nmax];          // averated vertex z
 double beam_mom[nmax];
+int tune_id[nmax];
 
 int peak_flag[nmax];
 int ntune_event = 0;
@@ -259,10 +262,10 @@ int main(int argc, char** argv){
 
   char name_Mmom_L[500];
   char name_Mmom_R[500];
-  sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); 
-  sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
-  //sprintf(name_Mmom_L,"newpar_lmom_1.dat"); 
-  //sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
+  //sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); 
+  //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
+  sprintf(name_Mmom_L,"newpar_lmom_1.dat"); 
+  sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   double Pmom_L[nParamT], Pmom_R[nParamT];
@@ -295,26 +298,36 @@ int main(int argc, char** argv){
   
   TH1F* h1_2 = new TH1F("h1_2","",200,-10.0,10.0);
   h1_2->GetXaxis()->SetTitle("ctime (ns)");
-  TH1F* h2_2 = new TH1F("h2","",200,-50.,150.0);
-  TH1F* h2_L_2 = (TH1F*)h2->Clone("h2_L_h22");
-  TH1F* h2_S_2 = (TH1F*)h2->Clone("h2_S_h22");
+  TH1F* h2_2 = new TH1F("h2_2","",200,-50.,150.0);
+  TH1F* h2_L_2 = (TH1F*)h2_2->Clone("h2_L_2");
+  //TH1F* h2_S_2 = (TH1F*)h2_2->Clone("h2_S_h22");
   
   char tempc[500];
   char tempc2[500];
+  
+  nL1 = 0;
+  nS  = 0;
+  nL2 = 0;
 
   for(int i=0 ; i<nmax ; i++){
     x[i]    = -2222.0; // x at FP
     y[i]    = -2222.0; // y at FP
     xp[i]   = -2222.0; // x' at FP
     yp[i]   = -2222.0; // y' at FP
+    tgang_xp[nmax] = -2222.0;
+    tgang_yp[nmax] = -2222.0;
     
     x2[i]    = -2222.0; // x at FP
     y2[i]    = -2222.0; // y at FP
     xp2[i]   = -2222.0; // x' at FP
     yp2[i]   = -2222.0; // y' at FP
+    tgang_xp2[nmax] = -2222.0;
+    tgang_yp2[nmax] = -2222.0;
 
+    avz[i]   = -2222.0;
     
     peak_flag[i] = -1;
+    tune_id[i]   = -1;
     
     //z_recon[ntune_event] = -2222.0;
     //holegroup[ntune_event] = -1;
@@ -425,9 +438,16 @@ int main(int argc, char** argv){
 
 	  if( ntune_event<nmax ){
 	    
-	    if(j==0) h2_L ->Fill(mm);
-	    else  h2_S ->Fill(mm);
-
+	    if(j==0) {
+	      h2_L ->Fill(mm);
+	      nL1++;
+	    }
+	    else  {
+	      h2_S ->Fill(mm);
+	      nS++;
+	    }
+	    
+	    tune_id[ntune_event] = 1;
 	    peak_flag[ntune_event] = j; // Lambda = 0, Sigma = 1
 	    
 	    x[ntune_event]  = (r_x_fp[0]-XFPm)/XFPr;  // scaled 
@@ -463,7 +483,7 @@ int main(int argc, char** argv){
   
   
   // ----------------- Lambda ---------------------------- //
-  double ent2 = t2->GetEntry(i);
+  double ent2 = t2->GetEntries();
   for (int i=0 ; i< ent2 ; i++){
     // ----- Initialization ------- //
     for(int j=0 ; j<max ; j++){
@@ -510,7 +530,7 @@ int main(int argc, char** argv){
 			      (vz_mean_2[0]-Ztm)/Ztr,
 			      2);
       par_ep[0] = par_ep[0] * Momr + Momm;
-      par_ep[0] = par_ep[0] * 2.218/2.100; // T kinematics
+      par_ep[0] = par_ep[0] * HTkin_mom_scale; // T kinematics
       par_ep[1] = th2_2[0];
       par_ep[2] = -ph2_2[0] - hrs_ang;
       
@@ -556,37 +576,38 @@ int main(int argc, char** argv){
       mm = (mm-mL)*1000.0;
       h2_2->Fill(mm);
       
-      for(int j=0 ; j<npeak_2 ; j++){
+      for(int j=0 ; j<npeak2 ; j++){
 	
 	if(pcent_2[j]-selection_width_2[j]<mm
-	   && mm<pcent[j]+selection_width_2[j]){
+	   && mm<pcent_2[j]+selection_width_2[j]){
 
 	  if( ntune_event<nmax ){
 	    
-	    if(j==0) h2_L ->Fill(mm);
-	    else  h2_S ->Fill(mm);
+	    h2_L_2 ->Fill(mm);
+	    nL2++;
 
-	    peak_flag[ntune_event] = j; // Lambda = 0, Sigma = 1
+	    tune_id[ntune_event] = 2;
+	    peak_flag[ntune_event] = j; // Lambda = 0
 	    
-	    x[ntune_event]  = (r_x_fp[0]-XFPm)/XFPr;  // scaled 
-	    y[ntune_event]  = (r_y_fp[0]-YFPm)/YFPr;  // scaled
-	    xp[ntune_event] = (r_th_fp[0]-XpFPm)/XpFPr; // scaled
-	    yp[ntune_event] = (r_ph_fp[0]-YpFPm)/YpFPr; // scaled
+	    x[ntune_event]  = (r_x_fp_2[0]-XFPm)/XFPr;  // scaled 
+	    y[ntune_event]  = (r_y_fp_2[0]-YFPm)/YFPr;  // scaled
+	    xp[ntune_event] = (r_th_fp_2[0]-XpFPm)/XpFPr; // scaled
+	    yp[ntune_event] = (r_ph_fp_2[0]-YpFPm)/YpFPr; // scaled
 	    tgang_xp[ntune_event] = par_k[1];
 	    tgang_yp[ntune_event] = par_k[2];
 	    
-	    x2[ntune_event]  = (l_x_fp[0]-XFPm)/XFPr;  // scaled 
-	    y2[ntune_event]  = (l_y_fp[0]-YFPm)/YFPr;  // scaled
-	    xp2[ntune_event] = (l_th_fp[0]-XpFPm)/XpFPr; // scaled
-	    yp2[ntune_event] = (l_ph_fp[0]-YpFPm)/YpFPr; // scaled
+	    x2[ntune_event]  = (l_x_fp_2[0]-XFPm)/XFPr;  // scaled 
+	    y2[ntune_event]  = (l_y_fp_2[0]-YFPm)/YFPr;  // scaled
+	    xp2[ntune_event] = (l_th_fp_2[0]-XpFPm)/XpFPr; // scaled
+	    yp2[ntune_event] = (l_ph_fp_2[0]-YpFPm)/YpFPr; // scaled
 	    tgang_xp2[ntune_event] = par_ep[1];
 	    tgang_yp2[ntune_event] = par_ep[2];
 	    
-	    avz[ntune_event] = (vz_mean[0]-Ztm)/Ztr; // scaled
+	    avz[ntune_event] = (vz_mean_2[0]-Ztm)/Ztr; // scaled
 	    //z_recon[ntune_event] = Zt[0]; // not scaled
 	    //cout << ntune_event << " " << mm << " " << peak_flag[ntune_event] << endl;
 
-	    beam_mom[ntune_event] = hallap + dpe; // NO mom loss correction
+	    beam_mom[ntune_event] = hallap_2 + dpe; // NO mom loss correction
 	    
 	    ntune_event++;
 
@@ -601,6 +622,10 @@ int main(int argc, char** argv){
 
   cout << " The number of events selected to be used for tuning: "
        << ntune_event << endl;
+  cout << " nL1 = " << nL1 << endl;
+  cout << " nS  = " << nS  << endl;
+  cout << " nL2 = " << nL2 << endl;
+  cout << endl;
 
   
   double chi_sq[nite];
@@ -665,7 +690,6 @@ int main(int argc, char** argv){
 
   }
   
-
   // =================================== //
   // ======== Draw histograms ========== //
   // =================================== //
@@ -677,9 +701,14 @@ int main(int argc, char** argv){
   h2_S->SetLineColor(9);
   h2_L->Draw("same");
   h2_S->Draw("same");
-  //TCanvas* c2 = new TCanvas("c2","c2");
-
-
+  
+  TCanvas* c3 = new TCanvas("c3","c3");
+  h1_2->Draw();
+  TCanvas* c4 = new TCanvas("c4","c4");
+  h2_2->Draw();
+  h2_L_2->SetLineColor(2);
+  h2_L_2->Draw("same");
+  
   TObjArray h(1);
   h.Add(c1);
   h.Add(c2);
@@ -688,15 +717,19 @@ int main(int argc, char** argv){
   h.Add(h2_L);
   h.Add(h2_S);
   
-  for(int i=0 ; i<npeak ; i++){}
+  h.Add(h1_2); 
+  h.Add(h2_2);
+  h.Add(h2_L_2);
+  
+  //for(int i=0 ; i<npeak ; i++){}
   
   if(nite>0){
     TGraph * gr1 = new TGraph(nite,x,chi_sq);
     gr1->SetName("gr1");
-    TCanvas * c3 = new TCanvas("c3","c3",600,600);
-    c3->cd(1);gr1->Draw("*la");
+    TCanvas * c_chi2 = new TCanvas("c_chi2","c_chi2",600,600);
+    c_chi2->cd(1); gr1->Draw("*la");
     h.Add(gr1);
-    h.Add(c3);
+    h.Add(c_chi2);
   }
   h.Write();
 
@@ -911,7 +944,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 // #############################################################
 {
   
-  const double sigma = 5; // MeV/c2
+  const double sigma = 1; // MeV/c2
   //double ztR      = 0.0;
   //double refpos   = 0.0;
   double residual = 0.0;
@@ -946,6 +979,11 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 			    y2[i], yp2[i],
 			    avz[i], 2);
     par_ep[0] = par_ep[0]*Momr + Momm;
+    
+    if(tune_id[i]==2){
+      par_ep[0] = par_ep[0] * HTkin_mom_scale; // T kinematics
+    }
+    
     par_ep[1] = tgang_xp2[i];
     par_ep[2] = tgang_yp2[i];
 

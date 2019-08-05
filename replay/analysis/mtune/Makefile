@@ -5,8 +5,8 @@
 ROOTLIBS    = `root-config --libs`
 ROOTINCLUDE = `root-config --cflags`
 GLIBS = $(ROOTLIBS) -lMinuit
-#CC = g++
-CC = icpc
+CC = g++
+#CC = icpc
 #CCFLAGS = -pthread -std=c++11 -m64 -I/u/apps/root/6.10.02/root/include
 CCFLAGS = $(ROOTINCLUDE)
 #LD = g++
