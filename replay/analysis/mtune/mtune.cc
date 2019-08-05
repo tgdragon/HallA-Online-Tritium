@@ -517,7 +517,7 @@ int main(int argc, char** argv){
        && l_cer_2>1500.0
        && fabs(ctime_2[0])<1.0 ){
       
-      //h1->Fill(ctime[0]);
+      h1_2->Fill(ctime_2[0]);
 
       double par_ep[3];
       double par_k[3];
