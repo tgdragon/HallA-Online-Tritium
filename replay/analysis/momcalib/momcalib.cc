@@ -53,7 +53,7 @@ const double  PLm = 25.4, PLr=0.7;
 const double  Ztm = -0.15,Ztr=0.35; 
 
 const int npeak = 2;
-double pcent[npeak] = {-8.05, 67.44}; 
+double pcent[npeak] = {0.0, 77.}; 
 double pcent_real[npeak] = {0.0, 76.959};
 double selection_width[npeak] = {12.0, 20.0};
 
@@ -112,7 +112,7 @@ int main(int argc, char** argv){
   TTree* t1 = (TTree*)f1->Get("tree");
   //Double_t trig1;
   double ent = t1->GetEntries();
-  ent = 50000; // for test
+  //ent = 50000; // for test
   //if(nite>0) ent = 400000;
   
   cout << endl;
@@ -210,8 +210,10 @@ int main(int argc, char** argv){
 
   char name_Mmom_L[500];
   char name_Mmom_R[500];
-  sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); // Better matrix
-  sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); // Better matrix
+  //sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); 
+  //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
+  sprintf(name_Mmom_L,"newpar_lmom_0.dat"); 
+  sprintf(name_Mmom_R,"newpar_rmom_0.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   double Pmom_L[nParamT], Pmom_R[nParamT];
@@ -305,11 +307,28 @@ int main(int argc, char** argv){
 
       double par_ep[3];
       double par_k[3];
-      par_ep[0] = mom2[0];
+      //par_ep[0] = mom2[0];
+      par_ep[0] = calcf2t_4th(OptPar,
+			      (l_x_fp[0]-XFPm)/XFPr, 
+			      (l_th_fp[0]-XpFPm)/XpFPr,
+			      (l_y_fp[0]-YFPm)/YFPr,
+			      (l_ph_fp[0]-YpFPm)/YpFPr,
+			      (vz_mean[0]-Ztm)/Ztr,
+			      2);
+      par_ep[0] = par_ep[0] * Momr + Momm;
+      
       par_ep[1] = th2[0];
       par_ep[2] = -ph2[0] - hrs_ang;
       
-      par_k[0] = mom1[0];
+      //par_k[0] = mom1[0];
+      par_k[0] = calcf2t_4th(OptPar,
+			      (r_x_fp[0]-XFPm)/XFPr, 
+			      (r_th_fp[0]-XpFPm)/XpFPr,
+			      (r_y_fp[0]-YFPm)/YFPr,
+			      (r_ph_fp[0]-YpFPm)/YpFPr,
+			      (vz_mean[0]-Ztm)/Ztr,
+			      1);
+      par_k[0] = par_k[0] * Momr + Momm;
       par_k[1] = th1[0];
       par_k[2] = ph1[0] + hrs_ang;
       
@@ -609,7 +628,8 @@ double tune(double* pa, int j)
   const int nXpf=4;
   const int nYf=4;
   const int nYpf=4;
-  const int nZt=2; // The number of order is reduced for test (4-->2)
+  //const int nZt=2; // The number of order is reduced for test (4-->2)
+  const int nZt=4; // The number of order is reduced for test (4-->2)
   int npar=0;
   int a=0,b=0,c=0,d=0,e=0;
   for (int n=0;n<nMatT+1;n++){
@@ -621,9 +641,11 @@ double tune(double* pa, int j)
 	      if (a+b+c+d+e==n){
 		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
 		  start[npar] = pa[npar];
-		  step[npar] = 1.0e-4;
+		  //step[npar] = 1.0e-3; 
+		  step[npar] = 0.0; // no tuning for right
 		  start[npar+126] = pa[npar+126];
-		  step[npar+126] = 1.0e-4;  
+		  step[npar+126] = 1.0e-3;  
+		  //step[npar+126] = 0.0; // no tuning for Left
 		}
 		else{
 		  start[npar] = 0.0;
@@ -662,8 +684,8 @@ double tune(double* pa, int j)
     minuit -> mnparm(i,pname,start[i],step[i],LLim[i],ULim[i],ierflg);
   }
   // ~~~~ Strategy ~~~~
-  arglist[0] = 2.0; // original
-  //arglist[0] = 1.0; // test
+  //arglist[0] = 2.0; // original
+  arglist[0] = 1.0; // test
   //arglist[0] = 0.0;   // test
   minuit->mnexcm("SET STR",arglist,1,ierflg);
   
@@ -694,7 +716,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 // #############################################################
 {
   
-  const double sigma = 0.5; // MeV/c2
+  const double sigma = 5; // MeV/c2
   //double ztR      = 0.0;
   //double refpos   = 0.0;
   double residual = 0.0;
@@ -716,6 +738,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
   //  }
   //}
   
+  chi2 = 0.0;
   for(int i=0 ; i<ntune_event ; i++){
     residual = 0.0;
     //ang    = 0.0;
@@ -739,16 +762,16 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
     par_k[1] = tgang_xp[i];
     par_k[2] = tgang_yp[i];
       
-    beam_mom[i] = beam_mom[i];
+    //beam_mom[i] = beam_mom[i];
     
-    avz[i] = avz[i] * Ztr + Ztm;
+    //avz[i] = avz[i] * Ztr + Ztm;
 
       // ---- 400 um thick target -----
       double dpe  = 184.3e-6; // GeV/c
       double dpep = 0.0; // GeV/c
       double dpk  = 0.0; // GeV/c
       
-      if(avz[i]<8.0e-2){
+      if( avz[i]*Ztr+Ztm <8.0e-2){
 	dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
 	dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
 
@@ -760,22 +783,29 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
       dpep = dpep / 1000.0; // MeV/c --> GeV/c
       dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
       
-      beam_mom[i] = beam_mom[i] - dpe;
+      //beam_mom[i] = beam_mom[i] - dpe;
       par_ep[0] = par_ep[0] + dpep;
       par_k[0]  = par_k[0]  + dpk;
 
-      double mm;
-      mm = CalcMM(beam_mom[i], par_ep, par_k, mp);
+      double mm=0;
+      mm = CalcMM(beam_mom[i]-dpe, par_ep, par_k, mp);
       mm = (mm-mL)*1000.0;
       //cout << beam_mom[i] << " "
       //   << par_ep[0] << " " << par_ep[1] << " " << par_ep[2] << " "
       //   << par_k[0] << " "  << par_k[1]  << " " << par_k[2] << endl;
       residual = mm - pcent_real[(int)peak_flag[i]];
-      //cout << mm << " " << pcent_real[peak_flag[i]] << " " << residual << endl;
-      chi2 = chi2 + pow(residual,2.0);
+//      cout << mm << " " << pcent_real[peak_flag[i]] << " " << residual 
+//	   << " " << chi2<< endl;
+      chi2 = chi2 + pow(residual/sigma,2.0);
   }
   
-  fval = chi2/((double)ntune_event-(double)nParamT)/pow(sigma,2.0);
+  //cout << chi2 << endl;
+  chi2 = chi2/((double)ntune_event-(double)nParamT);
+  //cout << chi2 << endl;
+  //cout << " " << chi2 << endl;
+  //fval = chi2/((double)ntune_event-(double)nParamT)/pow(sigma,2.0);
+  fval = chi2;
+    
 }
 
 double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
