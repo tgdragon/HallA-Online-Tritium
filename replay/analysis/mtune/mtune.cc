@@ -264,8 +264,8 @@ int main(int argc, char** argv){
   char name_Mmom_R[500];
   //sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); 
   //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
-  sprintf(name_Mmom_L,"newpar_lmom_9.dat"); 
-  sprintf(name_Mmom_R,"newpar_rmom_9.dat"); 
+  sprintf(name_Mmom_L,"newpar_lmom_1.dat"); 
+  sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   double Pmom_L[nParamT], Pmom_R[nParamT];
