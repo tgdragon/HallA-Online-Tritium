@@ -57,11 +57,11 @@ const double  Ztm = -0.15,Ztr=0.35;
 const int npeak = 2;
 double pcent[npeak] = {0.0, 77.}; 
 double pcent_real[npeak] = {0.0, 76.959};
-double selection_width[npeak] = {15.0, 15.0};
+double selection_width[npeak] = {18.0, 18.0};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {-5.0}; 
 double pcent_real_2[npeak2] = {0.0};
-double selection_width_2[npeak2] = {15.0};
+double selection_width_2[npeak2] = {18.0};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -247,7 +247,7 @@ int main(int argc, char** argv){
   t2->SetBranchAddress("R.ps.asum_c", &ps_asum_2);
   t2->SetBranchAddress("ctime", &ctime_2);
   
-  TFile* fnew = new TFile("check_momcalib.root","recreate");
+  TFile* fnew = new TFile("check_tune.root","recreate");
   //TTree* tnew = new TTree("tree","check for LHRS SS");
   //tnew->Branch("Xt",   &Xt,   "Xt/D");
   //tnew->Branch("Yt",   &Yt,   "Yt/D");
@@ -264,8 +264,8 @@ int main(int argc, char** argv){
   char name_Mmom_R[500];
   //sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); 
   //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
-  sprintf(name_Mmom_L,"newpar_lmom_1.dat"); 
-  sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
+  sprintf(name_Mmom_L,"newpar_lmom_9.dat"); 
+  sprintf(name_Mmom_R,"newpar_rmom_9.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   double Pmom_L[nParamT], Pmom_R[nParamT];
@@ -946,7 +946,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 // #############################################################
 {
   
-  const double sigma = 2; // MeV/c2
+  const double sigma = 1.0; // MeV/c2
   //double ztR      = 0.0;
   //double refpos   = 0.0;
   double residual = 0.0;
