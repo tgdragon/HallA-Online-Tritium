@@ -869,10 +869,12 @@ double tune(double* pa, int j)
 	      if (a+b+c+d+e==n){
 		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
 		  start[npar] = pa[npar];
-		  step[npar] = 1.0e-3; 
+		  //step[npar] = 1.0e-3; 
+		  step[npar] = 1.0e-2; 
 		  //step[npar] = 0.0; // no tuning for right
 		  start[npar+126] = pa[npar+126];
-		  step[npar+126] = 1.0e-3;  
+		  //step[npar+126] = 1.0e-3;  
+		  step[npar+126] = 1.0e-2;  
 		  //step[npar+126] = 0.0; // no tuning for Left
 		}
 		else{
@@ -919,7 +921,7 @@ double tune(double* pa, int j)
   
   
   // ~~~~ Migrad + Simplex  ~~~~ 
-  arglist[0] = 20000;
+  arglist[0] = 50000;
   arglist[1] = 0.01;
   minuit -> mnexcm("MINImize",arglist,2,ierflg); // Chi-square minimization
   
@@ -944,7 +946,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 // #############################################################
 {
   
-  const double sigma = 1; // MeV/c2
+  const double sigma = 2; // MeV/c2
   //double ztR      = 0.0;
   //double refpos   = 0.0;
   double residual = 0.0;
