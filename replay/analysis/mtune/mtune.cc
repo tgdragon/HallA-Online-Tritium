@@ -57,11 +57,11 @@ const double  Ztm = -0.15,Ztr=0.35;
 const int npeak = 2;
 double pcent[npeak] = {0.0, 77.}; 
 double pcent_real[npeak] = {0.0, 76.959};
-double selection_width[npeak] = {18.0, 18.0};
+double selection_width[npeak] = {15.0, 15.0};
 const int npeak2 = 1;
-double pcent_2[npeak2] = {-5.0}; 
+double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
-double selection_width_2[npeak2] = {18.0};
+double selection_width_2[npeak2] = {15.0};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -264,8 +264,8 @@ int main(int argc, char** argv){
   char name_Mmom_R[500];
   //sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); 
   //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
-  sprintf(name_Mmom_L,"newpar_lmom_9.dat"); 
-  sprintf(name_Mmom_R,"newpar_rmom_9.dat"); 
+  sprintf(name_Mmom_L,"newpar_lmom_1.dat"); 
+  sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   double Pmom_L[nParamT], Pmom_R[nParamT];
@@ -363,7 +363,8 @@ int main(int argc, char** argv){
     
     
     if(fabs(rvz[0]-lvz[0])<0.05
-       && fabs(vz_mean[0])<0.1
+       //&& fabs(vz_mean[0])<0.1
+       && fabs(vz_mean[0])<0.07
        && a1 < 0.5
        && a2 >3.0
        && a2 < 18.0
@@ -510,7 +511,8 @@ int main(int argc, char** argv){
     ctime_2[0] = ctime_2[0] - kcenter;
     
     if(fabs(rvz_2[0]-lvz_2[0])<0.05
-       && fabs(vz_mean_2[0])<0.1
+       //&& fabs(vz_mean_2[0])<0.1
+       && fabs(vz_mean_2[0])<0.07
        && a1_2 < 0.5
        && a2_2 >3.0
        && a2_2 < 18.0
