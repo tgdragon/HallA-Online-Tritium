@@ -395,7 +395,7 @@ int main(int argc, char** argv){
   Myp_L.close();
   
   char name_Mmom_L[500];
-  sprintf(name_Mmom_L,"matrices/mom_LHRS_4.dat");
+  sprintf(name_Mmom_L,"matrices/mom_LHRS_4_sample.dat");
   ifstream Mmom_L(name_Mmom_L);
   double Pmom_L[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
@@ -407,7 +407,7 @@ int main(int argc, char** argv){
   Mmom_L.close();
   
   char name_Mmom_R[500];
-  sprintf(name_Mmom_R,"matrices/mom_RHRS_4.dat");
+  sprintf(name_Mmom_R,"matrices/mom_RHRS_4_sample.dat");
   ifstream Mmom_R(name_Mmom_R);
   double Pmom_R[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
