@@ -43,24 +43,24 @@ int main(int argc, char** argv){
   else if (!strcmp(inputfile,"h22.dat")){
     sprintf(outfile,"%s/h22.root",file_dir);
   }
-  else if (!strcmp(inputfile,"t2_1.dat")){
-    sprintf(outfile,"%s/t2_1.root",file_dir);
+  else if (!strcmp(inputfile,"T2.dat")){
+    sprintf(outfile,"%s/T2.root",file_dir);
   }
-  else if (!strcmp(inputfile,"t2_2.dat")){
-    sprintf(outfile,"%s/t2_2.root",file_dir);
+  else if (!strcmp(inputfile,"He3.dat")){
+    sprintf(outfile,"%s/He3.root",file_dir);
   }
   else {
     sprintf(outfile,"%s/temp.root",file_dir);
   }
   
   ifstream* dragon_data_file = new ifstream(inputfile);
-  double run, num;
+  double run, num, flag;
   char tempc[900];
   int nfile = 0;
   if(dragon_data_file->is_open()==true){
     TChain* c1 = new TChain("tree");
     while (!dragon_data_file->eof()){
-      *dragon_data_file >>run >> num;
+      *dragon_data_file >>run >> num >> flag;
       if(num==0){
 	sprintf(tempc,"%s/tri_coin_%d.root",file_dir,(int)run);
       }

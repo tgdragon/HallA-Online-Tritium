@@ -1,5 +1,5 @@
 /*
-  nude_coin.cc
+  maruhadaka.cc
   "Stripping unnecessary data from original ROOT file"
   
   Toshiyuki Gogami, Nov 9, 2018
@@ -8,9 +8,23 @@
 #include "TROOT.h"
 #include "TFile.h"
 #include "TTree.h"
+#include "TVector3.h"
 #include <fstream>
 #include <iostream>
 using namespace std;
+
+const double me = 0.000511;
+const double mpi= 0.13957; 
+const double mk = 0.493677;
+const double mp = 0.938272;
+const double mn = 0.939565379;
+const double mL = 1.115683;
+const double mS = 1.192642;
+const double md = 1.875612762;
+const double mHe3 = 2.80839133;
+const double mH3 = 2.80892086;
+
+const double HTkin_mom_scale = 2.218/2.100;
 
 const double  XFPm=-0.7, XpFPm=-0.15; 
 const double  YFPm=-0.05, YpFPm=-0.18; 
@@ -26,8 +40,9 @@ extern double calcf2t_plen(double* P,
 extern double calcf2t_4th_2(double* P, double xf, double xpf, 
 			    double yf, double ypf, double zt);
 extern double Calc_FPcor(double* val, double* par);
+extern double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt);
 
-const int nParamT=35;     // For path length matrix (3rd order)
+const int nParamT=35;     // Fo
 //double Plen_opt[nParamT]; // For path length matrix (3rd order)
 const int nParamT_4=126;  // For xpt, ypt with z (4th order)
 
@@ -42,8 +57,9 @@ double toffset_R = -364.6-150.; // for H2_1
 const double toffset_L = 1762.0;
 //const double ch2time = 56.0e-12 * 1.0e+9; // 56 (ps/ch); F1TDC 
 double ch2time = 56.0e-12 * 1.0e+9; // 56 (ps/ch); F1TDC 
-const double mpi = 0.13957;  // GeV/c2
-const double me  = 0.000511; // GeV/c2
+
+//const double me  = 0.000511; // GeV/c2
+const double hrs_ang = 13.2 * 3.14159 / 180.;
 
 int main(int argc, char** argv){
   //int nude3(int run=111179, int nf=0, int tflag=5){
@@ -58,13 +74,26 @@ int main(int argc, char** argv){
     run = atoi(argv[1]);
     nf  = atoi(argv[2]);
   }
-  else if (argc>3){
+  else if (argc==4){
     run   = atoi(argv[1]);
     nf    = atoi(argv[2]);
     hypflag = atoi(argv[3]);
-    //tflag = atoi(argv[3]);
-    //cout << "tflag is fixed to be five (coin data)" << endl;
   }
+  
+  double mcore, mtar;
+  if(hypflag==1 || hypflag==2){ // h2.dat or h22.dat
+    mtar  = mp;
+    mcore = mL;
+  }
+  else if(hypflag==3){ // T2.dat
+    mtar  = mH3;
+    mcore = mn+mn+mL;
+  }
+  else if(hypflag==4){ // He3.dat
+    mtar  = mHe3;
+    mcore = md+mL;
+  }
+  
   
   int dataflag = 1;
   if (run>111400){
@@ -90,6 +119,7 @@ int main(int argc, char** argv){
   char inputfname[500], newfname[500];;
   if(nf<1){
     sprintf(inputfname,"./nnL/tritium_%d.root",run);
+    
     sprintf(newfname,"./nnL/nude_dir2/nude_%d.root",run);
     if(tflag==5){
       sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d.root",run);
@@ -155,6 +185,7 @@ int main(int argc, char** argv){
   double rvz[max], lvz[max];
   double vz_mean[max];
   double th1[max], ph1[max];
+  double th1_own[max], ph1_own[max];
   double th2[max], ph2[max];
   Int_t runnum;
   double hallap;
@@ -257,11 +288,12 @@ int main(int argc, char** argv){
   bool acflag = false;
   bool trig_fire = false;
   double ctime[max];
+  double mm[max];
   
   TFile* fnew = new TFile(newfname,"recreate");
   TTree* tnew = new TTree("tree","3H(e,e'K+)nnL experiment (2018)");
   
-  tnew->Branch("DR.T1", &trig1, "DR.T1/D"   );
+  //tnew->Branch("DR.T1", &trig1, "DR.T1/D"   );
   //tnew->Branch("DR.T4", &trig4, "DR.T4/D"  );
   //tnew->Branch("DR.T5", &trig5, "DR.T5/D"   );
   
@@ -274,8 +306,10 @@ int main(int argc, char** argv){
   tnew->Branch("R.a2.asum_c", &a2,     "R.a2.asum_c/D");
   //tnew->Branch("RTDC.F1FirstHit", &rf1tdc, "RTDC.F1FirstHit[64]/D");
   //tnew->Branch("LTDC.F1FirstHit", &lf1tdc, "LTDC.F1FirstHit[64]/D");
-  tnew->Branch("R.tr.tg_th", &th1,      "R.tr.tg_th[100]/D");
-  tnew->Branch("R.tr.tg_ph", &ph1,      "R.tr.tg_ph[100]/D");
+  tnew->Branch("R.tr.tg_th_org", &th1,      "R.tr.tg_th_org[100]/D");
+  tnew->Branch("R.tr.tg_ph_org", &ph1,      "R.tr.tg_ph_org[100]/D");
+  tnew->Branch("R.tr.tg_th", &th1_own,      "R.tr.tg_th[100]/D");
+  tnew->Branch("R.tr.tg_ph", &ph1_own,      "R.tr.tg_ph[100]/D");
   tnew->Branch("L.tr.tg_th", &th2,      "L.tr.tg_th[100]/D");
   tnew->Branch("L.tr.tg_ph", &ph2,      "L.tr.tg_ph[100]/D");
   //tnew->Branch("R.s0.time", &rtime_s0,  "R.s0.time[100]/D");
@@ -324,10 +358,12 @@ int main(int argc, char** argv){
   
   //tnew->Branch("Lrb.Raster2.rawcur.x", &rast_curx, "Lrb.Raster2.rawcur.x/D");
   //tnew->Branch("Lrb.Raster2.rawcur.y", &rast_cury, "Lrb.Raster2.rawcur.y/D");
-  tnew->Branch("Lrb.x",  &rast_x, "Lrb.x/D");
-  tnew->Branch("Lrb.x2", &rast_x2, "Lrb.x2/D");
+  //tnew->Branch("Lrb.x",  &rast_x, "Lrb.x/D");
+  //tnew->Branch("Lrb.x2", &rast_x2, "Lrb.x2/D");
+  tnew->Branch("Lrb.x", &rast_x2, "Lrb.x/D");
   tnew->Branch("Lrb.y", &rast_y, "Lrb.y/D");
   tnew->Branch("L.cer.asum_c", &lcer_asum_c, "L.cer.asum_c/D");
+  tnew->Branch("mm", &mm, "mm[100]/D");
   
   
   char name_Mlen[100];
@@ -395,6 +431,31 @@ int main(int argc, char** argv){
     Pyp_L[i]=par;
   }
   Myp_L.close();
+  
+  char name_Mxp_R[500];
+  sprintf(name_Mxp_R,"matrices/xpt_RHRS_4_sample.dat");
+  ifstream Mxp_R(name_Mxp_R);
+  double Pxp_R[nParamT_4];
+  for (int i=0;i<nParamT_4;i++){
+    double par=0.;
+    int p=0;
+    Mxp_R >> par >> p >> p >> p >> p >> p; 
+    Pxp_R[i]=par;
+    //cout << par << endl;
+  }
+  Mxp_R.close();
+  
+  char name_Myp_R[500];
+  sprintf(name_Myp_R,"matrices/ypt_RHRS_4_sample.dat");
+  ifstream Myp_R(name_Myp_R);
+  double Pyp_R[nParamT_4];
+  for (int i=0;i<nParamT_4;i++){
+    double par=0.;
+    int p=0;
+    Myp_R >> par >> p >> p >> p >> p >> p; 
+    Pyp_R[i]=par;
+  }
+  Myp_R.close();
   
   char name_Mmom_L[500];
   sprintf(name_Mmom_L,"matrices/mom_LHRS_4_sample.dat");
@@ -513,12 +574,15 @@ int main(int argc, char** argv){
       mom2_own[j] = -2222.0;
       th1[j]   = -2222.0;
       ph1[j]   = -2222.0;
+      th1_own[j]   = -2222.0;
+      ph1_own[j]   = -2222.0;
       th2[j]   = -2222.0;
       ph2[j]   = -2222.0;
       r_s2_t_pads[j] = -2222.0;
       l_s2_t_pads[j] = -2222.0;
       valval[j] = -2222.0;
       ctime[j]  = -2222.0;
+      mm[j]    = -2222.0;
       rvz[j]   = -2222.0;
       lvz[j]   = -2222.0;
       vz_mean[j] = -2222.0;
@@ -597,7 +661,9 @@ int main(int argc, char** argv){
     // ------------------------------------------- //
     // ------ Aerogel Cherenkov selection -------- //
     // ------------------------------------------- //
-    if(a1 > -10.0 && a1 < 30.0 && a2 > -10.0 && a2 < 60.0){
+    if(//a1 > -10.0 && a1 < 30.0 
+       a1 > -10.0 && a1 < 5.0 
+       && a2 > 2.0 && a2 < 18.0){
       acflag = true;
     }
     else acflag = false;
@@ -605,6 +671,7 @@ int main(int argc, char** argv){
     if (trig_fire==true	
 	&& genflag==true 
 	&& acflag==true 
+	&& lcer_asum_c>1500.
 	){
       tref_L  = lf1tdc[40]       * ch2time;
       timeL_L = lf1tdc[seg_L]    * ch2time;
@@ -659,7 +726,7 @@ int main(int argc, char** argv){
 	double lvz_cor = lvz[0] + cor_rast;
 	vz_mean[0] = (rvz_cor + lvz_cor)/2.0;
 	
-	// ----- Left arm angle ----- //
+
 	XFP_L   = (XFP_L -XFPm)/XFPr;
 	XpFP_L  = (XpFP_L-XpFPm)/XpFPr;
 	YFP_L   = (YFP_L -YFPm)/YFPr;
@@ -682,22 +749,67 @@ int main(int argc, char** argv){
 	mom2_own[0] = mom2_own[0] * Momr + Momm;
 	th2[0]  = th2[0]*Xptr + Xptm;
 	ph2[0]  = ph2[0]*Yptr + Yptm;
+	//ph2[0]  = -ph2[0] - hrs_ang;
 	
 	if(run<111221 || (111479<run && run<111552) ){ // H2 kinematics
 	  mom2_own[0] = mom2_own[0];
 	}
 	else{ // T2 kinematics
-	  mom2_own[0] = mom2_own[0] * 2.218/2.100;    
+	  mom2_own[0] = mom2_own[0] * HTkin_mom_scale;
 	}
 	
 	// --- Right ---
 	mom1_own[0] = calcf2t_4th_2(Pmom_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
+	th1_own[0]  = calcf2t_4th_2(Pxp_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
+	ph1_own[0]  = calcf2t_4th_2(Pyp_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
 	
 	XFP_R   = XFP_R*XFPr + XFPm;
 	XpFP_R  = XpFP_R*XpFPr + XpFPm;
 	YFP_R   = YFP_R*YFPr + YFPm;
 	YpFP_R  = YpFP_R*YpFPr + YpFPm;
 	mom1_own[0] = mom1_own[0] * Momr + Momm;
+	th1_own[0]  = th1_own[0]*Xptr + Xptm;
+	ph1_own[0]  = ph1_own[0]*Yptr + Yptm;
+	//ph1_own[0]  = ph1_own[0] + hrs_ang;
+	
+	hallap = hallap/1000.0; // MeV/c --> GeV/c
+	
+	double par_ep[3];
+	double par_k[3];
+	
+	par_ep[0] = mom2_own[0];
+	par_ep[1] = th2[0];
+	par_ep[2] = -ph2[0] - hrs_ang;
+	
+	par_k[0]  = mom1_own[0];
+	par_k[1]  = th1_own[0];
+	par_k[2]  = ph1_own[0] + hrs_ang;
+	
+	// ---- 400 um thick target -----
+	double dpe  = 184.3e-6; // GeV/c
+	double dpep = 0.0; // GeV/c
+	double dpk  = 0.0; // GeV/c
+	
+	if(vz_mean[0]<8.0e-2){
+	  dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
+	  dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
+	  
+	}
+	else {
+	  dpep =  6.23e-3 * par_ep[2] + 0.403; // MeV/c
+	  dpk  = -3.158e-2* par_k[2]  + 0.4058;// MeV/c
+	}
+	dpep = dpep / 1000.0; // MeV/c --> GeV/c
+	dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
+	
+	hallap = hallap - dpe;
+	par_ep[0] = par_ep[0] + dpep;
+	par_k[0]  = par_k[0]  + dpk;
+	
+	
+	mm[0] = CalcMM(hallap, par_ep, par_k, mtar);
+	mm[0] = (mm[0]-mcore)*1000.0;
+	
 	
 	double beta_L = mom2[0]/sqrt(pow(mom2[0],2.0)+pow(me,2.0));
 	double cor_L   = (LenL-3.18)/3.0e+8/beta_L * 1.0e+9; // (3.18 m; test)
@@ -719,10 +831,14 @@ int main(int argc, char** argv){
 	meantime_R = meantime_R + yfp_cor_R + yfp_cor_L;
 	meantime_R = meantime_R-cor_L+75.4;
 	ctime[0] = -meantime_R;
+	double kcenter = 3.3;
+	ctime[0] = ctime[0]  - kcenter;
 	
 	if(tflag==5){
-	  if(fabs(ctime[0])<20.0 && 
-	     fabs(rvz_cor - lvz_cor)<0.1){
+	  if(fabs(ctime[0])<15.0 
+	     && fabs(rvz_cor - lvz_cor)<0.07 
+	     && fabs(vz_mean[0])<0.2
+	     ){
 	    // ---- Filling data ------ //
 	    tnew->Fill(); // ---------- //
 	    //------------------------- //
@@ -857,6 +973,47 @@ double calcf2t_4th_2(double* P, double xf, double xpf,
   }
   
   return Y; 
+  
+}
+
+
+double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
+  
+  double pe = ee;
+  double Ee = sqrt(me*me + pe*pe);
+  TVector3 vec_e (0.0, 0.0, pe);
+  
+  double pep  = pvec_ep[0];
+  double xpep = pvec_ep[1];
+  double ypep = pvec_ep[2];
+  double px_ep, py_ep, pz_ep;
+  pz_ep = pep / sqrt(1.0 + xpep*xpep + ypep*ypep);
+  px_ep = xpep * pz_ep;
+  py_ep = ypep * pz_ep;
+  TVector3 vec_ep (px_ep, py_ep, pz_ep);
+  //double Eep = sqrt(vec_ep * vec_ep);
+  double Eep = sqrt(pep*pep + me*me);
+  
+  double pk  = pvec_k[0];
+  double xpk = pvec_k[1];
+  double ypk = pvec_k[2];
+  double px_k, py_k, pz_k;
+  pz_k = pk / sqrt(1.0 + xpk*xpk + ypk*ypk);
+  px_k = xpk * pz_k;
+  py_k = ypk * pz_k;
+  TVector3 vec_k (px_k, py_k, pz_k);
+  //double Ek = sqrt(vec_k * vec_k);
+  double Ek = sqrt(pk*pk + mk*mk);
+  
+  double missingE2 = 0.0, missingP2 = 0.0, missingM2 = 0.0;
+  missingE2 = pow(Ee + mt - Ek - Eep, 2.0);
+  missingP2 = (vec_e - vec_ep - vec_k) * (vec_e - vec_ep - vec_k);
+  missingM2 = missingE2 - missingP2;
+  
+  double MissingMass = 0.0;
+  MissingMass = sqrt(missingM2);
+
+  return MissingMass;
   
 }
 

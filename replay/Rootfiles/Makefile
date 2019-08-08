@@ -5,7 +5,8 @@
 ROOTLIBS    = `root-config --libs`
 ROOTINCLUDE = `root-config --cflags`
 GLIBS = $(ROOTLIBS) -lMinuit
-CC = g++
+#CC = g++
+CC = icpc
 #CCFLAGS = -pthread -std=c++11 -m64 -I/u/apps/root/6.10.02/root/include
 CCFLAGS = $(ROOTINCLUDE)
 #LD = g++
@@ -18,7 +19,11 @@ OBJS1 = nude_coin.o
 TARGET2 = merge_rootfiles
 OBJS2 = merge_rootfiles.o
 
-all: ${TARGET1} ${TARGET2}
+TARGET3 = maruhadaka
+OBJS3 = maruhadaka.o
+
+
+all: ${TARGET1} ${TARGET2} ${TARGET3}
 
 ${TARGET1}: ${OBJS1}
 	${CC} ${CCFLAGS} -o $@ ${OBJS1} ${GLIBS}
@@ -29,6 +34,12 @@ ${TARGET2}: ${OBJS2}
 	${CC} ${CCFLAGS} -o $@ ${OBJS2} ${GLIBS}
 ${OBJS2}: merge_rootfiles.cc
 	${CC} ${CCFLAGS} -c  merge_rootfiles.cc ${GLIBS}
+
+${TARGET3}: ${OBJS3}
+	${CC} ${CCFLAGS} -o $@ ${OBJS3} ${GLIBS}
+${OBJS3}: maruhadaka.cc
+	${CC} ${CCFLAGS} -c  maruhadaka.cc ${GLIBS}
+
 
 
 
