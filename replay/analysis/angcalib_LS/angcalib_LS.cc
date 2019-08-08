@@ -82,6 +82,7 @@ int tune_id[nmax];
 int peak_flag[nmax];
 int ntune_event = 0;
 double OptPar[nParamT]; 
+double MomPar[nParamT]; 
 
 const double hrs_ang = 13.2 * 3.14159 / 180.;
 
@@ -263,29 +264,42 @@ int main(int argc, char** argv){
 
   char name_Mmom_L[500];
   char name_Mmom_R[500];
+  char name_Mxpt[500];
+  char name_Mypt[500];
   sprintf(name_Mmom_L,"../matrices/mom_LHRS_4_sample.dat"); 
   sprintf(name_Mmom_R,"../matrices/mom_RHRS_4_sample.dat"); 
-  //sprintf(name_Mmom_L,"newpar_lmom_1.dat"); 
-  //sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
-  //sprintf(name_Mmom_L,"newpar/newpar_lmom_14.dat"); 
-  //sprintf(name_Mmom_R,"newpar/newpar_rmom_14.dat"); 
+  sprintf(name_Mxpt,"../matrices/xpt_RHRS_4.dat"); 
+  sprintf(name_Mypt,"../matrices/ypt_RHRS_4.dat"); 
+  //sprintf(name_Mxpt,"newpar/newpar_xpt_1.dat"); 
+  //sprintf(name_Mypt,"newpar/newpar_ypt_1.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
-  double Pmom_L[nParamT], Pmom_R[nParamT];
+  ifstream Mxpt(name_Mxpt);
+  ifstream Mypt(name_Mypt);
+  //double Pmom_L[nParamT], Pmom_R[nParamT];
   //for (int i=0;i<nParamT/2;i++){
   for (int i=0;i<126;i++){
     double par=0.;
     int p=0;
+
+    Mmom_R >> par >> p >> p >> p >> p >> p;
+    MomPar[i] = par;
+    
     Mmom_L >> par >> p >> p >> p >> p >> p;
-    //Pmom_L[i] = par;
+    MomPar[i+126] = par;
+    
+    Mxpt >> par >> p >> p >> p >> p >> p;
+    OptPar[i] = par;
+    
+    Mypt >> par >> p >> p >> p >> p >> p;
     OptPar[i+126] = par;
     //cout << par << endl;
-    Mmom_R >> par >> p >> p >> p >> p >> p;
-    //Pmom_R[i]  = par;
-    OptPar[i] = par;
+
   }
   Mmom_L.close();
   Mmom_R.close();
+  Mxpt.close();
+  Mypt.close();
 
   ntune_event = 0;
   
@@ -379,7 +393,7 @@ int main(int argc, char** argv){
       double par_ep[3];
       double par_k[3];
       //par_ep[0] = mom2[0];
-      par_ep[0] = calcf2t_4th(OptPar,
+      par_ep[0] = calcf2t_4th(MomPar,
 			      (l_x_fp[0]-XFPm)/XFPr, 
 			      (l_th_fp[0]-XpFPm)/XpFPr,
 			      (l_y_fp[0]-YFPm)/YFPr,
@@ -392,7 +406,7 @@ int main(int argc, char** argv){
       
       
       //par_k[0] = mom1[0];
-      par_k[0] = calcf2t_4th(OptPar,
+      par_k[0] = calcf2t_4th(MomPar,
 			      (r_x_fp[0]-XFPm)/XFPr, 
 			      (r_th_fp[0]-XpFPm)/XpFPr,
 			      (r_y_fp[0]-YFPm)/YFPr,
@@ -400,11 +414,25 @@ int main(int argc, char** argv){
 			      (vz_mean[0]-Ztm)/Ztr,
 			      1);
       par_k[0] = par_k[0] * Momr + Momm;
+      //par_k[1] = th1[0];
+      par_k[1] = calcf2t_4th(OptPar,
+			      (r_x_fp[0]-XFPm)/XFPr, 
+			      (r_th_fp[0]-XpFPm)/XpFPr,
+			      (r_y_fp[0]-YFPm)/YFPr,
+			      (r_ph_fp[0]-YpFPm)/YpFPr,
+			      (vz_mean[0]-Ztm)/Ztr,
+			      1);
+      par_k[1] = par_k[1] * Xptr + Xptm;
       
-      
-      
-      par_k[1] = th1[0];
-      par_k[2] = ph1[0] + hrs_ang;
+      par_k[2] = calcf2t_4th(OptPar,
+			      (r_x_fp[0]-XFPm)/XFPr, 
+			      (r_th_fp[0]-XpFPm)/XpFPr,
+			      (r_y_fp[0]-YFPm)/YFPr,
+			      (r_ph_fp[0]-YpFPm)/YpFPr,
+			      (vz_mean[0]-Ztm)/Ztr,
+			      2);
+      par_k[2] = par_k[2] * Yptr + Yptm;
+      par_k[2] = par_k[2] + hrs_ang;
       
       hallap = hallap/1000.0; // MeV/c --> GeV/c
 
@@ -527,7 +555,7 @@ int main(int argc, char** argv){
       double par_ep[3];
       double par_k[3];
       //par_ep[0] = mom2[0];
-      par_ep[0] = calcf2t_4th(OptPar,
+      par_ep[0] = calcf2t_4th(MomPar,
 			      (l_x_fp_2[0]-XFPm)/XFPr, 
 			      (l_th_fp_2[0]-XpFPm)/XpFPr,
 			      (l_y_fp_2[0]-YFPm)/YFPr,
@@ -541,7 +569,7 @@ int main(int argc, char** argv){
       
       
       //par_k[0] = mom1[0];
-      par_k[0] = calcf2t_4th(OptPar,
+      par_k[0] = calcf2t_4th(MomPar,
 			      (r_x_fp_2[0]-XFPm)/XFPr, 
 			      (r_th_fp_2[0]-XpFPm)/XpFPr,
 			      (r_y_fp_2[0]-YFPm)/YFPr,
@@ -550,8 +578,25 @@ int main(int argc, char** argv){
 			      1);
       par_k[0] = par_k[0] * Momr + Momm;
       
-      par_k[1] = th1_2[0];
-      par_k[2] = ph1_2[0] + hrs_ang;
+      // par_k[1] = th1_2[0];
+      par_k[1] = calcf2t_4th(OptPar,
+			      (r_x_fp_2[0]-XFPm)/XFPr, 
+			      (r_th_fp_2[0]-XpFPm)/XpFPr,
+			      (r_y_fp_2[0]-YFPm)/YFPr,
+			      (r_ph_fp_2[0]-YpFPm)/YpFPr,
+			      (vz_mean_2[0]-Ztm)/Ztr,
+			      1);
+      par_k[1] = par_k[1] * Xptr + Xptm;
+
+      par_k[2] = calcf2t_4th(OptPar,
+			      (r_x_fp_2[0]-XFPm)/XFPr, 
+			      (r_th_fp_2[0]-XpFPm)/XpFPr,
+			      (r_y_fp_2[0]-YFPm)/YFPr,
+			      (r_ph_fp_2[0]-YpFPm)/YpFPr,
+			      (vz_mean_2[0]-Ztm)/Ztr,
+			      2);
+      par_k[2] = par_k[2] * Yptr + Yptm;
+      par_k[2] = par_k[2] + hrs_ang;
       
       hallap_2 = hallap_2/1000.0; // MeV/c --> GeV/c
 
@@ -983,7 +1028,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
     double par_ep[3];
     double par_k[3];
     
-    par_ep[0] = calcf2t_4th(param,
+    par_ep[0] = calcf2t_4th(MomPar,
 			    x2[i], xp2[i],
 			    y2[i], yp2[i],
 			    avz[i], 2);
@@ -996,14 +1041,27 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
     par_ep[1] = tgang_xp2[i];
     par_ep[2] = tgang_yp2[i];
 
-    par_k[0] = calcf2t_4th(param,
+    par_k[0] = calcf2t_4th(MomPar,
 			   x[i], xp[i],
 			   y[i], yp[i],
 			   avz[i], 1);
     par_k[0] = par_k[0]*Momr + Momm;
-    par_k[1] = tgang_xp[i];
-    par_k[2] = tgang_yp[i];
-      
+    
+    par_k[1] = calcf2t_4th(param,
+			   x[i], xp[i],
+			   y[i], yp[i],
+			   avz[i], 1);
+    par_k[1] = par_k[1]*Xptr + Xptm;
+    
+    //par_k[1] = tgang_xp[i];
+    par_k[2] = calcf2t_4th(param,
+			   x[i], xp[i],
+			   y[i], yp[i],
+			   avz[i], 2);
+    par_k[2] = par_k[2]*Yptr + Yptm;
+    par_k[2] = par_k[2] + hrs_ang;
+    
+    //par_k[2] = tgang_yp[i];
     //beam_mom[i] = beam_mom[i];
     
     //avz[i] = avz[i] * Ztr + Ztm;
