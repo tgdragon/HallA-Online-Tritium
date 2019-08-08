@@ -268,10 +268,12 @@ int main(int argc, char** argv){
   char name_Mypt[500];
   sprintf(name_Mmom_L,"../matrices/mom_LHRS_4_sample.dat"); 
   sprintf(name_Mmom_R,"../matrices/mom_RHRS_4_sample.dat"); 
-  sprintf(name_Mxpt,"../matrices/xpt_RHRS_4.dat"); 
-  sprintf(name_Mypt,"../matrices/ypt_RHRS_4.dat"); 
-  //sprintf(name_Mxpt,"newpar/newpar_xpt_1.dat"); 
-  //sprintf(name_Mypt,"newpar/newpar_ypt_1.dat"); 
+  //sprintf(name_Mxpt,"../matrices/xpt_RHRS_4.dat"); 
+  //sprintf(name_Mypt,"../matrices/ypt_RHRS_4.dat"); 
+  sprintf(name_Mxpt,"newpar_xpt_1.dat"); 
+  sprintf(name_Mypt,"newpar_ypt_1.dat"); 
+  //sprintf(name_Mxpt,"newpar/newpar_xpt_0.dat"); 
+  //sprintf(name_Mypt,"newpar/newpar_ypt_0.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   ifstream Mxpt(name_Mxpt);
@@ -694,8 +696,8 @@ int main(int argc, char** argv){
 	 << chi_sq[i] << endl;
     cout << endl;
     
-    sprintf(tempc,  "./newpar/newpar_lmom_%d.dat",i); 
-    sprintf(tempc2, "./newpar/newpar_rmom_%d.dat",i); 
+    sprintf(tempc,  "./newpar/newpar_ypt_%d.dat",i); 
+    sprintf(tempc2, "./newpar/newpar_xpt_%d.dat",i); 
 
     ofstream * ofs1 = new ofstream(tempc);
     ofstream * ofs2 = new ofstream(tempc2);
