@@ -55,13 +55,13 @@ const double  Ztm = -0.15,Ztr=0.35;
 
 
 const int npeak = 2;
-double pcent[npeak] = {0.0, 77.}; 
+double pcent[npeak] = {0.0, 76.8}; 
 double pcent_real[npeak] = {0.0, 76.959};
-double selection_width[npeak] = {15.0, 15.0};
+double selection_width[npeak] = {5.0, 5.0};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
-double selection_width_2[npeak2] = {15.0};
+double selection_width_2[npeak2] = {5.0};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -266,6 +266,8 @@ int main(int argc, char** argv){
   //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
   sprintf(name_Mmom_L,"newpar_lmom_1.dat"); 
   sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
+  //sprintf(name_Mmom_L,"newpar/newpar_lmom_19.dat"); 
+  //sprintf(name_Mmom_R,"newpar/newpar_rmom_19.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   double Pmom_L[nParamT], Pmom_R[nParamT];
@@ -872,11 +874,13 @@ double tune(double* pa, int j)
 		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
 		  start[npar] = pa[npar];
 		  //step[npar] = 1.0e-3; 
-		  step[npar] = 1.0e-2; 
+		  //step[npar] = 1.0e-2; 
+		  step[npar] = 5.0e-2; 
 		  //step[npar] = 0.0; // no tuning for right
 		  start[npar+126] = pa[npar+126];
 		  //step[npar+126] = 1.0e-3;  
-		  step[npar+126] = 1.0e-2;  
+		  //step[npar+126] = 1.0e-2;  
+		  step[npar+126] = 5.0e-2;  
 		  //step[npar+126] = 0.0; // no tuning for Left
 		}
 		else{
@@ -910,8 +914,8 @@ double tune(double* pa, int j)
     
     //LLim[i] = pa[i] - pa[i]*0.8;
     //ULim[i] = pa[i] + pa[i]*0.8;
-    LLim[i] = pa[i] - 5.0; // temp
-    ULim[i] = pa[i] + 5.0; // temp
+    LLim[i] = pa[i] - 1.0; // temp
+    ULim[i] = pa[i] + 1.0; // temp
     
     minuit -> mnparm(i,pname,start[i],step[i],LLim[i],ULim[i],ierflg);
   }
