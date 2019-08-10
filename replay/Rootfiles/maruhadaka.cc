@@ -23,6 +23,8 @@ const double mS = 1.192642;
 const double md = 1.875612762;
 const double mHe3 = 2.80839133;
 const double mH3 = 2.80892086;
+const double mMg26=24.19650327;
+const double mAl27=25.12650524;
 
 const double HTkin_mom_scale = 2.218/2.100;
 
@@ -92,6 +94,10 @@ int main(int argc, char** argv){
   else if(hypflag==4){ // He3.dat
     mtar  = mHe3;
     mcore = md+mL;
+  }
+  else if(hypflag==27){ // Al27.dat
+    mtar  = mAl27;
+    mcore = mMg26+mL;
   }
   
   
@@ -833,11 +839,26 @@ int main(int argc, char** argv){
 	ctime[0] = -meantime_R;
 	double kcenter = 3.3;
 	ctime[0] = ctime[0]  - kcenter;
+	bool vzflag = false;
+	
+	if(hypflag==27){ // Al target
+	  if (fabs(vz_mean[0]-0.125)<0.02
+	      || fabs(vz_mean[0]+0.125)<0.02){
+	    vzflag=true;
+	  }
+	  else vzflag=false;
+	}
+	else{ // Others
+	  if(fabs(vz_mean[0])<0.2){
+	    vzflag=true;
+	  }
+	  else vzflag=false;
+	}
 	
 	if(tflag==5){
 	  if(fabs(ctime[0])<15.0 
 	     && fabs(rvz_cor - lvz_cor)<0.07 
-	     && fabs(vz_mean[0])<0.2
+	     && vzflag==true
 	     ){
 	    // ---- Filling data ------ //
 	    tnew->Fill(); // ---------- //

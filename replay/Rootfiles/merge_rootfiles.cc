@@ -49,6 +49,18 @@ int main(int argc, char** argv){
   else if (!strcmp(inputfile,"He3.dat")){
     sprintf(outfile,"%s/He3.root",file_dir);
   }
+  else if (!strcmp(inputfile,"Al_He3.dat")){
+    sprintf(outfile,"%s/Al_He3.root",file_dir);
+  }
+  else if (!strcmp(inputfile,"Al_T2.dat")){
+    sprintf(outfile,"%s/Al_T2.root",file_dir);
+  }
+  else if (!strcmp(inputfile,"Al_h2.dat")){
+    sprintf(outfile,"%s/Al_h2.root",file_dir);
+  }
+  else if (!strcmp(inputfile,"Al_h22.dat")){
+    sprintf(outfile,"%s/Al_h22.root",file_dir);
+  }
   else {
     sprintf(outfile,"%s/temp.root",file_dir);
   }

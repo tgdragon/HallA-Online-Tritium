@@ -12,13 +12,18 @@ from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures.process import ProcessPoolExecutor 
 import numpy as np
 
-nworkers=15
+nworkers=20
 #runfile = "multiF.dat"
-runfile = "h2.dat"
+#runfile = "h2.dat"
 #runfile = "h22.dat"
 #runfile = "He3.dat"
 #runfile = "T2.dat"
 #runfile = "ss.dat"
+#runfile = "Al_h22.dat"
+#runfile = "Al_h2.dat"
+runfile = "Al_He3.dat"
+#runfile = "Al_T2.dat"
+
 thisfile = "nude_coin.py"
 
 def nude_start(command):
@@ -32,8 +37,8 @@ def main():
     lines = inputfile.readlines()
     for line in lines:
         data = line.split()
-        com = "./nude_coin " + data[0]+ " " +data[1]
-        #com = "./maruhadaka " + data[0]+ " " +data[1] + " " +data[2] #stricter cut
+        #com = "./nude_coin " + data[0]+ " " +data[1]
+        com = "./maruhadaka " + data[0]+ " " +data[1] + " " +data[2] #stricter cut
         #com = "root -l -q \"nude3.cc(" + data[0]+ "," +data[1] + "," + str(trigflag)
         #com2 = com + ")\";"
         #call(com,shell=True)
@@ -41,6 +46,9 @@ def main():
         comlist.append(com)
     with ProcessPoolExecutor(max_workers=nworkers) as executor:
         executor.map(nude_start,comlist)
+
+    #com3 = "./merge_rootfiles" + runfile
+    #call(com3, shell=True)
 
 
 stime = time.time()
