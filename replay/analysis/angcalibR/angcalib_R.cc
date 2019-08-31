@@ -56,7 +56,7 @@ double fcent[nfoil] = {-0.125, -0.100, -0.075, -0.050, -0.025,
 double fcent_real[nfoil] = {-0.125, -0.100, -0.075, -0.050, -0.025,
 			    0.000, 0.025, 0.050, 0.100, 0.125};
 //double selection_width = 0.0125; 
-double selection_width = 0.005; // event selection width for z
+double selection_width = 0.006; // event selection width for z
 
 
 const double step = 0.492 * 2.54;
@@ -99,7 +99,7 @@ const double hrs_ang = 13.2 * 3.14159 / 180.;
 //void angcalib(){
 int main(int argc, char** argv){
   TApplication* app = new TApplication("app", &argc, argv);
-  const int nite = 3;  // The number of tuning iteration
+  const int nite = 0;  // The number of tuning iteration
   
   // =================================== //
   // ======== General conditions ======= //
@@ -179,8 +179,10 @@ int main(int argc, char** argv){
   char name_Mxt_R[500], name_Myt_R[500];
   sprintf(name_Mxt_R,"../matrices/xpt_RHRS_4.dat");
   sprintf(name_Myt_R,"../matrices/ypt_RHRS_4.dat");
-  //sprintf(name_Mxt_R,"./sample_matrix/newpar_xpt_2.dat"); // Better matrix
-  //sprintf(name_Myt_R,"./sample_matrix/newpar_ypt_2.dat"); // Better matrix
+  //sprintf(name_Mxt_R,"./sample_matrix/newpar_xpt_1.dat"); // Better matrix
+  //sprintf(name_Myt_R,"./sample_matrix/newpar_ypt_1.dat"); // Better matrix
+  //sprintf(name_Mxt_R,"./newpar/newpar_xpt_1.dat"); // Better matrix
+  //sprintf(name_Myt_R,"./newpar/newpar_ypt_1.dat"); // Better matrix
   ifstream Mxt_R(name_Mxt_R);
   ifstream Myt_R(name_Myt_R);
   double Pxt_R[nParamT], Pyt_R[nParamT];
@@ -302,20 +304,20 @@ int main(int argc, char** argv){
     XpFP[0] = (XpFP[0]-XpFPm)/XpFPr;
     YFP[0]  = (YFP[0]-YFPm)/YFPr;
     YpFP[0] = (YpFP[0]-YpFPm)/YpFPr;
-    //    Zt[0]   = (Zt[0]-Ztm)/Ztr;
-
-//    Xpt[0]  = calcf2t_4th_2(Pxt_R,
-//			   XFP[0], XpFP[0],
-//			   YFP[0], YpFP[0],
-//			   Zt[0]);
-//    Ypt[0] = calcf2t_4th_2(Pyt_R,
-//			   XFP[0], XpFP[0],
-//			   YFP[0], YpFP[0],
-//			   Zt[0]);
-//
-//    Ypt[0]  = Ypt[0]*Yptr +Yptm;
-//    Xpt[0]  = Xpt[0]*Xptr +Xptm;
-//    Zt[0]   = Zt[0]*Ztr +Ztm;
+    Zt[0]   = (Zt[0]-Ztm)/Ztr;
+    
+    Xpt[0]  = calcf2t_4th_2(Pxt_R,
+			    XFP[0], XpFP[0],
+			    YFP[0], YpFP[0],
+			    Zt[0]);
+    Ypt[0] = calcf2t_4th_2(Pyt_R,
+			   XFP[0], XpFP[0],
+			   YFP[0], YpFP[0],
+			   Zt[0]);
+    
+    Ypt[0]  = Ypt[0]*Yptr +Yptm;
+    Xpt[0]  = Xpt[0]*Xptr +Xptm;
+    Zt[0]   = Zt[0]*Ztr +Ztm;
     
     if(fabs(Xpt[0]) < 0.2 
        //&& fabs(Ypt[0]) < 0.04 ){
@@ -772,22 +774,31 @@ void fcn1(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
     
     nev[foil_flag[i]][holegroup[i]]++;
   }
-  
+
+  double totevent = 0;
   for(int i=0 ; i<nfoil ; i++){
     for(int j=0 ; j<nsshole ; j++){
       
       //if(nev[i][j]>0){
-      if(nev[i][j]>10){ 
+      if(nev[i][j]>30){ 
       //if(nev[i][j]>50){ // using only holes with more than 50 events
-	chi2[i][j] = chi2[i][j]/(nev[i][j]-126.0)/pow(sigma,2.0);
+	//chi2[i][j] = chi2[i][j]/(nev[i][j]-126.0)/pow(sigma,2.0);
+	chi2[i][j] = chi2[i][j]/pow(sigma,2.0);
       }
       else chi2[i][j] = 0.0;
       
       total_chi2 = total_chi2 + chi2[i][j]*w[i][j];
+      totevent++;
     }
   }
   
-  fval = total_chi2/(double)nfoil/(double)nsshole;
+  //fval = total_chi2/(double)nfoil/(double)nsshole;
+  //if(totevent>125.){
+  //  fval = total_chi2/(totevent-126.0);
+  //}
+  //else fval = total_chi2;
+
+  fval = total_chi2;
 }
 
 
@@ -845,22 +856,31 @@ void fcn2(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
     
     nev[foil_flag[i]][holegroup[i]]++;
   }
-  
+
+  double totevent = 0;
   for(int i=0 ; i<nfoil ; i++){
     for(int j=0 ; j<nsshole ; j++){
       
       //if(nev[i][j]>0){
       //if(nev[i][j]>10){ 
-      if(nev[i][j]>50){ // using only holes with more than 50 events
-	chi2[i][j] = chi2[i][j]/(nev[i][j]-126.0)/pow(sigma,2.0);
+      if(nev[i][j]>30){ // using only holes with more than 50 events
+	//chi2[i][j] = chi2[i][j]/(nev[i][j]-126.0)/pow(sigma,2.0);
+	chi2[i][j] = chi2[i][j]/pow(sigma,2.0);
       }
       else chi2[i][j] = 0.0;
       
       total_chi2 = total_chi2 + chi2[i][j]*w[i][j];
+      totevent++;
     }
   }
   
-  fval = total_chi2/(double)nfoil/(double)nsshole;
+  //fval = total_chi2/(double)nfoil/(double)nsshole;
+  //if(totevent>125.){
+  //  fval = total_chi2/(totevent-126.0);
+  //}
+  //else fval = total_chi2;
+  
+  fval = total_chi2;
 }
 
 
