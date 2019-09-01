@@ -56,7 +56,7 @@ double fcent[nfoil] = {-0.125, -0.100, -0.075, -0.050, -0.025,
 double fcent_real[nfoil] = {-0.125, -0.100, -0.075, -0.050, -0.025,
 			    0.000, 0.025, 0.050, 0.100, 0.125};
 //double selection_width = 0.0125; 
-double selection_width = 0.006; // event selection width for z
+double selection_width = 0.005; // event selection width for z
 
 
 const double step = 0.492 * 2.54;
@@ -69,8 +69,10 @@ double refx[nsshole];
 double refy[nsshole];
 //double selec_widthx = 0.60; // selection width in x (dispersive plane)
 //double selec_widthy = 0.45; // selection width in y 
-double selec_widthx = 0.45;
-double selec_widthy = 0.35;
+//double selec_widthx = 0.45;
+//double selec_widthy = 0.35;
+double selec_widthx = 0.50;
+double selec_widthy = 0.40;
 
 
 const int nParamT = 126;  // Number of parameters
@@ -177,12 +179,12 @@ int main(int argc, char** argv){
   
 
   char name_Mxt_R[500], name_Myt_R[500];
-  sprintf(name_Mxt_R,"../matrices/xpt_RHRS_4.dat");
-  sprintf(name_Myt_R,"../matrices/ypt_RHRS_4.dat");
+  //sprintf(name_Mxt_R,"../matrices/xpt_RHRS_4.dat");
+  //sprintf(name_Myt_R,"../matrices/ypt_RHRS_4.dat");
   //sprintf(name_Mxt_R,"./sample_matrix/newpar_xpt_1.dat"); // Better matrix
   //sprintf(name_Myt_R,"./sample_matrix/newpar_ypt_1.dat"); // Better matrix
-  //sprintf(name_Mxt_R,"./newpar/newpar_xpt_1.dat"); // Better matrix
-  //sprintf(name_Myt_R,"./newpar/newpar_ypt_1.dat"); // Better matrix
+  sprintf(name_Mxt_R,"./newpar/newpar_xpt_2.dat");
+  sprintf(name_Myt_R,"./newpar/newpar_ypt_2.dat");
   ifstream Mxt_R(name_Mxt_R);
   ifstream Myt_R(name_Myt_R);
   double Pxt_R[nParamT], Pyt_R[nParamT];
@@ -321,7 +323,7 @@ int main(int argc, char** argv){
     
     if(fabs(Xpt[0]) < 0.2 
        //&& fabs(Ypt[0]) < 0.04 ){
-       && fabs(Ypt[0]) < 0.04 ){
+       && fabs(Ypt[0]) < 0.1 ){
       
       double ssx, ssy;
       for(int j=0 ; j<nfoil ; j++){
@@ -336,10 +338,12 @@ int main(int argc, char** argv){
 	    
 	    //ssx = (-Xpt[0]*l[j]*projectf[j] + offs_xp[j])*scal_xp[j]; // for initial parameters (xpt_LHRS_4.dat)
 	    //ssy = (-Ypt[0]*l[j]*projectf[j] + offs_yp[j])*scal_yp[j]; // for initial parameters (ypt_LHRS_4.dat)
-	    ssx = (-Xpt[0]*l[j]*projectf[j] + offs_xp[j])*scal_xp[j]*0.9; // for initial parameters (xpt_LHRS_4.dat)
-	    ssy = (-Ypt[0]*l[j]*projectf[j] + offs_yp[j])*scal_yp[j]*1.1; // for initial parameters (ypt_LHRS_4.dat)
-	    //ssx = -Xpt[0]*l[j]*projectf[j];
-	    //ssy = -Ypt[0]*l[j]*projectf[j];
+	    //ssx = (-Xpt[0]*l[j]*projectf[j] + offs_xp[j])*scal_xp[j]*0.9; // for initial parameters (xpt_LHRS_4.dat)
+	    //ssy = (-Ypt[0]*l[j]*projectf[j] + offs_yp[j])*scal_yp[j]*1.1; // for initial parameters (ypt_LHRS_4.dat)
+	    ssx = -Xpt[0]*l[j]*projectf[j];
+	    ssy = -Ypt[0]*l[j]*projectf[j];
+
+	    if (ssy>0) ssx = ssx * 1.08;
 
 	    //if(j==8) ssy = ssy * 1.08;  // for second parameters
 	    //if(j==9) ssy = ssy * 1.126; // for second parameters
