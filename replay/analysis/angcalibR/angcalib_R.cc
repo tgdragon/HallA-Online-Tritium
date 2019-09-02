@@ -101,7 +101,7 @@ const double hrs_ang = 13.2 * 3.14159 / 180.;
 //void angcalib(){
 int main(int argc, char** argv){
   TApplication* app = new TApplication("app", &argc, argv);
-  const int nite = 0;  // The number of tuning iteration
+  const int nite = 3;  // The number of tuning iteration
   
   // =================================== //
   // ======== General conditions ======= //
@@ -183,8 +183,8 @@ int main(int argc, char** argv){
   //sprintf(name_Myt_R,"../matrices/ypt_RHRS_4.dat");
   //sprintf(name_Mxt_R,"./sample_matrix/newpar_xpt_1.dat"); // Better matrix
   //sprintf(name_Myt_R,"./sample_matrix/newpar_ypt_1.dat"); // Better matrix
-  sprintf(name_Mxt_R,"./newpar/newpar_xpt_2.dat");
-  sprintf(name_Myt_R,"./newpar/newpar_ypt_2.dat");
+  sprintf(name_Mxt_R,"./newpar_xpt_2.dat");
+  sprintf(name_Myt_R,"./newpar_ypt_2.dat");
   ifstream Mxt_R(name_Mxt_R);
   ifstream Myt_R(name_Myt_R);
   double Pxt_R[nParamT], Pyt_R[nParamT];
@@ -212,7 +212,7 @@ int main(int argc, char** argv){
     *ifs >> temp
 	 >> offs_xp[i] >> scal_xp[i]
 	 >> offs_yp[i] >> scal_yp[i];
-    cout << offs_xp[i] << " " << offs_yp[i] << endl;
+    //cout << offs_xp[i] << " " << offs_yp[i] << endl;
     if(scal_yp[i]>0.5) offset_flag[i] = true;
     else offset_flag[i] = false;
   }
@@ -343,7 +343,7 @@ int main(int argc, char** argv){
 	    ssx = -Xpt[0]*l[j]*projectf[j];
 	    ssy = -Ypt[0]*l[j]*projectf[j];
 
-	    if (ssy>0) ssx = ssx * 1.08;
+	    //if (ssy>0) ssx = ssx * 1.08;
 
 	    //if(j==8) ssy = ssy * 1.08;  // for second parameters
 	    //if(j==9) ssy = ssy * 1.126; // for second parameters
@@ -784,7 +784,7 @@ void fcn1(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
     for(int j=0 ; j<nsshole ; j++){
       
       //if(nev[i][j]>0){
-      if(nev[i][j]>30){ 
+      if(nev[i][j]>5){ 
       //if(nev[i][j]>50){ // using only holes with more than 50 events
 	//chi2[i][j] = chi2[i][j]/(nev[i][j]-126.0)/pow(sigma,2.0);
 	chi2[i][j] = chi2[i][j]/pow(sigma,2.0);
@@ -867,7 +867,7 @@ void fcn2(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
       
       //if(nev[i][j]>0){
       //if(nev[i][j]>10){ 
-      if(nev[i][j]>30){ // using only holes with more than 50 events
+      if(nev[i][j]>5){ // using only holes with more than 50 events
 	//chi2[i][j] = chi2[i][j]/(nev[i][j]-126.0)/pow(sigma,2.0);
 	chi2[i][j] = chi2[i][j]/pow(sigma,2.0);
       }
