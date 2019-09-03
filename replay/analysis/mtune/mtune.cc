@@ -57,11 +57,11 @@ const double  Ztm = -0.15,Ztr=0.35;
 const int npeak = 2;
 double pcent[npeak] = {0.0, 76.8}; 
 double pcent_real[npeak] = {0.0, 76.959};
-double selection_width[npeak] = {5.0, 5.0};
+double selection_width[npeak] = {8.0, 8.0};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
-double selection_width_2[npeak2] = {5.0};
+double selection_width_2[npeak2] = {8.0};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -266,8 +266,6 @@ int main(int argc, char** argv){
   //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
   sprintf(name_Mmom_L,"newpar_lmom_1.dat"); 
   sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
-  //sprintf(name_Mmom_L,"newpar/newpar_lmom_19.dat"); 
-  //sprintf(name_Mmom_R,"newpar/newpar_rmom_19.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   double Pmom_L[nParamT], Pmom_R[nParamT];
@@ -285,6 +283,45 @@ int main(int argc, char** argv){
   }
   Mmom_L.close();
   Mmom_R.close();
+  
+  char name_Mxpt_R[500];
+  char name_Mypt_R[500];
+  sprintf(name_Mxpt_R,"../matrices/xpt_RHRS_4_upto2.dat"); 
+  sprintf(name_Mypt_R,"../matrices/ypt_RHRS_4_upto2.dat"); 
+  ifstream Mxpt_R(name_Mxpt_R);
+  ifstream Mypt_R(name_Mypt_R);
+  //double Pxpt_R[nParamT], Pxpt_R[nParamT];
+  double Pang_R[nParamT];
+  //for (int i=0;i<nParamT/2;i++){
+  for (int i=0;i<126;i++){
+    double par=0.;
+    int p=0;
+    Mxpt_R >> par >> p >> p >> p >> p >> p;
+    Pang_R[i] = par;
+    Mypt_R >> par >> p >> p >> p >> p >> p;
+    Pang_R[i+126] = par;
+  }
+  Mxpt_R.close();
+  Mypt_R.close();
+  
+  char name_Mxpt_L[500];
+  char name_Mypt_L[500];
+  sprintf(name_Mxpt_L,"../matrices/xpt_LHRS_4_upto2.dat"); 
+  sprintf(name_Mypt_L,"../matrices/ypt_LHRS_4_upto2.dat"); 
+  ifstream Mxpt_L(name_Mxpt_L);
+  ifstream Mypt_L(name_Mypt_L);
+  double Pang_L[nParamT];
+  //for (int i=0;i<nParamT/2;i++){
+  for (int i=0;i<126;i++){
+    double par=0.;
+    int p=0;
+    Mxpt_L >> par >> p >> p >> p >> p >> p;
+    Pang_L[i] = par;
+    Mypt_L >> par >> p >> p >> p >> p >> p;
+    Pang_L[i+126] = par;
+  }
+  Mxpt_L.close();
+  Mypt_L.close();
 
   ntune_event = 0;
   
@@ -385,9 +422,25 @@ int main(int argc, char** argv){
 			      (l_ph_fp[0]-YpFPm)/YpFPr,
 			      (vz_mean[0]-Ztm)/Ztr,
 			      2);
+      //par_ep[1] = th2[0];
+      //par_ep[2] = ph2[0];
+      par_ep[1] = calcf2t_4th(Pang_L,
+			     (l_x_fp[0]-XFPm)/XFPr, 
+			     (l_th_fp[0]-XpFPm)/XpFPr,
+			     (l_y_fp[0]-YFPm)/YFPr,
+			     (l_ph_fp[0]-YpFPm)/YpFPr,
+			     (vz_mean[0]-Ztm)/Ztr,
+			     1);
+      par_ep[2] = calcf2t_4th(Pang_L,
+			     (l_x_fp[0]-XFPm)/XFPr, 
+			     (l_th_fp[0]-XpFPm)/XpFPr,
+			     (l_y_fp[0]-YFPm)/YFPr,
+			     (l_ph_fp[0]-YpFPm)/YpFPr,
+			     (vz_mean[0]-Ztm)/Ztr,
+			     2);
       par_ep[0] = par_ep[0] * Momr + Momm;
-      par_ep[1] = th2[0];
-      par_ep[2] = -ph2[0] - hrs_ang;
+      par_ep[1] = par_ep[1] * Xptr + Xptm;
+      par_ep[2] = par_ep[2] * Yptr + Yptm;
       
       
       //par_k[0] = mom1[0];
@@ -398,12 +451,23 @@ int main(int argc, char** argv){
 			      (r_ph_fp[0]-YpFPm)/YpFPr,
 			      (vz_mean[0]-Ztm)/Ztr,
 			      1);
+      par_k[1] = calcf2t_4th(Pang_R,
+			     (r_x_fp[0]-XFPm)/XFPr, 
+			     (r_th_fp[0]-XpFPm)/XpFPr,
+			     (r_y_fp[0]-YFPm)/YFPr,
+			     (r_ph_fp[0]-YpFPm)/YpFPr,
+			     (vz_mean[0]-Ztm)/Ztr,
+			     1);
+      par_k[2] = calcf2t_4th(Pang_R,
+			     (r_x_fp[0]-XFPm)/XFPr, 
+			     (r_th_fp[0]-XpFPm)/XpFPr,
+			     (r_y_fp[0]-YFPm)/YFPr,
+			     (r_ph_fp[0]-YpFPm)/YpFPr,
+			     (vz_mean[0]-Ztm)/Ztr,
+			     2);
       par_k[0] = par_k[0] * Momr + Momm;
-      
-      
-      
-      par_k[1] = th1[0];
-      par_k[2] = ph1[0] + hrs_ang;
+      par_k[1] = par_k[1] * Xptr + Xptm;
+      par_k[2] = par_k[2] * Yptr + Yptm;
       
       hallap = hallap/1000.0; // MeV/c --> GeV/c
 
@@ -533,11 +597,26 @@ int main(int argc, char** argv){
 			      (l_ph_fp_2[0]-YpFPm)/YpFPr,
 			      (vz_mean_2[0]-Ztm)/Ztr,
 			      2);
+      //par_ep[1] = th2_2[0];
+      //par_ep[2] = ph2_2[0];
+      par_ep[1] = calcf2t_4th(Pang_L,
+			     (l_x_fp_2[0]-XFPm)/XFPr, 
+			     (l_th_fp_2[0]-XpFPm)/XpFPr,
+			     (l_y_fp_2[0]-YFPm)/YFPr,
+			     (l_ph_fp_2[0]-YpFPm)/YpFPr,
+			     (vz_mean_2[0]-Ztm)/Ztr,
+			     1);
+      par_ep[2] = calcf2t_4th(Pang_L,
+			     (l_x_fp_2[0]-XFPm)/XFPr, 
+			     (l_th_fp_2[0]-XpFPm)/XpFPr,
+			     (l_y_fp_2[0]-YFPm)/YFPr,
+			     (l_ph_fp_2[0]-YpFPm)/YpFPr,
+			     (vz_mean_2[0]-Ztm)/Ztr,
+			     2);
       par_ep[0] = par_ep[0] * Momr + Momm;
       par_ep[0] = par_ep[0] * HTkin_mom_scale; // T kinematics
-      par_ep[1] = th2_2[0];
-      par_ep[2] = -ph2_2[0] - hrs_ang;
-      
+      par_ep[1] = par_ep[1] * Xptr + Xptm;
+      par_ep[2] = par_ep[2] * Yptr + Yptm;
       
       //par_k[0] = mom1[0];
       par_k[0] = calcf2t_4th(OptPar,
@@ -547,10 +626,25 @@ int main(int argc, char** argv){
 			      (r_ph_fp_2[0]-YpFPm)/YpFPr,
 			      (vz_mean_2[0]-Ztm)/Ztr,
 			      1);
+      //par_k[1] = th1_2[0];
+      //par_k[2] = ph1_2[0];
+      par_k[1] = calcf2t_4th(Pang_R,
+			     (r_x_fp_2[0]-XFPm)/XFPr, 
+			     (r_th_fp_2[0]-XpFPm)/XpFPr,
+			     (r_y_fp_2[0]-YFPm)/YFPr,
+			     (r_ph_fp_2[0]-YpFPm)/YpFPr,
+			     (vz_mean_2[0]-Ztm)/Ztr,
+			     1);
+      par_k[2] = calcf2t_4th(Pang_R,
+			     (r_x_fp_2[0]-XFPm)/XFPr, 
+			     (r_th_fp_2[0]-XpFPm)/XpFPr,
+			     (r_y_fp_2[0]-YFPm)/YFPr,
+			     (r_ph_fp_2[0]-YpFPm)/YpFPr,
+			     (vz_mean_2[0]-Ztm)/Ztr,
+			     2);
       par_k[0] = par_k[0] * Momr + Momm;
-      
-      par_k[1] = th1_2[0];
-      par_k[2] = ph1_2[0] + hrs_ang;
+      par_k[1] = par_k[1] * Xptr + Xptm;
+      par_k[2] = par_k[2] * Yptr + Yptm;
       
       hallap_2 = hallap_2/1000.0; // MeV/c --> GeV/c
 
@@ -860,8 +954,8 @@ double tune(double* pa, int j)
   const int nXpf=4;
   const int nYf=4;
   const int nYpf=4;
-  //const int nZt=2; // The number of order is reduced for test (4-->2)
-  const int nZt=4; // The number of order is reduced for test (4-->2)
+  const int nZt=2; // The number of order is reduced for test (4-->2)
+  //const int nZt=4;
   int npar=0;
   int a=0,b=0,c=0,d=0,e=0;
   for (int n=0;n<nMatT+1;n++){
@@ -885,8 +979,10 @@ double tune(double* pa, int j)
 		}
 		else{
 		  start[npar] = 0.0;
+		  //start[npar] = pa[npar];
 		  step[npar] = 0.0;
 		  start[npar+126] = 0.0;
+		  //start[npar+126] = pa[npar+126];
 		  step[npar+126] = 0.0;
 		}
 		npar++;
@@ -914,8 +1010,8 @@ double tune(double* pa, int j)
     
     //LLim[i] = pa[i] - pa[i]*0.8;
     //ULim[i] = pa[i] + pa[i]*0.8;
-    LLim[i] = pa[i] - 1.0; // temp
-    ULim[i] = pa[i] + 1.0; // temp
+    LLim[i] = pa[i] - 5.0; // temp
+    ULim[i] = pa[i] + 5.0; // temp
     
     minuit -> mnparm(i,pname,start[i],step[i],LLim[i],ULim[i],ierflg);
   }
@@ -1038,10 +1134,13 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 //      cout << mm << " " << pcent_real[peak_flag[i]] << " " << residual 
 //	   << " " << chi2<< endl;
       chi2 = chi2 + pow(residual/sigma,2.0);
+      if(tune_id[i]==1 && peak_flag[i]==0) chi2 = chi2/nL1;
+      else if (tune_id[i]==1 && peak_flag[i]==1) chi2 = chi2/nS;
+      else chi2 = chi2/nL2;
   }
   
   //cout << chi2 << endl;
-  chi2 = chi2/((double)ntune_event-(double)nParamT);
+  //chi2 = chi2/((double)ntune_event-(double)nParamT);
   //cout << chi2 << endl;
   //cout << " " << chi2 << endl;
   //fval = chi2/((double)ntune_event-(double)nParamT)/pow(sigma,2.0);
@@ -1063,6 +1162,7 @@ double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
   px_ep = xpep * pz_ep;
   py_ep = ypep * pz_ep;
   TVector3 vec_ep (px_ep, py_ep, pz_ep);
+  vec_ep.RotateY(hrs_ang);
   //double Eep = sqrt(vec_ep * vec_ep);
   double Eep = sqrt(pep*pep + me*me);
   
@@ -1074,6 +1174,7 @@ double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
   px_k = xpk * pz_k;
   py_k = ypk * pz_k;
   TVector3 vec_k (px_k, py_k, pz_k);
+  vec_k.RotateY(-hrs_ang);
   //double Ek = sqrt(vec_k * vec_k);
   double Ek = sqrt(pk*pk + mk*mk);
   
