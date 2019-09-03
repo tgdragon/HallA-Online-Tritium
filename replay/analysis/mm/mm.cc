@@ -9,7 +9,18 @@ const double me = 0.000511;
 const double mk = 0.493677;
 const double mp = 0.938272;
 const double mL = 1.115683;
+const double hrs_ang = 13.2 * 3.14159 / 180.;
 extern double CalcMM(double ee, double* par_ep, double* par_k, double mt);
+
+//const int n_dpcor = 3;
+//double th_dpcor[n_dpcor] = {300, 400, 500};  // um
+//double dpe_par[n_dpcor] = {148.0e-6, 183.0e-6, 223.4e-6}; // GeV/c
+//double dpe1_par0[n_dpcor] = {};
+//double dpe1_par1[n_dpcor] = {};
+//double dpe2_par0[n_dpcor] = {};
+//double dpe2_par1[n_dpcor] = {};
+//double dpe2_par2[n_dpcor] = {};
+//
 
 void mm(){
   //TFile* f1 = new TFile("coin_111170_111190.root");
@@ -72,7 +83,7 @@ void mm(){
   double ctime[max];
   double vz_mean[max];
   double l_cer;
-  const double hrs_ang = 13.2 * 3.14159 / 180.;
+  
   
   t1->SetBranchAddress("fEvtHdr.fRun", &runnum    );
   t1->SetBranchAddress("HALLA_p", &hallap );
@@ -113,8 +124,8 @@ void mm(){
   t1->SetBranchAddress("L.tr.th",  &l_th_fp);
   t1->SetBranchAddress("R.tr.ph",  &r_ph_fp);
   t1->SetBranchAddress("L.tr.ph",  &l_ph_fp);
-  t1->SetBranchAddress("R.tr.beta",  &rbeta);
-  t1->SetBranchAddress("L.tr.beta",  &lbeta);
+  //t1->SetBranchAddress("R.tr.beta",  &rbeta);
+  //t1->SetBranchAddress("L.tr.beta",  &lbeta);
   //t1->SetBranchAddress("R.s2.trpath",  &rpathl_s2);
   //t1->SetBranchAddress("L.s2.trpath",  &lpathl_s2);
   //t1->SetBranchAddress("L.s2.nthit",&nhit);
@@ -231,13 +242,16 @@ void mm(){
   bool acc3_selection = false;
   bool acc4_selection = false;
   bool acc5_selection = false;
-  const double kcenter = 3.1;
+  //const double kcenter = 3.1;
+  //const double kcenter = 3.3; // h22.root
+  const double kcenter = 0.0;
   const double rf_sep = 2.0;
   double par_ep[3];
   double par_k[3];
   double mm, mm_1st_cor;
   double shift;
-  
+
+  //ent = 50000; // for test
   // ================================== //
   // ======== Main loop =============== //
   // ================================== //
@@ -279,12 +293,12 @@ void mm(){
     else zL_selection = false;
     
     if (fabs(rvz[0]-lvz[0])<0.05
-	&& fabs(vz_mean[0])<0.1){
+	&& fabs(vz_mean[0])<0.07){
       vz_selection =true;
     }
     else vz_selection = false;
     
-    if(a1 < 0.5) ac1_selection = true;
+    if(a1 < 1.0) ac1_selection = true;
     else ac1_selection = false;
     
     if(a2 > 3.0 && a2 <18.0 ) ac2_selection = true;
@@ -324,25 +338,70 @@ void mm(){
        vz_selection == true
 	&& ac1_selection == true
 	&& ac2_selection == true 
-	&& lcer_selection==true ){
+       //&& lcer_selection==true
+	){
       
       par_ep[0] = mom2[0];
-      par_ep[1] = th2[0];
-      par_ep[2] = ph2[0] - hrs_ang;
+      //par_ep[0] = mom2[0]*2.1/2.218;
+      //par_ep[0] = mom2[0]*2.218/2.1;
+      //par_ep[1] = th2[0];
+      par_ep[1] = -th2[0];// right handed system
+      //par_ep[2] = -ph2[0] - hrs_ang;
+      par_ep[2] = ph2[0];// right handed system
       
       par_k[0] = mom1[0];
-      par_k[1] = th1[0];
-      par_k[2] = ph1[0] + hrs_ang;
+      //par_k[1] = th1[0];
+      //par_k[2] = ph1[0] + hrs_ang;
+      par_k[1] = -th1[0];// right handed system
+      par_k[2] = ph1[0]; // right handed system
       
-      hallap = hallap/1000.0; // MeV-->GeV
+      //hallap = hallap/1000.0; // MeV/c --> GeV/c
+
+      // ---- 400 um thick target -----
+      double dpe  = 184.3e-6; // GeV/c
+      double dpep = 0.0; // GeV/c
+      double dpk  = 0.0; // GeV/c
+      //double momdown = 2.1/2.218;
+      
+      if(vz_mean[0]<8.0e-2){
+	dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
+	//dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
+	dpk  = -1.31749 * sin(-4.61513*par_k[2] ) + 2.0368; // MeV/c
+
+      }
+      else {
+	dpep =  6.23e-3 * par_ep[2] + 0.403; // MeV/c
+	//dpk  = -3.158e-2* par_k[2]  + 0.4058;// MeV/c
+	dpk  = 3.158e-2* par_k[2]  + 0.4058;// MeV/c
+      }
+      
+      //cout << par_ep[2] << " " << dpep << endl;
+      //cout << vz_mean[0] << " " << par_k[2] << " " << dpk << endl;
+      //cout << par_k[2] << " " << par_ep[2] << endl;
+      dpep = dpep / 1000.0; // MeV/c --> GeV/c
+      dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
+      
+      hallap = hallap - dpe;
+      par_ep[0] = par_ep[0] + dpep;
+      par_k[0]  = par_k[0]  + dpk;
+
+//      cout << hallap << " " 
+//	   << par_ep[0] << " " << par_ep[1] << " " << par_ep[2] << " " << dpep << " "
+//	   << par_k[0]  << " " << par_k[1]  << " " << par_k[2] << " " << dpk
+//	   << endl;
       
       mm = CalcMM(hallap, par_ep, par_k, mp);
-      //mm_1st_cor = (mm-mL)*1000. + (436.30*l_ph_fp[0] - 22.3);
-      //mm_1st_cor = mm_1st_cor - (2.3625*lvz[0]);
-      //mm_1st_cor = mm_1st_cor + (131.1*l_y_fp[0]);
-      //mm = mm_1st_cor/1000.0 + mL;
+
+      /*
+	// ---- Correction during the beam time ------ //
+	mm_1st_cor = (mm-mL)*1000. + (436.30*l_ph_fp[0] - 22.3);
+	mm_1st_cor = mm_1st_cor - (2.3625*lvz[0]);
+	mm_1st_cor = mm_1st_cor + (131.1*l_y_fp[0]);
+	mm = mm_1st_cor/1000.0 + mL;
+      */
       
       mm = (mm-mL)*1000.; // Gen --> MeV
+      //cout << mm << endl;
       
       //if(runnum>111554)  mm = mm - 79.0; // ? 
       //mm = mm - 79.0; // ? 
@@ -488,6 +547,7 @@ double CalcMM(double ee, double* par_ep, double* par_k, double mt){
   px_ep = xpep * pz_ep;
   py_ep = ypep * pz_ep;
   TVector3 vec_ep (px_ep, py_ep, pz_ep);
+  vec_ep.RotateY(hrs_ang);
   //double Eep = sqrt(vec_ep * vec_ep);
   double Eep = sqrt(pep*pep + me*me);
   
@@ -499,6 +559,7 @@ double CalcMM(double ee, double* par_ep, double* par_k, double mt){
   px_k = xpk * pz_k;
   py_k = ypk * pz_k;
   TVector3 vec_k (px_k, py_k, pz_k);
+  vec_k.RotateY(-hrs_ang);
   //double Ek = sqrt(vec_k * vec_k);
   double Ek = sqrt(pk*pk + mk*mk);
   
