@@ -18,8 +18,8 @@ void four2five(){
   int npar=0;
   int a=0,b=0,c=0,d=0,e=0;
   
-  ifstream* ifs = new ifstream("newpar_lmom_4.dat");
-  ofstream* ofs = new ofstream("newpar_lmom_4_5th.dat");
+  ifstream* ifs = new ifstream("newpar_rmom_6.dat");
+  ofstream* ofs = new ofstream("newpar_rmom_6_5th.dat");
   
   double par=0;
   double temp=0;
