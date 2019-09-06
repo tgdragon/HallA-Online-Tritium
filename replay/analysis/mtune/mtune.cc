@@ -37,6 +37,10 @@ extern double calcf2t_4th(double*,
 			  double, double, 
 			  double, double,
 			  double, int);
+extern double calcf2t_5th(double*,
+			  double, double, 
+			  double, double,
+			  double, int);
 extern double tune(double* pa, int j);
 extern void fcn(int &nPar, double* /*grad*/, 
 		double &fval, double* param, int /*iflag*/);
@@ -55,17 +59,20 @@ const double  Ztm = -0.15,Ztr=0.35;
 
 
 const int npeak = 2;
-double pcent[npeak] = {0.0, 76.8}; 
+double pcent[npeak] = {0.0, 76.959};
+//double pcent[npeak] = {0.0, 75.8};
+//double pcent[npeak] = {0.0, 73.5}; 
 double pcent_real[npeak] = {0.0, 76.959};
-double selection_width[npeak] = {8.0, 8.0};
+double selection_width[npeak] = {5.0, 6.0};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
-double selection_width_2[npeak2] = {8.0};
+double selection_width_2[npeak2] = {5.0};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
-const int nParamT = 252;  // Number of parameters (126 x 2)
+const int nParamT  = 252;  // Number of parameters (126 x 2); 4th
+const int nParamT2 = 504;  // Number of parameters (252 x 2); 5th
 const int nmax = 3000;    // Number of events used for tuning
 
 double x[nmax],   y[nmax]; // Reft HRS
@@ -80,7 +87,7 @@ int tune_id[nmax];
 
 int peak_flag[nmax];
 int ntune_event = 0;
-double OptPar[nParamT]; 
+double OptPar[nParamT2]; 
 
 const double hrs_ang = 13.2 * 3.14159 / 180.;
 
@@ -268,14 +275,14 @@ int main(int argc, char** argv){
   sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
-  double Pmom_L[nParamT], Pmom_R[nParamT];
+  //double Pmom_L[nParamT], Pmom_R[nParamT];
   //for (int i=0;i<nParamT/2;i++){
-  for (int i=0;i<126;i++){
+  for (int i=0;i<252;i++){
     double par=0.;
     int p=0;
     Mmom_L >> par >> p >> p >> p >> p >> p;
     //Pmom_L[i] = par;
-    OptPar[i+126] = par;
+    OptPar[i+252] = par;
     //cout << par << endl;
     Mmom_R >> par >> p >> p >> p >> p >> p;
     //Pmom_R[i]  = par;
@@ -415,7 +422,7 @@ int main(int argc, char** argv){
       double par_ep[3];
       double par_k[3];
       //par_ep[0] = mom2[0];
-      par_ep[0] = calcf2t_4th(OptPar,
+      par_ep[0] = calcf2t_5th(OptPar,
 			      (l_x_fp[0]-XFPm)/XFPr, 
 			      (l_th_fp[0]-XpFPm)/XpFPr,
 			      (l_y_fp[0]-YFPm)/YFPr,
@@ -444,7 +451,7 @@ int main(int argc, char** argv){
       
       
       //par_k[0] = mom1[0];
-      par_k[0] = calcf2t_4th(OptPar,
+      par_k[0] = calcf2t_5th(OptPar,
 			      (r_x_fp[0]-XFPm)/XFPr, 
 			      (r_th_fp[0]-XpFPm)/XpFPr,
 			      (r_y_fp[0]-YFPm)/YFPr,
@@ -590,7 +597,7 @@ int main(int argc, char** argv){
       double par_ep[3];
       double par_k[3];
       //par_ep[0] = mom2[0];
-      par_ep[0] = calcf2t_4th(OptPar,
+      par_ep[0] = calcf2t_5th(OptPar,
 			      (l_x_fp_2[0]-XFPm)/XFPr, 
 			      (l_th_fp_2[0]-XpFPm)/XpFPr,
 			      (l_y_fp_2[0]-YFPm)/YFPr,
@@ -619,7 +626,7 @@ int main(int argc, char** argv){
       par_ep[2] = par_ep[2] * Yptr + Yptm;
       
       //par_k[0] = mom1[0];
-      par_k[0] = calcf2t_4th(OptPar,
+      par_k[0] = calcf2t_5th(OptPar,
 			      (r_x_fp_2[0]-XFPm)/XFPr, 
 			      (r_th_fp_2[0]-XpFPm)/XpFPr,
 			      (r_y_fp_2[0]-YFPm)/YFPr,
@@ -748,7 +755,7 @@ int main(int argc, char** argv){
     ofstream * ofs1 = new ofstream(tempc);
     ofstream * ofs2 = new ofstream(tempc2);
     int nppp = 0;
-    const int nn = 4; // 4th order matrix using xf, xpf, y, ypf, and zt
+    const int nn = 5; // 4th order matrix using xf, xpf, y, ypf, and zt
     for(int i=0 ; i<nn+1 ; i++){
       for(int e=0 ; e<nn+1 ; e++){
 	for(int d=0 ; d<nn+1 ; d++){
@@ -756,7 +763,7 @@ int main(int argc, char** argv){
 	    for(int b=0 ; b<nn+1 ; b++){
 	      for(int a=0 ; a<nn+1 ; a++){  
 		if(a+b+c+d+e==i){
-		  *ofs1 << OptPar[nppp+126] 
+		  *ofs1 << OptPar[nppp+252] 
 			<< " " << a 
 			<< " " << b
 			<< " " << c
@@ -935,6 +942,59 @@ double calcf2t_4th(double* P, double xf, double xpf,
 }
 
 
+//////////////////////////////////////////////////
+double calcf2t_5th(double* P, double xf, double xpf, 
+		   double yf, double ypf, double zt,
+		   int flag=0)
+//////////////////////////////////////////////////
+{
+  // ------------------------------------------------ //
+  // ----- 5th order using xf, xpf, yf, ypf, zt ----- //
+  // ------------------------------------------------ //
+  const int nMatT=5;  
+  const int nXf=5;
+  const int nXpf=5;
+  const int nYf=5;
+  const int nYpf=5;
+  const int nZt=5;
+  
+  double Y=0.;
+  double x=1.; 
+  int npar=0;
+  int a=0,b=0,c=0,d=0,e=0;
+  
+  for (int n=0;n<nMatT+1;n++){
+    for(e=0;e<n+1;e++){
+      for (d=0;d<n+1;d++){
+	for (c=0;c<n+1;c++){ 
+	  for (b=0;b<n+1;b++){
+	    for (a=0;a<n+1;a++){ 
+	      
+	      if (a+b+c+d+e==n){
+		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
+		  x = pow(xf,double(a))*pow(xpf,double(b))*
+		    pow(yf,double(c))*pow(ypf,double(d))*pow(zt,double(e));
+		}
+		else{
+		  x = 0.;
+		}
+		if(flag==2) Y += x*P[npar+252]; // LHRS
+		else Y += x*P[npar];    // RHRS
+	      npar++;
+	      }
+	      
+	    }
+	  }
+	}
+      }    
+    }
+  }
+  
+  return Y; 
+  
+}
+
+
 // #############################################################
 double tune(double* pa, int j) 
 // #############################################################
@@ -942,19 +1002,19 @@ double tune(double* pa, int j)
   double chi2 = 0.0;
   double arglist[10]; 
   int ierflg = 0;
-  int allparam = nParamT;
+  int allparam = nParamT2;
   //cout << allparam << endl;
   TMinuit* minuit = new TMinuit(allparam);
   minuit->SetFCN(fcn);
 
   double start[allparam];
   double step[allparam];
-  const int nMatT=4;  
-  const int nXf=4;
-  const int nXpf=4;
-  const int nYf=4;
-  const int nYpf=4;
-  const int nZt=2; // The number of order is reduced for test (4-->2)
+  const int nMatT=5;  
+  const int nXf=5;
+  const int nXpf=5;
+  const int nYf=5;
+  const int nYpf=5;
+  const int nZt=3; // The number of order is reduced for test (4-->3)
   //const int nZt=4;
   int npar=0;
   int a=0,b=0,c=0,d=0,e=0;
@@ -969,21 +1029,25 @@ double tune(double* pa, int j)
 		  start[npar] = pa[npar];
 		  //step[npar] = 1.0e-3; 
 		  //step[npar] = 1.0e-2; 
-		  step[npar] = 5.0e-2; 
+		  //step[npar] = 5.0e-2; 
+		  step[npar] = pa[npar] * 0.05;
 		  //step[npar] = 0.0; // no tuning for right
-		  start[npar+126] = pa[npar+126];
-		  //step[npar+126] = 1.0e-3;  
-		  //step[npar+126] = 1.0e-2;  
-		  step[npar+126] = 5.0e-2;  
-		  //step[npar+126] = 0.0; // no tuning for Left
+		  start[npar+252] = pa[npar+252];
+		  //step[npar+252] = 1.0e-3;  
+		  //step[npar+252] = 1.0e-2;  
+		  //step[npar+252] = 5.0e-2;  
+		  step[npar+252] = pa[npar+252]*0.05;  
+		  //step[npar+252] = 0.0; // no tuning for Left
+		  if(step[npar]==0) step[npar]=0.05;
+		  if(step[npar+252]==0) step[npar+252]=0.05;
 		}
 		else{
 		  start[npar] = 0.0;
 		  //start[npar] = pa[npar];
 		  step[npar] = 0.0;
-		  start[npar+126] = 0.0;
-		  //start[npar+126] = pa[npar+126];
-		  step[npar+126] = 0.0;
+		  start[npar+252] = 0.0;
+		  //start[npar+252] = pa[npar+252];
+		  step[npar+252] = 0.0;
 		}
 		npar++;
 	      }
@@ -1016,15 +1080,16 @@ double tune(double* pa, int j)
     minuit -> mnparm(i,pname,start[i],step[i],LLim[i],ULim[i],ierflg);
   }
   // ~~~~ Strategy ~~~~
-  arglist[0] = 2.0; // original
-  //arglist[0] = 1.0; // test
+  //arglist[0] = 2.0; // original
+  arglist[0] = 1.0; // test
   //arglist[0] = 0.0;   // test
   minuit->mnexcm("SET STR",arglist,1,ierflg);
   
   
   // ~~~~ Migrad + Simplex  ~~~~ 
   arglist[0] = 50000;
-  arglist[1] = 0.01;
+  //arglist[1] = 0.01; // origial
+  arglist[1] = 0.1; // origial
   minuit -> mnexcm("MINImize",arglist,2,ierflg); // Chi-square minimization
   
   double amin,edm,errdef;
@@ -1078,7 +1143,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
     double par_ep[3];
     double par_k[3];
     
-    par_ep[0] = calcf2t_4th(param,
+    par_ep[0] = calcf2t_5th(param,
 			    x2[i], xp2[i],
 			    y2[i], yp2[i],
 			    avz[i], 2);
@@ -1091,7 +1156,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
     par_ep[1] = tgang_xp2[i];
     par_ep[2] = tgang_yp2[i];
 
-    par_k[0] = calcf2t_4th(param,
+    par_k[0] = calcf2t_5th(param,
 			   x[i], xp[i],
 			   y[i], yp[i],
 			   avz[i], 1);
@@ -1134,9 +1199,9 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 //      cout << mm << " " << pcent_real[peak_flag[i]] << " " << residual 
 //	   << " " << chi2<< endl;
       chi2 = chi2 + pow(residual/sigma,2.0);
-      if(tune_id[i]==1 && peak_flag[i]==0) chi2 = chi2/nL1;
-      else if (tune_id[i]==1 && peak_flag[i]==1) chi2 = chi2/nS;
-      else chi2 = chi2/nL2;
+      //if(tune_id[i]==1 && peak_flag[i]==0) chi2 = chi2/nL1;
+      //else if (tune_id[i]==1 && peak_flag[i]==1) chi2 = chi2/nS;
+      //else chi2 = chi2/nL2;
   }
   
   //cout << chi2 << endl;
