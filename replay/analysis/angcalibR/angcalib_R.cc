@@ -1,5 +1,5 @@
 /*
-  angcalibR.cc
+  angcalib_R.cc
   This is a macro to optimize angle parameters.
   
   Toshiyuki Gogami, Feb 20, 2019
@@ -71,8 +71,8 @@ double refy[nsshole];
 //double selec_widthy = 0.45; // selection width in y 
 //double selec_widthx = 0.45;
 //double selec_widthy = 0.35;
-double selec_widthx = 0.50;
-double selec_widthy = 0.40;
+double selec_widthx = 0.45;
+double selec_widthy = 0.35;
 
 
 const int nParamT = 126;  // Number of parameters
@@ -101,7 +101,7 @@ const double hrs_ang = 13.2 * 3.14159 / 180.;
 //void angcalib(){
 int main(int argc, char** argv){
   TApplication* app = new TApplication("app", &argc, argv);
-  const int nite = 3;  // The number of tuning iteration
+  const int nite = 0;  // The number of tuning iteration
   
   // =================================== //
   // ======== General conditions ======= //
