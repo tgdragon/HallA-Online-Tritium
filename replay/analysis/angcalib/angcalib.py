@@ -22,7 +22,7 @@ def nude_start(command):
 
 def main():
     comlist = []
-    inputfile = open(runfile,"r")
+    inputfile = open(inpfile,"r")
     lines = inputfile.readlines()
     for line in lines:
         data = line.split()

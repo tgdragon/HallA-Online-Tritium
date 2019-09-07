@@ -22,8 +22,7 @@ def nude_start(command):
 
 def main():
     comlist = []
-    #inputfile = open("h2_2.dat","r")
-    inputfile = open(runfile,"r")
+    inputfile = open(inpfile,"r")
     lines = inputfile.readlines()
     for line in lines:
         data = line.split()
