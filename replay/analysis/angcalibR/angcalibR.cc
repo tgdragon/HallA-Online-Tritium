@@ -113,6 +113,10 @@ int main(int argc, char** argv){
     nite = atoi(argv[1]);
     flag = atoi(argv[2]);
   }
+  else{
+    cout << "Type ./angcalibR  #iteration  #flag(1=xp,others=yp)" << endl;
+    return 100;
+  }
   
   // =================================== //
   // ======== General conditions ======= //
