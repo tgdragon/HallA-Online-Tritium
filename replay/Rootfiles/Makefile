@@ -22,8 +22,11 @@ OBJS2 = merge_rootfiles.o
 TARGET3 = maruhadaka
 OBJS3 = maruhadaka.o
 
+TARGET4 = maruhadakaR
+OBJS4 = maruhadakaR.o
 
-all: ${TARGET1} ${TARGET2} ${TARGET3}
+
+all: ${TARGET1} ${TARGET2} ${TARGET3} ${TARGET4}
 
 ${TARGET1}: ${OBJS1}
 	${CC} ${CCFLAGS} -o $@ ${OBJS1} ${GLIBS}
@@ -39,6 +42,11 @@ ${TARGET3}: ${OBJS3}
 	${CC} ${CCFLAGS} -o $@ ${OBJS3} ${GLIBS}
 ${OBJS3}: maruhadaka.cc
 	${CC} ${CCFLAGS} -c  maruhadaka.cc ${GLIBS}
+
+${TARGET4}: ${OBJS4}
+	${CC} ${CCFLAGS} -o $@ ${OBJS4} ${GLIBS}
+${OBJS4}: maruhadakaR.cc
+	${CC} ${CCFLAGS} -c  maruhadakaR.cc ${GLIBS}
 
 
 
