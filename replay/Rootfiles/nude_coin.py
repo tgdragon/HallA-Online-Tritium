@@ -1,3 +1,4 @@
+#!/apps/python/3.4.3/bin/python3
 #!/usr/bin/python
 
 # Toshiyuki Gogami
@@ -12,17 +13,18 @@ from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures.process import ProcessPoolExecutor 
 import numpy as np
 
-nworkers=20
+nworkers=5
 #runfile = "multiF.dat"
-#runfile = "h2.dat"
+runfile = "h2.dat"
 #runfile = "h22.dat"
 #runfile = "He3.dat"
 #runfile = "T2.dat"
 #runfile = "ss.dat"
 #runfile = "Al_h22.dat"
 #runfile = "Al_h2.dat"
-runfile = "Al_He3.dat"
+#runfile = "Al_He3.dat"
 #runfile = "Al_T2.dat"
+#runfile = "ssR.dat"
 
 thisfile = "nude_coin.py"
 
@@ -37,8 +39,9 @@ def main():
     lines = inputfile.readlines()
     for line in lines:
         data = line.split()
-        #com = "./nude_coin " + data[0]+ " " +data[1]
-        com = "./maruhadaka " + data[0]+ " " +data[1] + " " +data[2] #stricter cut
+        com = "./nude_coin " + data[0]+ " " +data[1]
+        #com = "./maruhadaka " + data[0]+ " " +data[1] + " " +data[2] #stricter cut
+        #com = "./maruhadakaR " + data[0]+ " " +data[1] + " " +data[2] #stricter cut
         #com = "root -l -q \"nude3.cc(" + data[0]+ "," +data[1] + "," + str(trigflag)
         #com2 = com + ")\";"
         #call(com,shell=True)
