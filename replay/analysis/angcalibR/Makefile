@@ -13,8 +13,8 @@ CCFLAGS = $(ROOTINCLUDE)
 #LD = /home/gogami/gcc/gcc-6.3.0-install/bin/g++
 LDFLAGS = -g
 
-TARGET1 = angcalib_R
-OBJS1 = angcalib_R.o
+TARGET1 = angcalibR
+OBJS1 = angcalibR.o
 #TARGET2 = check
 #OBJS2 = check.o
 
@@ -23,8 +23,8 @@ all: ${TARGET1}
 
 ${TARGET1}: ${OBJS1}
 	${CC} ${CCFLAGS} -o $@ ${OBJS1} ${GLIBS}
-${OBJS1}: angcalib_R.cc
-	${CC} ${CCFLAGS} -c  angcalib_R.cc ${GLIBS}
+${OBJS1}: angcalibR.cc
+	${CC} ${CCFLAGS} -c  angcalibR.cc ${GLIBS}
 
 #${TARGET2}: ${OBJS2}
 #	${CC} ${CCFLAGS} -o $@ ${OBJS2} ${GLIBS}
