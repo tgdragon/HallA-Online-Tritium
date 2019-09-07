@@ -41,12 +41,17 @@ extern double calcf2t_plen(double* P,
 			   double yf, double ypf);
 extern double calcf2t_4th_2(double* P, double xf, double xpf, 
 			    double yf, double ypf, double zt);
+extern double calcf2t_5th(double*,
+			  double, double, 
+			  double, double,  
+			  double);
 extern double Calc_FPcor(double* val, double* par);
 extern double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt);
 
-const int nParamT=35;     // Fo
+const int nParamT=35;     // 
 //double Plen_opt[nParamT]; // For path length matrix (3rd order)
 const int nParamT_4=126;  // For xpt, ypt with z (4th order)
+const int nParamT_5=254;  // For xpt, ypt with z (5th order)
 
 const int npar_rtime_ycor = 2;
 double par_rtime_ycor[npar_rtime_ycor];
@@ -439,7 +444,8 @@ int main(int argc, char** argv){
   Myp_L.close();
   
   char name_Mxp_R[500];
-  sprintf(name_Mxp_R,"matrices/xpt_RHRS_4_sample.dat");
+  //sprintf(name_Mxp_R,"matrices/xpt_RHRS_4_sample.dat");
+  sprintf(name_Mxp_R,"matrices/xpt_RHRS_4_upto2.dat");
   ifstream Mxp_R(name_Mxp_R);
   double Pxp_R[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
@@ -452,7 +458,8 @@ int main(int argc, char** argv){
   Mxp_R.close();
   
   char name_Myp_R[500];
-  sprintf(name_Myp_R,"matrices/ypt_RHRS_4_sample.dat");
+  //sprintf(name_Myp_R,"matrices/ypt_RHRS_4_sample.dat");
+  sprintf(name_Myp_R,"matrices/ypt_RHRS_4_upto2.dat");
   ifstream Myp_R(name_Myp_R);
   double Pyp_R[nParamT_4];
   for (int i=0;i<nParamT_4;i++){
@@ -464,10 +471,10 @@ int main(int argc, char** argv){
   Myp_R.close();
   
   char name_Mmom_L[500];
-  sprintf(name_Mmom_L,"matrices/mom_LHRS_4_sample.dat");
+  sprintf(name_Mmom_L,"matrices/mom_LHRS_5_upto2.dat");
   ifstream Mmom_L(name_Mmom_L);
-  double Pmom_L[nParamT_4];
-  for (int i=0;i<nParamT_4;i++){
+  double Pmom_L[nParamT_5];
+  for (int i=0;i<nParamT_5;i++){
     double par=0.;
     int p=0;
     Mmom_L >> par >> p >> p >> p >> p >> p; 
@@ -476,10 +483,10 @@ int main(int argc, char** argv){
   Mmom_L.close();
   
   char name_Mmom_R[500];
-  sprintf(name_Mmom_R,"matrices/mom_RHRS_4_sample.dat");
+  sprintf(name_Mmom_R,"matrices/mom_RHRS_5_upto2.dat");
   ifstream Mmom_R(name_Mmom_R);
-  double Pmom_R[nParamT_4];
-  for (int i=0;i<nParamT_4;i++){
+  double Pmom_R[nParamT_5];
+  for (int i=0;i<nParamT_5;i++){
     double par=0.;
     int p=0;
     Mmom_R >> par >> p >> p >> p >> p >> p; 
@@ -744,7 +751,8 @@ int main(int argc, char** argv){
 	double vzt = (vz_mean[0] - Ztm)/Ztr;
 	
 	// --- Left ---
-	mom2_own[0] = calcf2t_4th_2(Pmom_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
+	//mom2_own[0] = calcf2t_4th_2(Pmom_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
+	mom2_own[0] = calcf2t_5th(Pmom_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
 	th2[0]  = calcf2t_4th_2(Pxp_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
 	ph2[0]  = calcf2t_4th_2(Pyp_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
 	
@@ -765,7 +773,8 @@ int main(int argc, char** argv){
 	}
 	
 	// --- Right ---
-	mom1_own[0] = calcf2t_4th_2(Pmom_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
+	//mom1_own[0] = calcf2t_4th_2(Pmom_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
+	mom1_own[0] = calcf2t_5th(Pmom_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
 	th1_own[0]  = calcf2t_4th_2(Pxp_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
 	ph1_own[0]  = calcf2t_4th_2(Pyp_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
 	
@@ -784,12 +793,12 @@ int main(int argc, char** argv){
 	double par_k[3];
 	
 	par_ep[0] = mom2_own[0];
-	par_ep[1] = th2[0];
-	par_ep[2] = -ph2[0] - hrs_ang;
+	par_ep[1] = th2[0]; // right handed system
+	par_ep[2] = ph2[0]; // right handed system
 	
 	par_k[0]  = mom1_own[0];
-	par_k[1]  = th1_own[0];
-	par_k[2]  = ph1_own[0] + hrs_ang;
+	par_k[1]  = th1_own[0]; // right handed system
+	par_k[2]  = ph1_own[0]; // right handed system
 	
 	// ---- 400 um thick target -----
 	double dpe  = 184.3e-6; // GeV/c
@@ -997,6 +1006,56 @@ double calcf2t_4th_2(double* P, double xf, double xpf,
   
 }
 
+//////////////////////////////////////////////////
+double calcf2t_5th(double* P, double xf, double xpf, 
+		   double yf, double ypf, double zt)
+//////////////////////////////////////////////////
+{
+  // ------------------------------------------------ //
+  // ----- 5th order using xf, xpf, yf, ypf, zt ----- //
+  // ------------------------------------------------ //
+  const int nMatT=5;  
+  const int nXf=5;
+  const int nXpf=5;
+  const int nYf=5;
+  const int nYpf=5;
+  const int nZt=5;
+  
+  double Y=0.;
+  double x=1.; 
+  int npar=0;
+  int a=0,b=0,c=0,d=0,e=0;
+  
+  for (int n=0;n<nMatT+1;n++){
+    for(e=0;e<n+1;e++){
+      for (d=0;d<n+1;d++){
+	for (c=0;c<n+1;c++){ 
+	  for (b=0;b<n+1;b++){
+	    for (a=0;a<n+1;a++){ 
+	      
+	      if (a+b+c+d+e==n){
+		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
+		  x = pow(xf,double(a))*pow(xpf,double(b))*
+		    pow(yf,double(c))*pow(ypf,double(d))*pow(zt,double(e));
+		}
+		else{
+		  x = 0.;
+		}
+		Y += x*P[npar];  
+		npar++;
+	      }
+	      
+	    }
+	  }
+	}
+      }    
+    }
+  }
+  
+  return Y; 
+  
+}
+
 
 double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
   
@@ -1012,6 +1071,7 @@ double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
   px_ep = xpep * pz_ep;
   py_ep = ypep * pz_ep;
   TVector3 vec_ep (px_ep, py_ep, pz_ep);
+  vec_ep.RotateY(hrs_ang);
   //double Eep = sqrt(vec_ep * vec_ep);
   double Eep = sqrt(pep*pep + me*me);
   
@@ -1023,6 +1083,7 @@ double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
   px_k = xpk * pz_k;
   py_k = ypk * pz_k;
   TVector3 vec_k (px_k, py_k, pz_k);
+  vec_k.RotateY(-hrs_ang);
   //double Ek = sqrt(vec_k * vec_k);
   double Ek = sqrt(pk*pk + mk*mk);
   
