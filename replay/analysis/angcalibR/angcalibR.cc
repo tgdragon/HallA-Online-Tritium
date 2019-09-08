@@ -106,7 +106,10 @@ int main(int argc, char** argv){
   
   int nite = 0; // The number of tuning iteration
   int flag = 1; // (tuning flag; 1=xp, others=yp)
-  if(argc==2){
+  if(argc==1){
+    cout << " nite=0; no tning" << endl;
+  }
+  else if(argc==2){
     nite = atoi(argv[1]);
   }
   else if(argc>2){
@@ -194,12 +197,12 @@ int main(int argc, char** argv){
   
 
   char name_Mxt_R[500], name_Myt_R[500];
-  sprintf(name_Mxt_R,"../matrices/xpt_RHRS_4.dat");
-  sprintf(name_Myt_R,"../matrices/ypt_RHRS_4.dat");
+  //sprintf(name_Mxt_R,"../matrices/xpt_RHRS_4.dat");
+  //sprintf(name_Myt_R,"../matrices/ypt_RHRS_4.dat");
   //sprintf(name_Mxt_R,"./sample_matrix/newpar_xpt_1.dat"); // Better matrix
   //sprintf(name_Myt_R,"./sample_matrix/newpar_ypt_1.dat"); // Better matrix
-  //sprintf(name_Mxt_R,"./newpar_xpt_2.dat");
-  //sprintf(name_Myt_R,"./newpar_ypt_2.dat");
+  sprintf(name_Mxt_R,"./newpar_xpt_2.dat");
+  sprintf(name_Myt_R,"./newpar_ypt_2.dat");
   ifstream Mxt_R(name_Mxt_R);
   ifstream Myt_R(name_Myt_R);
   double Pxt_R[nParamT], Pyt_R[nParamT];
@@ -356,11 +359,11 @@ int main(int argc, char** argv){
 	  //if(offset_flag[j]==true){ 
 	  if(offset_flag[j]==true || offset_flag[j]==false){ // (in case you don't need scale+offset for event selection)
 	    
-	    ssx = (ssx + offs_xp[j])*scal_xp[j]*1.08;
-	    if(ssy>0){
-	      ssy = (ssy + offs_yp[j])*scal_yp[j]*1.02;
-	    }
-	    else  ssy =(ssy + offs_yp[j])*scal_yp[j]*1.1;
+	    //ssx = (ssx + offs_xp[j])*scal_xp[j]*1.08;
+	    //if(ssy>0){
+	    //  ssy = (ssy + offs_yp[j])*scal_yp[j]*1.02;
+	    //}
+	    //else  ssy =(ssy + offs_yp[j])*scal_yp[j]*1.1;
 	    
 	    
 	    //if (ssy>0) ssx = ssx * 1.08;
