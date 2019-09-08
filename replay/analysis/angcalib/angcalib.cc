@@ -359,11 +359,11 @@ int main(int argc, char** argv){
 	  //if(offset_flag[j]==true){ 
 	  if(offset_flag[j]==true || offset_flag[j]==false){ // (in case you don't need scale+offset for event selection)
 	    
-	    ssx = (ssx + offs_xp[j])*scal_xp[j]*1.05;
-	    if(ssy>0){
-	      ssy = (ssy + offs_yp[j])*scal_yp[j]*1.08;
-	    }
-	    else  ssy =(ssy + offs_yp[j])*scal_yp[j]*1.05;
+	    //ssx = (ssx + offs_xp[j])*scal_xp[j]*1.05;
+	    //if(ssy>0){
+	    //  ssy = (ssy + offs_yp[j])*scal_yp[j]*1.08;
+	    //}
+	    //else  ssy =(ssy + offs_yp[j])*scal_yp[j]*1.05;
 	    
 	    
 	    //if (ssy>0) ssx = ssx * 1.08;
