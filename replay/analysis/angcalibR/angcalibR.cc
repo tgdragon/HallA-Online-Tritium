@@ -107,7 +107,7 @@ int main(int argc, char** argv){
   int nite = 0; // The number of tuning iteration
   int flag = 1; // (tuning flag; 1=xp, others=yp)
   if(argc==1){
-    cout << " nite=0; no tning" << endl;
+    cout << " nite=0; no tuning" << endl;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
