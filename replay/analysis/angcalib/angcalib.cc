@@ -68,8 +68,10 @@ double ssy_cent_real[nrow];
 double ssx_cent_real[ncol];
 double refx[nsshole];
 double refy[nsshole];
-double selec_widthx = 0.60; // selection width in x (dispersive plane)
-double selec_widthy = 0.45; // selection width in y 
+//double selec_widthx = 0.60; // selection width in x (dispersive plane)
+//double selec_widthy = 0.45; // selection width in y
+double selec_widthx = 0.65; // selection width in x (dispersive plane)
+double selec_widthy = 0.5; // selection width in y 
 //double selec_widthx = 0.45;
 //double selec_widthy = 0.35;
 //double selec_widthx = 0.50;
@@ -359,11 +361,11 @@ int main(int argc, char** argv){
 	  //if(offset_flag[j]==true){ 
 	  if(offset_flag[j]==true || offset_flag[j]==false){ // (in case you don't need scale+offset for event selection)
 	    
-	    //ssx = (ssx + offs_xp[j])*scal_xp[j]*1.05;
-	    //if(ssy>0){
-	    //  ssy = (ssy + offs_yp[j])*scal_yp[j]*1.08;
-	    //}
-	    //else  ssy =(ssy + offs_yp[j])*scal_yp[j]*1.05;
+	    ssx = (ssx + offs_xp[j])*scal_xp[j]*1.05;
+	    if(ssy>0){
+	      ssy = (ssy + offs_yp[j])*scal_yp[j]*1.05;
+	    }
+	    else  ssy =(ssy + offs_yp[j])*scal_yp[j]*1.05;
 	    
 	    
 	    //if (ssy>0) ssx = ssx * 1.08;
@@ -686,7 +688,8 @@ double tune(double* pa, int j, int angflag)
 	      if (a+b+c+d+e==n){
 		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
 		  start[npar] = pa[npar];
-		  step[npar] = 1.0e-3;  
+		  //step[npar] = 1.0e-3;
+		  step[npar] = pa[npar] * 5.0e-2;  
 		}
 		else{
 		  start[npar] = 0.0;
