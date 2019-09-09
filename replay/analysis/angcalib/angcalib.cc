@@ -206,10 +206,10 @@ int main(int argc, char** argv){
   //sprintf(name_Myt_R,"../matrices/ypt_LHRS_4.dat");
   //sprintf(name_Mxt_R,"./sample_matrix/newpar_xpt_1.dat"); // Better matrix
   //sprintf(name_Myt_R,"./sample_matrix/newpar_ypt_1.dat"); // Better matrix
-  sprintf(name_Mxt_R,"./newpar/newpar_xpt_4.dat");
-  sprintf(name_Myt_R,"./newpar/newpar_ypt_1.dat");
-  //sprintf(name_Mxt_R,"./newpar_xpt_2.dat");
-  //sprintf(name_Myt_R,"./newpar_ypt_2.dat");
+  //sprintf(name_Mxt_R,"./newpar/newpar_xpt_4.dat");
+  //sprintf(name_Myt_R,"./newpar/newpar_ypt_1.dat");
+  sprintf(name_Mxt_R,"./newpar_xpt_0.dat");
+  sprintf(name_Myt_R,"./newpar_ypt_0.dat");
   ifstream Mxt_R(name_Mxt_R);
   ifstream Myt_R(name_Myt_R);
   double Pxt_R[nParamT], Pyt_R[nParamT];
@@ -358,13 +358,14 @@ int main(int argc, char** argv){
 	   && Zt[0]<fcent[j]+selection_width){
 	  
 	  
-	  ssy = l[j]*sin(atan(-Ypt[0]))/cos(dth[j]+atan(-Ypt[0]));
+	  //ssy = l[j]*sin(atan(-Ypt[0]))/cos(dth[j]+atan(-Ypt[0])); // RHRS
+	  ssy = l[j]*sin(atan(-Ypt[0]))/cos(dth[j]-atan(-Ypt[0])); // LHRS
 	  //ssx = -Xpt[0]*l[j];
 	  double l2=0.0;
 	  if(ssy>0){
-	    l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)+2.0*l[j]*sin(dth[j]));
+	    l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)-2.0*l[j]*sin(dth[j]));
 	  }
-	  else l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)-2.0*l[j]*sin(dth[j]));
+	  else l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)+2.0*l[j]*sin(dth[j]));
 	  ssx = -Xpt[0]*l2;
 	  
 	  h2[j]->Fill(ssy,ssx);
@@ -817,11 +818,11 @@ void fcn1(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
     double l2=0.0;
     if(ssy>0){
       l2 = sqrt(pow(l[foil_flag[i]],2.0)+pow(ssy,2.0)
-		+2.0*l[foil_flag[i]]*sin(dth[foil_flag[i]]));
+		-2.0*l[foil_flag[i]]*sin(dth[foil_flag[i]]));
     }
     else {
       l2 = sqrt(pow(l[foil_flag[i]],2.0)+pow(ssy,2.0)
-		-2.0*l[foil_flag[i]]*sin(dth[foil_flag[i]]));
+		+2.0*l[foil_flag[i]]*sin(dth[foil_flag[i]]));
     }
     sspos = ang * l2; // in centimeter
     
@@ -906,7 +907,8 @@ void fcn2(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
 			ztR);
     ang = -1.0 * (ang * Yptr +Yptm);
     //sspos = -ang*l[foil_flag[i]]*projectf[foil_flag[i]]; // in centimeter
-    sspos = l[foil_flag[i]] *sin(atan(ang))/cos(dth[foil_flag[i]]+atan(ang));
+    //sspos = l[foil_flag[i]] *sin(atan(ang))/cos(dth[foil_flag[i]]+atan(ang)); // RHRS
+    sspos = l[foil_flag[i]] *sin(atan(ang))/cos(dth[foil_flag[i]]-atan(ang)); // LHRS
     
     // ------------------- //
     // --- Residual ------ //
