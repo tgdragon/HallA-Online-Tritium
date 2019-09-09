@@ -363,9 +363,9 @@ int main(int argc, char** argv){
 	  //ssx = -Xpt[0]*l[j];
 	  double l2=0.0;
 	  if(ssy>0){
-	    l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)-2.0*l[j]*sin(dth[j]));
+	    l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)-2.0*ssy*l[j]*sin(dth[j]));
 	  }
-	  else l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)+2.0*l[j]*sin(dth[j]));
+	  else l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)+2.0*ssy*l[j]*sin(dth[j]));
 	  ssx = -Xpt[0]*l2;
 	  
 	  h2[j]->Fill(ssy,ssx);
@@ -702,7 +702,7 @@ double tune(double* pa, int j, int angflag)
 		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
 		  start[npar] = pa[npar];
 		  //step[npar] = 1.0e-3;
-		  step[npar] = pa[npar] * 5.0e-2;  
+		  step[npar] = pa[npar] * 5.0e-3;  
 		}
 		else{
 		  start[npar] = 0.0;
@@ -818,11 +818,11 @@ void fcn1(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
     double l2=0.0;
     if(ssy>0){
       l2 = sqrt(pow(l[foil_flag[i]],2.0)+pow(ssy,2.0)
-		-2.0*l[foil_flag[i]]*sin(dth[foil_flag[i]]));
+		-2.0*l[foil_flag[i]]*ssy*sin(dth[foil_flag[i]]));
     }
     else {
       l2 = sqrt(pow(l[foil_flag[i]],2.0)+pow(ssy,2.0)
-		+2.0*l[foil_flag[i]]*sin(dth[foil_flag[i]]));
+		+2.0*l[foil_flag[i]]*ssy*sin(dth[foil_flag[i]]));
     }
     sspos = ang * l2; // in centimeter
     
