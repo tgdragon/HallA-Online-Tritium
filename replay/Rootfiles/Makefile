@@ -25,8 +25,12 @@ OBJS3 = maruhadaka.o
 TARGET4 = maruhadakaR
 OBJS4 = maruhadakaR.o
 
+TARGET5 = maruhadakaL
+OBJS5 = maruhadakaL.o
 
-all: ${TARGET1} ${TARGET2} ${TARGET3} ${TARGET4}
+
+
+all: ${TARGET1} ${TARGET2} ${TARGET3} ${TARGET4} ${TARGET5}
 
 ${TARGET1}: ${OBJS1}
 	${CC} ${CCFLAGS} -o $@ ${OBJS1} ${GLIBS}
@@ -47,6 +51,11 @@ ${TARGET4}: ${OBJS4}
 	${CC} ${CCFLAGS} -o $@ ${OBJS4} ${GLIBS}
 ${OBJS4}: maruhadakaR.cc
 	${CC} ${CCFLAGS} -c  maruhadakaR.cc ${GLIBS}
+
+${TARGET5}: ${OBJS5}
+	${CC} ${CCFLAGS} -o $@ ${OBJS5} ${GLIBS}
+${OBJS5}: maruhadakaL.cc
+	${CC} ${CCFLAGS} -c  maruhadakaL.cc ${GLIBS}
 
 
 
