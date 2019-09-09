@@ -1,5 +1,5 @@
 /*
-  angcalibR.cc
+  angcalibR.cc (RHRS)
   This is a macro to optimize angle parameters.
   
   Toshiyuki Gogami, Feb 20, 2019
@@ -69,11 +69,13 @@ double ssx_cent_real[ncol];
 double refx[nsshole];
 double refy[nsshole];
 //double selec_widthx = 0.60; // selection width in x (dispersive plane)
-//double selec_widthy = 0.45; // selection width in y 
+//double selec_widthy = 0.45; // selection width in y
+//double selec_widthx = 0.65; // selection width in x (dispersive plane)
+//double selec_widthy = 0.5; // selection width in y 
 //double selec_widthx = 0.45;
 //double selec_widthy = 0.35;
 double selec_widthx = 0.50;
-double selec_widthy = 0.40;
+double selec_widthy = 0.35;
 
 
 const int nParamT = 126;  // Number of parameters
@@ -85,12 +87,15 @@ double z_recon[nmax]; // reconstructed z position
 int foil_flag[nmax];  
 int ntune_event = 0;
 int holegroup[nmax];
+double y_at_ss[nmax];
 
 double l[nfoil];
+//double l2[nfoil];
 double dth[nfoil];
 //double projectf[nfoil];
 double OptPar1[nParamT];
 double OptPar2[nParamT];
+
 
 //const int nParamT2 = 4; 
 //double parRaster[nParamT2];
@@ -107,7 +112,7 @@ int main(int argc, char** argv){
   int nite = 0; // The number of tuning iteration
   int flag = 1; // (tuning flag; 1=xp, others=yp)
   if(argc==1){
-    cout << " nite=0; no tuning" << endl;
+    cout << " nite=0: no tuning" << endl;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
@@ -197,10 +202,10 @@ int main(int argc, char** argv){
   
 
   char name_Mxt_R[500], name_Myt_R[500];
-  //sprintf(name_Mxt_R,"../matrices/xpt_RHRS_4.dat");
-  //sprintf(name_Myt_R,"../matrices/ypt_RHRS_4.dat");
-  //sprintf(name_Mxt_R,"./sample_matrix/newpar_xpt_1.dat"); // Better matrix
-  //sprintf(name_Myt_R,"./sample_matrix/newpar_ypt_1.dat"); // Better matrix
+  //sprintf(name_Mxt_R,"../matrices/xpt_LHRS_4.dat");
+  //sprintf(name_Myt_R,"../matrices/ypt_LHRS_4.dat");
+  //sprintf(name_Mxt_R,"./newpar/newpar_xpt_1.dat"); 
+  //sprintf(name_Myt_R,"./newpar/newpar_ypt_1.dat"); 
   sprintf(name_Mxt_R,"./newpar_xpt_2.dat");
   sprintf(name_Myt_R,"./newpar_ypt_2.dat");
   ifstream Mxt_R(name_Mxt_R);
@@ -350,20 +355,27 @@ int main(int argc, char** argv){
 	if(fcent[j]-selection_width<Zt[0]
 	   && Zt[0]<fcent[j]+selection_width){
 	  
-	  //h2[j]->Fill(-Ypt[0]*l[j]*projectf[j],-Xpt[0]*l[j]*projectf[j]);
-	  //h2[j]->Fill(-Ypt[0]*l[j]*projectf[j],-Xpt[0]*l[j]*projectf[j]);
-	  ssx = -Xpt[0]*l[j];
-	  ssy = l[j]*sin(atan(-Ypt[0]))/cos(dth[j]+atan(-Ypt[0]));
+	  
+	  ssy = l[j]*sin(atan(-Ypt[0]))/cos(dth[j]+atan(-Ypt[0])); // RHRS
+	  //ssy = l[j]*sin(atan(-Ypt[0]))/cos(dth[j]-atan(-Ypt[0])); // LHRS
+	  //ssx = -Xpt[0]*l[j];
+	  double l2=0.0;
+	  if(ssy>0){
+	    l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)+2.0*l[j]*sin(dth[j]));
+	  }
+	  else l2 = sqrt(pow(l[j],2.0)+pow(ssy,2.0)-2.0*l[j]*sin(dth[j]));
+	  ssx = -Xpt[0]*l2;
+	  
 	  h2[j]->Fill(ssy,ssx);
 	  
 	  //if(offset_flag[j]==true){ 
 	  if(offset_flag[j]==true || offset_flag[j]==false){ // (in case you don't need scale+offset for event selection)
 	    
-	    //ssx = (ssx + offs_xp[j])*scal_xp[j]*1.08;
+	    //ssx = (ssx + offs_xp[j])*scal_xp[j]*1.05;
 	    //if(ssy>0){
-	    //  ssy = (ssy + offs_yp[j])*scal_yp[j]*1.02;
+	    //  ssy = (ssy + offs_yp[j])*scal_yp[j]*1.05;
 	    //}
-	    //else  ssy =(ssy + offs_yp[j])*scal_yp[j]*1.1;
+	    //else  ssy =(ssy + offs_yp[j])*scal_yp[j]*1.05;
 	    
 	    
 	    //if (ssy>0) ssx = ssx * 1.08;
@@ -392,6 +404,7 @@ int main(int argc, char** argv){
 	    //foil_flag[ntune_event] = j;
 	    foil_flag[ntune_event] = foilg_temp;
 	    holegroup[ntune_event] = holeg_temp;
+	    y_at_ss[ntune_event] = ssy;
 	    x[ntune_event]  = XFP[0];  // scaled 
 	    y[ntune_event]  = YFP[0];  // scaled
 	    xp[ntune_event] = XpFP[0]; // scaled
@@ -686,7 +699,8 @@ double tune(double* pa, int j, int angflag)
 	      if (a+b+c+d+e==n){
 		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
 		  start[npar] = pa[npar];
-		  step[npar] = 1.0e-3;  
+		  //step[npar] = 1.0e-3;
+		  step[npar] = pa[npar] * 5.0e-2;  
 		}
 		else{
 		  start[npar] = 0.0;
@@ -770,6 +784,7 @@ void fcn1(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
   double nev[nfoil][nsshole];
   double chi2[nfoil][nsshole];
   double w[nfoil][nsshole];
+  double ssy;
 
   
   for(int i=0 ; i<nfoil ; i++){
@@ -786,6 +801,7 @@ void fcn1(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
     sspos  = 0.0;
     refpos = 0.0;  refpos = refx[holegroup[i]];
     ztR    = 0.0;  ztR    = z_recon[i];
+    ssy = y_at_ss[i];
     
     //if(foil_flag[i]==i) nev[i]++;
 
@@ -796,7 +812,17 @@ void fcn1(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
 			ztR);
     ang = -1.0 * (ang * Xptr +Xptm);
     //sspos = -ang*l[foil_flag[i]]*projectf[foil_flag[i]]; // in centimeter
-    sspos = ang * l[foil_flag[i]]; // in centimeter
+    //sspos = ang * l[foil_flag[i]]; // in centimeter
+    double l2=0.0;
+    if(ssy>0){
+      l2 = sqrt(pow(l[foil_flag[i]],2.0)+pow(ssy,2.0)
+		+2.0*l[foil_flag[i]]*sin(dth[foil_flag[i]]));
+    }
+    else {
+      l2 = sqrt(pow(l[foil_flag[i]],2.0)+pow(ssy,2.0)
+		-2.0*l[foil_flag[i]]*sin(dth[foil_flag[i]]));
+    }
+    sspos = ang * l2; // in centimeter
     
     // ------------------- //
     // --- Residual ------ //
@@ -879,7 +905,8 @@ void fcn2(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
 			ztR);
     ang = -1.0 * (ang * Yptr +Yptm);
     //sspos = -ang*l[foil_flag[i]]*projectf[foil_flag[i]]; // in centimeter
-    sspos = l[foil_flag[i]] *sin(atan(ang))/cos(dth[foil_flag[i]]+atan(ang));
+    sspos = l[foil_flag[i]] *sin(atan(ang))/cos(dth[foil_flag[i]]+atan(ang)); // RHRS
+    //sspos = l[foil_flag[i]] *sin(atan(ang))/cos(dth[foil_flag[i]]-atan(ang)); // LHRS
     
     // ------------------- //
     // --- Residual ------ //
