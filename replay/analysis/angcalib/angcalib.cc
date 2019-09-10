@@ -68,10 +68,10 @@ double ssy_cent_real[nrow];
 double ssx_cent_real[ncol];
 double refx[nsshole];
 double refy[nsshole];
-//double selec_widthx = 0.60; // selection width in x (dispersive plane)
-//double selec_widthy = 0.45; // selection width in y
-double selec_widthx = 0.65; // selection width in x (dispersive plane)
-double selec_widthy = 0.5; // selection width in y 
+double selec_widthx = 0.60; // selection width in x (dispersive plane)
+double selec_widthy = 0.45; // selection width in y
+//double selec_widthx = 0.65; // selection width in x (dispersive plane)
+//double selec_widthy = 0.5; // selection width in y 
 //double selec_widthx = 0.45;
 //double selec_widthy = 0.35;
 //double selec_widthx = 0.50;
@@ -381,6 +381,7 @@ int main(int argc, char** argv){
 	    
 	    
 	    //if (ssy>0) ssx = ssx * 1.08;
+	    if (ssx>5.5) ssy = ssy - 0.2;
 
 	    //if(j==8) ssy = ssy * 1.08;  // for second parameters
 	    //if(j==9) ssy = ssy * 1.126; // for second parameters
@@ -843,7 +844,8 @@ void fcn1(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
     for(int j=0 ; j<nsshole ; j++){
       
       //if(nev[i][j]>0){
-      if(nev[i][j]>5){ 
+      //if(nev[i][j]>10){
+      if(nev[i][j]>20){ 
       //if(nev[i][j]>50){ // using only holes with more than 50 events
 	//chi2[i][j] = chi2[i][j]/(nev[i][j]-126.0)/pow(sigma,2.0);
 	chi2[i][j] = chi2[i][j]/pow(sigma,2.0);
@@ -928,7 +930,8 @@ void fcn2(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*
       
       //if(nev[i][j]>0){
       //if(nev[i][j]>10){ 
-      if(nev[i][j]>5){ // using only holes with more than 50 events
+      //if(nev[i][j]>5){ // using only holes with more than 5 events
+      if(nev[i][j]>20){ //
 	//chi2[i][j] = chi2[i][j]/(nev[i][j]-126.0)/pow(sigma,2.0);
 	chi2[i][j] = chi2[i][j]/pow(sigma,2.0);
       }
