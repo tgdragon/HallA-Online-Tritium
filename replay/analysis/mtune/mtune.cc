@@ -421,9 +421,9 @@ int main(int argc, char** argv){
     
     if(fabs(rvz[0]-lvz[0])<0.05
        //&& fabs(vz_mean[0])<0.1
-       && fabs(vz_mean[0])<0.07
-       && a1 < 0.5
-       && a2 >3.0
+       && fabs(vz_mean[0])<0.08
+       && a1 < 3.0
+       && a2 > 2.0
        && a2 < 18.0
        && l_cer>1500.0
        && fabs(ctime[0])<1.0 ){
@@ -596,9 +596,9 @@ int main(int argc, char** argv){
     
     if(fabs(rvz_2[0]-lvz_2[0])<0.05
        //&& fabs(vz_mean_2[0])<0.1
-       && fabs(vz_mean_2[0])<0.07
-       && a1_2 < 0.5
-       && a2_2 >3.0
+       && fabs(vz_mean_2[0])<0.08
+       && a1_2 < 3.0
+       && a2_2 > 2.0
        && a2_2 < 18.0
        && l_cer_2>1500.0
        && fabs(ctime_2[0])<1.0 ){
