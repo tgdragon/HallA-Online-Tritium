@@ -94,21 +94,32 @@ const double hrs_ang = 13.2 * 3.14159 / 180.;
 int main(int argc, char** argv){
   TApplication* app = new TApplication("app", &argc, argv);
   int nite = 0;  // The number of tuning iteration
-  char RootFileName[500];
+  char RootFileName1[500];
+  char RootFileName2[500];
   if(argc==1){
-    sprintf(RootFileName,"h2_20190803.root");
+    cout << " nite=0; no tuning" << endl;
+    sprintf(RootFileName1,"h2_20190803.root");
+    sprintf(RootFileName2,"h22_20190803.root");
     nite = 0;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
+    sprintf(RootFileName1,"h2_20190803.root");
+    sprintf(RootFileName2,"h22_20190803.root");
   }
   else if(argc==3){
     nite = atoi(argv[1]);
-    sprintf(RootFileName,"%s",argv[2]);
+    sprintf(RootFileName1,"h2_20190803.root");
+    sprintf(RootFileName2,"%s",argv[2]);
   }
-  else{
-    cout << " Please type " << endl;
-    cout << " ./momcalib (ROOTFIILE) (NITE)" << endl;
+  else if(argc==4){
+    nite = atoi(argv[1]);
+    sprintf(RootFileName1,"%s",argv[2]);
+    sprintf(RootFileName2,"%s",argv[3]);
+  }
+  else if (argc==5){
+    cout << " Please type as follows " << endl;
+    cout << " ./momcalib  (NITE) (ROOTFILE1) (ROOTFILE2)" << endl;
     return 99;
   }
 
@@ -123,9 +134,9 @@ int main(int argc, char** argv){
   // ======================================== //
   // ======= Opening a ROOT file ============ //
   // ======================================== //
-  TFile* f1 = new TFile("h2_20190803.root");
+  TFile* f1 = new TFile(RootFileName1);
   TTree* t1 = (TTree*)f1->Get("tree");
-  TFile* f2 = new TFile("h22_20190803.root");
+  TFile* f2 = new TFile(RootFileName2);
   TTree* t2 = (TTree*)f2->Get("tree");
   //Double_t trig1;
   double ent = t1->GetEntries();
@@ -1030,13 +1041,15 @@ double tune(double* pa, int j)
 		  //step[npar] = 1.0e-3; 
 		  //step[npar] = 1.0e-2; 
 		  //step[npar] = 5.0e-2; 
-		  step[npar] = pa[npar] * 0.05;
+		  //step[npar] = pa[npar] * 0.05; // Sep2019
+		  step[npar] = pa[npar] * 5.0e-3; 
 		  //step[npar] = 0.0; // no tuning for right
 		  start[npar+252] = pa[npar+252];
 		  //step[npar+252] = 1.0e-3;  
 		  //step[npar+252] = 1.0e-2;  
 		  //step[npar+252] = 5.0e-2;  
-		  step[npar+252] = pa[npar+252]*0.05;  
+		  //step[npar+252] = pa[npar+252]*0.05; // Sep2019
+		  step[npar+252] = pa[npar+252]*5.0e-3;  
 		  //step[npar+252] = 0.0; // no tuning for Left
 		  if(step[npar]==0) step[npar]=0.05;
 		  if(step[npar+252]==0) step[npar+252]=0.05;
@@ -1080,8 +1093,8 @@ double tune(double* pa, int j)
     minuit -> mnparm(i,pname,start[i],step[i],LLim[i],ULim[i],ierflg);
   }
   // ~~~~ Strategy ~~~~
-  //arglist[0] = 2.0; // original
-  arglist[0] = 1.0; // test
+  arglist[0] = 2.0; // original
+  //arglist[0] = 1.0; // test
   //arglist[0] = 0.0;   // test
   minuit->mnexcm("SET STR",arglist,1,ierflg);
   
@@ -1089,7 +1102,8 @@ double tune(double* pa, int j)
   // ~~~~ Migrad + Simplex  ~~~~ 
   arglist[0] = 50000;
   //arglist[1] = 0.01; // origial
-  arglist[1] = 0.1; // origial
+  arglist[1] = 0.02; // 
+  //arglist[1] = 0.1; // 
   minuit -> mnexcm("MINImize",arglist,2,ierflg); // Chi-square minimization
   
   double amin,edm,errdef;
@@ -1196,9 +1210,18 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
       //   << par_ep[0] << " " << par_ep[1] << " " << par_ep[2] << " "
       //   << par_k[0] << " "  << par_k[1]  << " " << par_k[2] << endl;
       residual = mm - pcent_real[(int)peak_flag[i]];
-//      cout << mm << " " << pcent_real[peak_flag[i]] << " " << residual 
-//	   << " " << chi2<< endl;
-      chi2 = chi2 + pow(residual/sigma,2.0);
+      //      cout << mm << " " << pcent_real[peak_flag[i]] << " " << residual 
+      //	   << " " << chi2<< endl;
+
+      double w = 1.0;
+      if (tune_id[i]==1 && peak_flag[i]==1){ // Sigma0 with H kinematics
+	w = 7.0;
+	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
+      }
+      else if (tune_id[i]==2){ // Lambda with T kinematics
+	w = 2.0;
+	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
+      }
       //if(tune_id[i]==1 && peak_flag[i]==0) chi2 = chi2/nL1;
       //else if (tune_id[i]==1 && peak_flag[i]==1) chi2 = chi2/nS;
       //else chi2 = chi2/nL2;
