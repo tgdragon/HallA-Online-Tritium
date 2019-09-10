@@ -1214,7 +1214,11 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
       //	   << " " << chi2<< endl;
 
       double w = 1.0;
-      if (tune_id[i]==1 && peak_flag[i]==1){ // Sigma0 with H kinematics
+      if      (tune_id[i]==1 && peak_flag[i]==0){ // Lambda with H kinematics
+	w = 1.0;
+	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
+      }
+      else if (tune_id[i]==1 && peak_flag[i]==1){ // Sigma0 with H kinematics
 	w = 7.0;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
