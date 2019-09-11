@@ -68,12 +68,12 @@ double ssy_cent_real[nrow];
 double ssx_cent_real[ncol];
 double refx[nsshole];
 double refy[nsshole];
-double selec_widthx = 0.60; // selection width in x (dispersive plane)
-double selec_widthy = 0.45; // selection width in y
+//double selec_widthx = 0.60; // selection width in x (dispersive plane)
+//double selec_widthy = 0.45; // selection width in y
 //double selec_widthx = 0.65; // selection width in x (dispersive plane)
 //double selec_widthy = 0.5; // selection width in y 
-//double selec_widthx = 0.45;
-//double selec_widthy = 0.35;
+double selec_widthx = 0.45;
+double selec_widthy = 0.35;
 //double selec_widthx = 0.50;
 //double selec_widthy = 0.40;
 
