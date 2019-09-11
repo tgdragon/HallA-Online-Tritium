@@ -136,7 +136,7 @@ int main(int argc, char** argv){
       sprintf(newfname,"./nnL/coin_dragon2/tri_coin_%d.root",run);
     }
     else if(tflag==4){
-      sprintf(newfname,"./nnL/RHRS_single_dragon2/tri_Rsignle_%d.root",run);
+      sprintf(newfname,"./nnL/RHRS_single_dragon2/tri_Rsingle_%d.root",run);
     }
     else if(tflag==1){
       sprintf(newfname,"./nnL/LHRS_single_dragon/tri_Lsingle_%d.root",run);
