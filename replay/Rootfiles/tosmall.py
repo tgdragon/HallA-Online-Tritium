@@ -26,7 +26,7 @@ runfile = "h2.dat"
 #runfile = "Al_T2.dat"
 #runfile = "ssR.dat"
 
-thisfile = "nude_coin.py"
+thisfile = "tosmall.py"
 
 def nude_start(command):
     time.sleep(1.0)
@@ -39,13 +39,9 @@ def main():
     lines = inputfile.readlines()
     for line in lines:
         data = line.split()
-        com = "./nude_coin " + data[0]+ " " +data[1]
-        #com = "./maruhadaka " + data[0]+ " " +data[1] + " " +data[2] #stricter cut
-        #com = "./maruhadakaR " + data[0]+ " " +data[1] + " " +data[2] #stricter cut
-        #com = "root -l -q \"nude3.cc(" + data[0]+ "," +data[1] + "," + str(trigflag)
-        #com2 = com + ")\";"
-        #call(com,shell=True)
-        #comlist.append(com2)
+        com = "./maruhadaka " + data[0]+ " " +data[1] + " " +data[2] # Coin
+        #com = "./maruhadakaR " + data[0]+ " " +data[1] + " " +data[2] # RHRS single
+        #com = "./maruhadakaL " + data[0]+ " " +data[1] + " " +data[2] # LHRS single
         comlist.append(com)
     with ProcessPoolExecutor(max_workers=nworkers) as executor:
         executor.map(nude_start,comlist)
