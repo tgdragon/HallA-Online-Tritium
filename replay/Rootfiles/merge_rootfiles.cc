@@ -61,6 +61,9 @@ int main(int argc, char** argv){
   else if (!strcmp(inputfile,"Al_h22.dat")){
     sprintf(outfile,"%s/Al_h22.root",file_dir);
   }
+  else if (!strcmp(inputfile,"ss.dat")){
+    sprintf(outfile,"%s/ss.root",file_dir);
+  }
   else {
     sprintf(outfile,"%s/temp.root",file_dir);
   }
