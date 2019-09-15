@@ -12,10 +12,8 @@ void hist(){
   // ============================== //
   // ===== Open ROOT file ======== //
   // ============================== //
-  TFile* f1 = new TFile("T2_20190812.root");
-  //TFile* f1 = new TFile("Al.root");
+  TFile* f1 = new TFile("T2_20190912.root");
   TTree* t1 = (TTree*)f1->Get("tree");
-  
   
   // ============================ //
   // ===== 
@@ -25,29 +23,47 @@ void hist(){
   double mm[max];
   double ctime[max];
   double vz[max];
+  double vzl[max], vzr[max];
+  double moml[max], momr[max];
   
   t1->SetBranchAddress("ctime", &ctime);
   t1->SetBranchAddress("mm", &mm);
   t1->SetBranchAddress("R.a1.asum_c", &a1);
   t1->SetBranchAddress("R.a2.asum_c", &a2);
   t1->SetBranchAddress("vz_mean", &vz);
+  t1->SetBranchAddress("R.tr.vz", &vzr);
+  t1->SetBranchAddress("L.tr.vz", &vzl);
+  t1->SetBranchAddress("R.tr.p", &momr);
+  t1->SetBranchAddress("L.tr.p", &moml);
 
-  TH1F* hist1  = new TH1F("hist1","",100,-100.0,100.0);
+  
+  TH1F* hist1  = new TH1F("hist1","",250,-100.0,150.0);
+  //TH1F* hist1  = new TH1F("hist1","",125,-100.0,150.0);
+  //TH1F* hist1  = new TH1F("hist1","",100,-100.0,200.0);
+  //TH1F* hist1  = new TH1F("hist1","",50,-200.0,200.0);
   hist1->GetXaxis()->SetTitle("-B_{#Lambda} (MeV)");
-  hist1->GetYaxis()->SetTitle("Counts / 2 MeV");
+  //hist1->GetXaxis()->SetTitle("M - M_{#Lambda} (MeV/c^{2})");
+  hist1->GetYaxis()->SetTitle("Counts / MeV");
+  //hist1->GetXaxis()->SetRangeUser(-50.0,130.0);
   //TH1F* hist1  = new TH1F("hist1","",200,-100.0,100.0);
   TH1F* hist1_ = (TH1F*)hist1->Clone("hist1_");
-  TH1F* hist2  = new TH1F("hist2","",100,-15.0,15.0);
+  TH1F* hist2  = new TH1F("hist2","",300,-15.0,15.0);
   hist2->GetXaxis()->SetTitle("coin time (ns)");
-  hist2->GetYaxis()->SetTitle("Counts / 0.3 ns");
+  hist2->GetYaxis()->SetTitle("Counts / 100 ps");
   TH1F* hist2_ = (TH1F*)hist2->Clone("hist2_");
   TH1F* hist2__= (TH1F*)hist2->Clone("hist2__");
   TH1F* hist2_acc= (TH1F*)hist2->Clone("hist2_acc");
-
   hist2->GetXaxis()->SetRangeUser(-1.0,1.0);
   
+  TH2F* hist3 = new TH2F("hist3","",100,1.7,1.95,100,1.9,2.4);
+  hist3->GetXaxis()->SetTitle("p_{K} (GeV/c)");
+  hist3->GetYaxis()->SetTitle("p_{e'} (GeV/c)");
+  
+
+  hist1->SetMarkerStyle(4);
   hist1_->SetFillColor(9);
   hist1_->SetFillStyle(1001);
+  hist1_->SetMarkerStyle(22);
   hist2->SetLineColor(2);
   hist2_->SetLineColor(1);
   hist2__->SetLineColor(1);
@@ -72,10 +88,12 @@ void hist(){
     
     t1->GetEntry(i);
     
-    if(a1<1.0
-       && a2>3.0
-       && a2<13.0
-       && fabs(vz[0])<0.06 ){
+    if(a1 < 3.0
+       && a2 > 2.5
+       && a2 < 18.0
+       && fabs(vz[0])<0.08
+       && fabs(vzr[0]-vzl[0]-0.0067)<0.02
+       ){
        //&& fabs(vz[0])<0.25 ){
       hist2__->Fill(ctime[0]);
       
@@ -99,6 +117,7 @@ void hist(){
       if(abs(ctime[0])<1.0){
 	hist1 ->Fill(mm[0]);
 	hist2->Fill(ctime[0]);
+	hist3->Fill(momr[0],moml[0]);
       }
     }
     
@@ -108,8 +127,8 @@ void hist(){
   hist2_acc->Scale(1./6.);
 
   hist1 ->SetLineColor(1);
-  hist1_->SetMarkerStyle(25);
-  hist1_->SetMarkerSize(1);
+  hist1_->SetMarkerStyle(4);
+  hist1_->SetMarkerSize(1.0);
   hist1_->SetLineColor(1);
   
   
@@ -122,6 +141,13 @@ void hist(){
   //hist2_acc->Draw("same");
   hist2_->Draw("same");
   hist2->Draw("same");
+
+  TCanvas* c3 = new TCanvas("c3","c3");
+  hist3->Draw("col");
+
+  //c1->Print("mm_T2_20190912.png");
+  //c2->Print("ctime_T2_20190912.png");
+  //c3->Print("momcor_T2_20190912.png");
   
 }
   
