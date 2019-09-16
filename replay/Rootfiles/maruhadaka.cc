@@ -88,7 +88,7 @@ int main(int argc, char** argv){
   }
   
   double mcore, mtar;
-  if(hypflag==1 || hypflag==2){ // h2.dat or h22.dat
+  if(hypflag==1 || hypflag==2 || hypflag==32){ // h2.dat or h22.dat
     mtar  = mp;
     mcore = mL;
   }
@@ -104,7 +104,6 @@ int main(int argc, char** argv){
     mtar  = mAl27;
     mcore = mMg26+mL;
   }
-  
   
   int dataflag = 1;
   if (run>111400){
@@ -676,7 +675,8 @@ int main(int argc, char** argv){
     // ------------------------------------------- //
     if(//a1 > -10.0 && a1 < 30.0 
        a1 > -10.0 && a1 < 5.0 
-       && a2 > 2.0 && a2 < 18.0){
+       //&& a2 > 2.0 && a2 < 18.0){
+       && a2 > 0.0 && a2 < 30.0){
       acflag = true;
     }
     else acflag = false;
@@ -737,6 +737,8 @@ int main(int argc, char** argv){
 	double cor_rast = rast_x2/tan(13.2/180.*3.14159);
 	double rvz_cor = rvz[0] - cor_rast;
 	double lvz_cor = lvz[0] + cor_rast;
+	rvz[0] = rvz_cor;
+	lvz[0] = lvz_cor;
 	vz_mean[0] = (rvz_cor + lvz_cor)/2.0;
 	
 
