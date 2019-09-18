@@ -106,9 +106,13 @@ int main(int argc, char** argv){
   }
   
   int dataflag = 1;
+  double kcenter = 3.122;
   if (run>111400){
     dataflag = 2;
-    ch2time = 58.0e-12 * 1.0e+9;
+    kcenter = 3.212;
+    
+    //ch2time = 58.0e-12 * 1.0e+9; // apparently no need? (TG, Sep17, 2019)
+    
     toffset_R = -364.6-150.-15-0.788-0.113; // for H2_2
   }
   //int main(int argc, char** argv){
@@ -848,7 +852,7 @@ int main(int argc, char** argv){
 	meantime_R = meantime_R + yfp_cor_R + yfp_cor_L;
 	meantime_R = meantime_R-cor_L+75.4;
 	ctime[0] = -meantime_R;
-	double kcenter = 3.3;
+	
 	ctime[0] = ctime[0]  - kcenter;
 	bool vzflag = false;
 	
