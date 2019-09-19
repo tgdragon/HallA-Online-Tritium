@@ -110,9 +110,7 @@ int main(int argc, char** argv){
   if (run>111400){
     dataflag = 2;
     kcenter = 3.212;
-    
-    //ch2time = 58.0e-12 * 1.0e+9; // apparently no need? (TG, Sep17, 2019)
-    
+    ch2time = 58.0e-12 * 1.0e+9; // apparently no need? (TG, Sep17, 2019)
     toffset_R = -364.6-150.-15-0.788-0.113; // for H2_2
   }
   //int main(int argc, char** argv){
@@ -854,6 +852,9 @@ int main(int argc, char** argv){
 	ctime[0] = -meantime_R;
 	
 	ctime[0] = ctime[0]  - kcenter;
+	if (dataflag==2){
+	  ctime[0] = ctime[0]*0.96217438;
+	}
 	bool vzflag = false;
 	
 	if(hypflag==27){ // Al target
