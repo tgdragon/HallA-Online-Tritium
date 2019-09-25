@@ -1,8 +1,8 @@
 /*
-  "mixed_event.cc"
-  Mixed event analysis (coded but not checked yet)
+  mm.cc
+  Missing mass reconstuction 
   
-  Toshiyuki Gogami, Sep 14, 2019
+  Toshiyuki Gogami, Nov 9, 2018
 */
 
 const double me = 0.000511;
@@ -19,12 +19,11 @@ const double mL = 0.939565379*2.0 + 1.115683; // nn+L
 const double hrs_ang = 13.2 * 3.14159 / 180.;
 extern double CalcMM(double ee, double* par_ep, double* par_k, double mt);
 
+double nmix = 1;
 
-double nmix = 10;
-bool fit = true;
 
 void mixed_event(){
-  TFile* f1 = new TFile("T2_20190912.root");
+  TFile* f1 = new TFile("T2_20190920.root");
   TTree* t1 = (TTree*)f1->Get("tree");
   Double_t trig5;
   Double_t trig4;
@@ -144,15 +143,16 @@ void mixed_event(){
   h1_acc->SetFillStyle(3001);
   h1_acc_shift->SetLineColor(9);
 
-  double xmin = -300.0, xmax = 300.0;
-  int xbin = 300;
+  double xmin = -300.0, xmax = 300.0; int xbin = 300; // 2 MeV / bin
+  //double xmin = -300.0, xmax = 300.0; int xbin = 600; // 1 MeV / bin
+  //double xmin = -300.0, xmax = 300.0; int xbin = 200; // 3 MeV / bin
   TH1F* h2  = new TH1F("h2","",xbin,xmin,xmax);
   //TH1F* h2  = new TH1F("h2","",600,-300,300.);
   //h2->GetXaxis()->SetTitle("M_{x} - M_{#Lambda} (MeV/c^{2})");
   //h2->GetYaxis()->SetTitle("Counts / (2 MeV/c^{2})");
   h2->GetXaxis()->SetTitle("-B_{#Lambda} (MeV)");
   h2->GetYaxis()->SetTitle("Counts / 2 MeV");
-  h2->GetXaxis()->SetRangeUser(-100.0,200.0);
+  h2->GetXaxis()->SetRangeUser(-150.0,100.0);
   h2->SetLineColor(1);
   TH1F* h2_acc = (TH1F*)h2->Clone("h2_acc");
     
@@ -286,8 +286,8 @@ void mixed_event(){
     if(fabs(lvz[0])<0.1) zL_selection = true;
     else zL_selection = false;
     
-    if (fabs(rvz[0]-lvz[0]-0.0067)<0.03
-	&& fabs(vz_mean[0])<0.08){
+    if (fabs(rvz[0]-lvz[0])<0.025
+	&& fabs(vz_mean[0])<0.1){
       vz_selection =true;
     }
     else vz_selection = false;
@@ -295,7 +295,7 @@ void mixed_event(){
     if(a1 < 3.0) ac1_selection = true;
     else ac1_selection = false;
     
-    if(a2 > 2.0 && a2 <18.0 ) ac2_selection = true;
+    if(a2 > 3.0 && a2 <18.0 ) ac2_selection = true;
     else ac2_selection = false;
     
     if(l_cer>1500.0) lcer_selection = true;
@@ -336,7 +336,27 @@ void mixed_event(){
        1 == 1){
 
       
-
+      par_ep[0] = mom2[0];
+      par_ep[1] = th2[0];// right handed system
+      par_ep[2] = ph2[0];// right handed system
+      // ---- 400 um thick target -----
+      //double dpe  = 184.3e-6; // GeV/c
+      double dpep = 0.0; // GeV/c
+      //double dpk  = 0.0; // GeV/c
+      if(vz_mean[0]<8.0e-2){
+	dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
+	//dpk  = -1.31749 * sin(-4.61513*par_k[2] ) + 2.0368; // MeV/c
+      }
+      else {
+	dpep = 6.23e-3 * par_ep[2] + 0.403; // MeV/c
+	//dpk  = 3.158e-2* par_k[2]  + 0.4058;// MeV/c
+      }
+      dpep = dpep / 1000.0; // MeV/c --> GeV/c
+      //dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
+      //hallap = hallap - dpe;
+      par_ep[0] = par_ep[0] + dpep;
+      // par_k[0]  = par_k[0]  + dpk;
+      
       if (vz_selection == true
 	  && ac1_selection == true
 	  && ac2_selection == true ){
@@ -351,7 +371,8 @@ void mixed_event(){
 	  
 	  // ---- 400 um thick target -----
 	  double dpe  = 184.3e-6; // GeV/c
-	  double dpep = 0.0; // GeV/c
+	  //double dpep = 0.0; // GeV/c
+	  dpep = 0.0; // GeV/c
 	  double dpk  = 0.0; // GeV/c
 	  
 	  if(vz_mean[0]<8.0e-2){
@@ -408,19 +429,15 @@ void mixed_event(){
 	 //-8.0 < ctime[0] && ctime[0]<16.0
 	 ){
 	
-	if(acc1_selection ==true)      shift= 5.0*rf_sep;
-	else if(acc2_selection ==true) shift=-1.0*rf_sep;
-	else if(acc3_selection ==true) shift=-2.0*rf_sep;
-	else if(acc4_selection ==true) shift=-7.0*rf_sep;
-	else if(acc5_selection ==true) shift= 4.0*rf_sep;
-	else shift=-2222.0;
-
-	if(a1<3.0 && a2>2.0 && a2<18.0
-	     && fabs(rvz[0]-lvz[0]-0.0067)<0.03
-	     && fabs((rvz[0]+lvz[0])/2.0)<0.08 ){
-	  h1_acc       -> Fill(ctime[0]);
-	  h1_acc_shift -> Fill(ctime[0]+shift);
-	}
+	//if(acc1_selection ==true)      shift= 5.0*rf_sep;
+	//else if(acc2_selection ==true) shift=-1.0*rf_sep;
+	//else if(acc3_selection ==true) shift=-2.0*rf_sep;
+	//else if(acc4_selection ==true) shift=-7.0*rf_sep;
+	//else if(acc5_selection ==true) shift= 4.0*rf_sep;
+	//else shift=-2222.0;
+	
+	//h1_acc       -> Fill(ctime[0]);
+	//h1_acc_shift -> Fill(ctime[0]+shift);
 
 	
 	for(int j=0 ; j<(int)nmix ; j++){
@@ -434,9 +451,9 @@ void mixed_event(){
 	    t1->GetEntry(mixed_ent-ent);
 	  }
 
-	  if(a1<3.0 && a2>2.0 && a2<18.0
-	     && fabs(rvz[0]-lvz[0]-0.0067)<0.03
-	     && fabs((rvz[0]+lvz[0])/2.0)<0.08 ){
+	  if(a1<3.0 && a2>3.0 && a2<18.0
+	     && fabs(rvz[0]-lvz[0])<0.025
+	     && fabs((rvz[0]+lvz[0])/2.0)<0.1 ){
 	    par_k[0] = mom1[0];
 	    par_k[1] = th1[0]; 
 	    par_k[2] = ph1[0]; 
@@ -468,11 +485,11 @@ void mixed_event(){
   
   h1_acc_shift->Scale(1./5.);
   //h2_acc->Scale(1./5.);
-  h2_acc->Scale(1./nmix/5.);
+  //h2_acc->Scale(1./nmix/5.);
   //h2_acc->Scale(1./nmix/11.5);
 
   double dbin = (xmax-xmin)/(double)xbin;
-  double minx=-300.0,maxx=-10.0;
+  double minx=-100.0,maxx=-20.0;
   int fitmin = (minx-xmin)/dbin;
   int fitmax = (maxx-xmin)/dbin;
   double num1 = h2->Integral(fitmin,fitmax);
@@ -480,7 +497,10 @@ void mixed_event(){
   double mixscale = num1/num2;
   //cout << fitmin << "," << fitmax << ": "<< num1 << "/" << num2 << "= " << mixscale<< endl;
   cout << endl;
-  cout << minx << "-" << maxx << " MeV: mixscale = "<< num1 << "/" << num2 << "= " << mixscale<< endl;
+  cout << " " << minx << "-" << maxx << " MeV: mixscale = "<< num1 << "/" << num2 << "= " << mixscale<< endl;
+  cout << " " << nmix << " x 5 bunches" << " =  " << nmix * 5.0 << " (" << "effective scale = "
+       << num2 / num1 << ")" << endl;
+    
   cout << endl;
   TH1F* h2_acc2 = (TH1F*)h2_acc->Clone();
   for(int i=0 ; i<xbin ; i++){
@@ -489,7 +509,6 @@ void mixed_event(){
     h2_acc2->SetBinError( i+1,
 			  h2_acc->GetBinError(i+1)*mixscale);
   }
-
   
   TCanvas* c1 = new TCanvas("c1","c1");
   h1_->Draw();
