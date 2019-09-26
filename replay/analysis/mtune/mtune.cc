@@ -59,15 +59,15 @@ const double  Ztm = -0.15,Ztr=0.35;
 
 
 const int npeak = 2;
-double pcent[npeak] = {0.0, 76.959};
-//double pcent[npeak] = {0.0, 75.8};
+//double pcent[npeak] = {0.0, 76.959};
+double pcent[npeak] = {0.0, 75.076};
 //double pcent[npeak] = {0.0, 73.5}; 
 double pcent_real[npeak] = {0.0, 76.959};
-double selection_width[npeak] = {5.0, 6.0};
+double selection_width[npeak] = {17.0, 8.0};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
-double selection_width_2[npeak2] = {5.0};
+double selection_width_2[npeak2] = {13.0};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -98,18 +98,20 @@ int main(int argc, char** argv){
   char RootFileName2[500];
   if(argc==1){
     cout << " nite=0; no tuning" << endl;
-    sprintf(RootFileName1,"h2_20190803.root");
-    sprintf(RootFileName2,"h22_20190803.root");
+    sprintf(RootFileName1,"h2_20190919.root");
+    sprintf(RootFileName2,"h22_20190919.root");
+    //sprintf(RootFileName1,"h2_20190803.root");
+    //sprintf(RootFileName2,"h22_20190803.root");
     nite = 0;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20190803.root");
-    sprintf(RootFileName2,"h22_20190803.root");
+    sprintf(RootFileName1,"h2_20190919.root");
+    sprintf(RootFileName2,"h22_20190919.root");
   }
   else if(argc==3){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20190803.root");
+    sprintf(RootFileName1,"h2_20190919.root");
     sprintf(RootFileName2,"%s",argv[2]);
   }
   else if(argc==4){
@@ -414,14 +416,15 @@ int main(int argc, char** argv){
     
     //if(i+evshift<ent) t1->GetEntry(i+evshift); 
     //else t1->GetEntry(i-ent+evshift);
-    double kcenter = 3.3;
+    double kcenter = 0.0;
+    //double kcenter = 3.3;
     ctime[0] = ctime[0] - kcenter;
 
     
     
-    if(fabs(rvz[0]-lvz[0])<0.05
-       //&& fabs(vz_mean[0])<0.1
-       && fabs(vz_mean[0])<0.08
+    if(fabs(rvz[0]-lvz[0])<0.025
+       && fabs(vz_mean[0])<0.1
+       //&& fabs(vz_mean[0])<0.08
        && a1 < 3.0
        && a2 > 2.0
        && a2 < 18.0
@@ -487,7 +490,7 @@ int main(int argc, char** argv){
       par_k[1] = par_k[1] * Xptr + Xptm;
       par_k[2] = par_k[2] * Yptr + Yptm;
       
-      hallap = hallap/1000.0; // MeV/c --> GeV/c
+      //hallap = hallap/1000.0; // MeV/c --> GeV/c
 
       // ---- 400 um thick target -----
       double dpe  = 184.3e-6; // GeV/c
@@ -591,12 +594,13 @@ int main(int argc, char** argv){
     
     t2->GetEntry(i);
     
-    double kcenter = 3.3;
+    //double kcenter =3.3;
+    double kcenter =0.0;
     ctime_2[0] = ctime_2[0] - kcenter;
     
-    if(fabs(rvz_2[0]-lvz_2[0])<0.05
-       //&& fabs(vz_mean_2[0])<0.1
-       && fabs(vz_mean_2[0])<0.08
+    if(fabs(rvz_2[0]-lvz_2[0])<0.025
+       && fabs(vz_mean_2[0])<0.1
+       //&& fabs(vz_mean_2[0])<0.08
        && a1_2 < 3.0
        && a2_2 > 2.0
        && a2_2 < 18.0
@@ -664,7 +668,7 @@ int main(int argc, char** argv){
       par_k[1] = par_k[1] * Xptr + Xptm;
       par_k[2] = par_k[2] * Yptr + Yptm;
       
-      hallap_2 = hallap_2/1000.0; // MeV/c --> GeV/c
+      //hallap_2 = hallap_2/1000.0; // MeV/c --> GeV/c
 
       // ---- 400 um thick target -----
       double dpe  = 184.3e-6; // GeV/c
@@ -1247,26 +1251,26 @@ double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
   TVector3 vec_e (0.0, 0.0, pe);
   
   double pep  = pvec_ep[0];
-  double xpep = pvec_ep[1];
-  double ypep = pvec_ep[2];
+  double xpep = -pvec_ep[1];
+  double ypep = -pvec_ep[2];
   double px_ep, py_ep, pz_ep;
   pz_ep = pep / sqrt(1.0 + xpep*xpep + ypep*ypep);
   px_ep = xpep * pz_ep;
   py_ep = ypep * pz_ep;
   TVector3 vec_ep (px_ep, py_ep, pz_ep);
-  vec_ep.RotateY(hrs_ang);
+  vec_ep.RotateX(hrs_ang);
   //double Eep = sqrt(vec_ep * vec_ep);
   double Eep = sqrt(pep*pep + me*me);
   
   double pk  = pvec_k[0];
-  double xpk = pvec_k[1];
-  double ypk = pvec_k[2];
+  double xpk = -pvec_k[1];
+  double ypk = -pvec_k[2];
   double px_k, py_k, pz_k;
   pz_k = pk / sqrt(1.0 + xpk*xpk + ypk*ypk);
   px_k = xpk * pz_k;
   py_k = ypk * pz_k;
   TVector3 vec_k (px_k, py_k, pz_k);
-  vec_k.RotateY(-hrs_ang);
+  vec_k.RotateX(-hrs_ang);
   //double Ek = sqrt(vec_k * vec_k);
   double Ek = sqrt(pk*pk + mk*mk);
   
