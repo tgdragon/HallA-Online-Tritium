@@ -39,6 +39,9 @@ const double  Ztm = -0.15, Ztr=0.35;
 extern double calcf2t_plen(double* P, 
 			   double xf, double xpf,
 			   double yf, double ypf);
+extern double calcf2t_3rd(double*, 
+			  double, double, 
+			  double, double, double);
 extern double calcf2t_4th_2(double* P, double xf, double xpf, 
 			    double yf, double ypf, double zt);
 extern double calcf2t_5th(double*,
@@ -50,6 +53,7 @@ extern double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt);
 
 const int nParamT=35;     // 
 //double Plen_opt[nParamT]; // For path length matrix (3rd order)
+const int nParamT_3=56;   // For ctime correction
 const int nParamT_4=126;  // For xpt, ypt with z (4th order)
 const int nParamT_5=254;  // For xpt, ypt with z (5th order)
 
@@ -495,6 +499,28 @@ int main(int argc, char** argv){
   }
   Mmom_R.close();
   
+  char name_MctimeL[100];
+  char name_MctimeR[100];
+  sprintf(name_MctimeL,"matrices/ctimeL.dat"); 
+  sprintf(name_MctimeR,"matrices/ctimeR.dat"); 
+  ifstream MctimeL(name_MctimeL);
+  ifstream MctimeR(name_MctimeR);
+  double PctimeL[nParamT_3];
+  double PctimeR[nParamT_3];
+  for (int i=0;i<nParamT_3;i++){
+    double par = 0.0;
+    int p = 0;
+    MctimeL >> par >> p >> p >> p >> p >> p; 
+    PctimeL[i]=par;
+    
+    par = 0.0;
+    p   = 0;
+    MctimeR >> par >> p >> p >> p >> p >> p; 
+    PctimeR[i]=par;
+  }
+  MctimeR.close();
+
+  
   ifstream* s2_R_data;
   ifstream* s2_L_data;
   ifstream* rtime_ycor_data_L;
@@ -759,6 +785,7 @@ int main(int argc, char** argv){
 	mom2_own[0] = calcf2t_5th(Pmom_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
 	th2[0]  = calcf2t_4th_2(Pxp_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
 	ph2[0]  = calcf2t_4th_2(Pyp_L, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
+	double ctimecorL = calcf2t_3rd(PctimeL, XFP_L,XpFP_L,YFP_L,YpFP_L,vzt);
 	
 	XFP_L   = XFP_L*XFPr + XFPm;
 	XpFP_L  = XpFP_L*XpFPr + XpFPm;
@@ -781,6 +808,7 @@ int main(int argc, char** argv){
 	mom1_own[0] = calcf2t_5th(Pmom_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
 	th1_own[0]  = calcf2t_4th_2(Pxp_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
 	ph1_own[0]  = calcf2t_4th_2(Pyp_R, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
+	double ctimecorR = calcf2t_3rd(PctimeR, XFP_R,XpFP_R,YFP_R,YpFP_R,vzt);
 	
 	XFP_R   = XFP_R*XFPr + XFPm;
 	XpFP_R  = XpFP_R*XpFPr + XpFPm;
@@ -797,12 +825,12 @@ int main(int argc, char** argv){
 	double par_k[3];
 	
 	par_ep[0] = mom2_own[0];
-	par_ep[1] = th2[0]; // right handed system
-	par_ep[2] = ph2[0]; // right handed system
+	par_ep[1] = -th2[0]; // right handed system
+	par_ep[2] = -ph2[0]; // right handed system
 	
 	par_k[0]  = mom1_own[0];
-	par_k[1]  = th1_own[0]; // right handed system
-	par_k[2]  = ph1_own[0]; // right handed system
+	par_k[1]  = -th1_own[0]; // right handed system
+	par_k[2]  = -ph1_own[0]; // right handed system
 	
 	// ---- 400 um thick target -----
 	double dpe  = 184.3e-6; // GeV/c
@@ -855,11 +883,14 @@ int main(int argc, char** argv){
 	if (dataflag==2){
 	  ctime[0] = ctime[0]*0.96217438;
 	}
+	
+	ctime[0] = ctime[0] + ctimecorL + ctimecorR; // Ctime correction (TG, Sep 27, 2019)
+	
 	bool vzflag = false;
 	
 	if(hypflag==27){ // Al target
-	  if (fabs(vz_mean[0]-0.125)<0.02
-	      || fabs(vz_mean[0]+0.125)<0.02){
+	  if (fabs(vz_mean[0]-0.125)<0.04
+	      || fabs(vz_mean[0]+0.125)<0.04){
 	    vzflag=true;
 	  }
 	  else vzflag=false;
@@ -962,6 +993,56 @@ double Calc_FPcor(double* val, double* par){
   
 }
 
+
+//////////////////////////////////////////////////
+double calcf2t_3rd(double* P, double xf, double xpf, 
+		   double yf, double ypf, double zt)
+//////////////////////////////////////////////////
+{
+  // ------------------------------------------------ //
+  // ----- 3rd order using xf, xpf, yf, ypf, zt ----- //
+  // ------------------------------------------------ //
+  const int nMatT=3;  
+  const int nXf=3;
+  const int nXpf=3;
+  const int nYf=3;
+  const int nYpf=3;
+  const int nZt=3;
+  
+  double Y=0.;
+  double x=1.; 
+  int npar=0;
+  int a=0,b=0,c=0,d=0,e=0;
+  
+  for (int n=0;n<nMatT+1;n++){
+    for(e=0;e<n+1;e++){
+      for (d=0;d<n+1;d++){
+	for (c=0;c<n+1;c++){ 
+	  for (b=0;b<n+1;b++){
+	    for (a=0;a<n+1;a++){ 
+	      
+	      if (a+b+c+d+e==n){
+		if (a<=nXf && b<=nXpf && c<=nYf && d<=nYpf && e<=nZt){
+		  x = pow(xf,double(a))*pow(xpf,double(b))*
+		    pow(yf,double(c))*pow(ypf,double(d))*pow(zt,double(e));
+		}
+		else{
+		  x = 0.;
+		}
+		Y += x*P[npar];
+		npar++;
+	      }
+	      
+	    }
+	  }
+	}
+      }    
+    }
+  }
+  
+  return Y; 
+  
+}
 
 //////////////////////////////////////////////////
 double calcf2t_4th_2(double* P, double xf, double xpf, 
@@ -1078,7 +1159,7 @@ double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
   px_ep = xpep * pz_ep;
   py_ep = ypep * pz_ep;
   TVector3 vec_ep (px_ep, py_ep, pz_ep);
-  vec_ep.RotateY(hrs_ang);
+  vec_ep.RotateX(hrs_ang);
   //double Eep = sqrt(vec_ep * vec_ep);
   double Eep = sqrt(pep*pep + me*me);
   
@@ -1090,7 +1171,7 @@ double CalcMM(double ee, double* pvec_ep, double* pvec_k, double mt){
   px_k = xpk * pz_k;
   py_k = ypk * pz_k;
   TVector3 vec_k (px_k, py_k, pz_k);
-  vec_k.RotateY(-hrs_ang);
+  vec_k.RotateX(-hrs_ang);
   //double Ek = sqrt(vec_k * vec_k);
   double Ek = sqrt(pk*pk + mk*mk);
   
