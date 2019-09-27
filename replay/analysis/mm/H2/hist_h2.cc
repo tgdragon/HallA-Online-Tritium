@@ -12,7 +12,7 @@ void hist_h2(){
   // ============================== //
   // ===== Open ROOT file ======== //
   // ============================== //
-  TFile* f1 = new TFile("h2_20190912.root");
+  TFile* f1 = new TFile("h2_20190927.root");
   TTree* t1 = (TTree*)f1->Get("tree");
   
   // ============================ //
@@ -41,7 +41,7 @@ void hist_h2(){
   //hist1->GetXaxis()->SetTitle("-B_{#Lambda} (MeV)");
   hist1->GetXaxis()->SetTitle("M - M_{#Lambda} (MeV/c^{2})");
   hist1->GetYaxis()->SetTitle("Counts / MeV");
-  hist1->GetXaxis()->SetRangeUser(-50.0,130.0);
+  hist1->GetXaxis()->SetRangeUser(-80.0,150.0);
   //TH1F* hist1  = new TH1F("hist1","",200,-100.0,100.0);
   TH1F* hist1_ = (TH1F*)hist1->Clone("hist1_");
   TH1F* hist2  = new TH1F("hist2","",300,-15.0,15.0);
@@ -55,6 +55,13 @@ void hist_h2(){
   TH2F* hist3 = new TH2F("hist3","",100,1.7,1.95,100,1.9,2.4);
   hist3->GetXaxis()->SetTitle("p_{K} (GeV/c)");
   hist3->GetYaxis()->SetTitle("p_{e'} (GeV/c)");
+  
+  TH2F* hist4 = new TH2F("hist4","",200,-10.,15.,200,-0.1,5.0);
+  hist4->GetXaxis()->SetTitle("ctime (ns)");
+  hist4->GetYaxis()->SetTitle("AC1 NPE");
+  TH2F* hist5 = new TH2F("hist5","",200,-10.,15.,200,-0.5,30.0);
+  hist5->GetXaxis()->SetTitle("ctime (ns)");
+  hist5->GetYaxis()->SetTitle("AC2 NPE");
   
   
   hist1_->SetFillColor(9);
@@ -83,13 +90,19 @@ void hist_h2(){
     
     t1->GetEntry(i);
     
+    if(fabs(vz[0])<0.1
+       && fabs(vzr[0]-vzl[0])<0.025){
+      hist4->Fill(ctime[0],a1);
+      hist5->Fill(ctime[0],a2);
+    }
+    
     if(a1 < 3.0
        && a2 > 2.0
        && a2 < 18.0
-       && fabs(vz[0])<0.08
-       && fabs(vzr[0]-vzl[0]-0.0067)<0.02
+       && fabs(vz[0])<0.1
+       && fabs(vzr[0]-vzl[0])<0.025
        ){
-       //&& fabs(vz[0])<0.25 ){
+
       hist2__->Fill(ctime[0]);
       
       if(fabs(ctime[0]+step*4.0)<1.0
@@ -139,10 +152,16 @@ void hist_h2(){
 
   TCanvas* c3 = new TCanvas("c3","c3");
   hist3->Draw("col");
+  
+  TCanvas* c4 = new TCanvas("c4","c4");
+  c4->Divide(1,2);
+  c4->cd(1);gPad->SetLogz(1);hist4->Draw("col");
+  c4->cd(2);gPad->SetLogz(1);hist5->Draw("col");
 
-  //c1->Print("mm_H2_20190912.png");
-  //c2->Print("ctime_H2_20190912.png");
-  //c3->Print("momcor_H2_20190912.png");
+  //c1->Print("mm_H2_20190927.png");
+  //c2->Print("ctime_H2_20190927.png");
+  //c3->Print("momcor_H2_20190927.png");
+  //c4->Print("ctimeAC_H2_20190927.png");
   
 }
   
