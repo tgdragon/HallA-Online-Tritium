@@ -63,11 +63,11 @@ double pcent[npeak] = {0.0, 76.959};
 //double pcent[npeak] = {0.0, 76.15};
 //double pcent[npeak] = {0.0, 73.5}; 
 double pcent_real[npeak] = {0.0, 76.959};
-double selection_width[npeak] = {8.0, 5.0};
+double selection_width[npeak] = {7.0, 3.5};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
-double selection_width_2[npeak2] = {8.0};
+double selection_width_2[npeak2] = {6.5};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -1223,7 +1223,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==1 && peak_flag[i]==1){ // Sigma0 with H kinematics
-	w = 4.0;
+	w = 3.0;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==2){ // Lambda with T kinematics
