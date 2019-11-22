@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# -eq 0 ] 
+then
+	echo "Please enter run number"
+	read RUNNUM
+else
+	RUNNUM=$1
+fi
+
+rm t2root/Rootfiles/tritium_${RUNNUM}*.root
+rm /volatile/halla/triton/NNL_Rootfiles/tritium_${RUNNUM}*.root
+
+
+analyzer 'replay_coinc_new.C('$RUNNUM',-1,0,kTRUE,kFALSE,kFALSE)'
+mv t2root/Rootfiles/tritium_${RUNNUM}*.root /volatile/halla/triton/NNL_Rootfiles/.
+

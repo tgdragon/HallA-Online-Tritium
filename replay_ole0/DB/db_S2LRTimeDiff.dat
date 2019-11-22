@@ -1,0 +1,2 @@
+S2LRTimeDiff.condition = DR.bit5>0
+S2LRTimeDiff.glob_off = -100e-9

@@ -1,0 +1,11 @@
+
+# Cut definitions
+
+Block: RawDecode
+
+Block: Decode
+#Decode_master  DR.bit5>0
+
+Block: Reconstruct
+
+Block: Physics

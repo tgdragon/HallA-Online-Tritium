@@ -1,0 +1,26 @@
+if [ $# -eq 0 ] 
+then
+	echo "Please run again with a list of runs you would like to add to the wiki run list. "
+	exit 
+fi
+
+
+if [ $# -eq 2 ]
+then
+  if [ $2 -gt $1 ]
+  then
+    counter=$1
+    while [ $counter -le $2 ]
+    do
+      echo adding Run $counter
+      analyzer -b 'getinfo.C('$counter')'
+      ((counter++))
+    done
+  fi
+else
+  for  var in "$@"
+  do
+  echo adding Run $var
+  analyzer -b 'getinfo.C('$var')'
+  done
+fi
