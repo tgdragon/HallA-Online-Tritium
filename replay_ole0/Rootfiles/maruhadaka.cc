@@ -900,20 +900,24 @@ int main(int argc, char** argv){
 	  else vzflag=false;
 	}
 	else{ // Others
-	  if(fabs(vz_mean[0])<0.2){
+	  if(fabs(vz_mean[0])<0.25){
 	    vzflag=true;
 	  }
 	  else vzflag=false;
 	}
 	
 	if(tflag==5){
-	  if(fabs(ctime[0])<15.0 
-	     && fabs(rvz_cor - lvz_cor)<0.07 
+	  if(fabs(rvz_cor - lvz_cor)<0.07 
 	     && vzflag==true
 	     ){
-	    // ---- Filling data ------ //
-	    tnew->Fill(); // ---------- //
-	    //------------------------- //
+	    if(fabs(ctime[0])>3600.0){
+	      ctime[0] = ctime[0] - 3637.88;
+	    }
+	    if(fabs(ctime[0])<30.0){
+	      // ---- Filling data ------ //
+	      tnew->Fill(); // ---------- //
+	      //------------------------- //
+	    }
 	  }
 	}
 	else{
