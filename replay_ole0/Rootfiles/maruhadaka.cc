@@ -228,7 +228,7 @@ int main(int argc, char** argv){
   double ps_asum;
   double a1_tdc[24];
   double a2_tdc[26];
-  double rasterx, rastery;
+  //double rasterx, rastery;
   double dpp;
   UInt_t evid;
   
@@ -285,8 +285,8 @@ int main(int argc, char** argv){
   t1->SetBranchAddress("R.ps.asum_c", &ps_asum);
   t1->SetBranchAddress("R.a1.t_fadc", &a1_tdc);
   t1->SetBranchAddress("R.a2.t_fadc", &a2_tdc);
-  t1->SetBranchAddress("FbusRrb.Raster2.target.x", &rasterx);
-  t1->SetBranchAddress("FbusRrb.Raster2.target.y", &rastery);
+  //t1->SetBranchAddress("FbusRrb.Raster2.target.x", &rasterx);
+  //t1->SetBranchAddress("FbusRrb.Raster2.target.y", &rastery);
   double rast_curx, rast_cury;
   double rast_x, rast_y;
   double rast_x2; // raster x with new parameters
