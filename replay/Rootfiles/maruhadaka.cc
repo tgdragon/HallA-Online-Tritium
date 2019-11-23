@@ -228,7 +228,7 @@ int main(int argc, char** argv){
   double ps_asum;
   double a1_tdc[24];
   double a2_tdc[26];
-  double rasterx, rastery;
+  //double rasterx, rastery;
   double dpp;
   UInt_t evid;
   
@@ -285,8 +285,8 @@ int main(int argc, char** argv){
   t1->SetBranchAddress("R.ps.asum_c", &ps_asum);
   t1->SetBranchAddress("R.a1.t_fadc", &a1_tdc);
   t1->SetBranchAddress("R.a2.t_fadc", &a2_tdc);
-  t1->SetBranchAddress("FbusRrb.Raster2.target.x", &rasterx);
-  t1->SetBranchAddress("FbusRrb.Raster2.target.y", &rastery);
+  //t1->SetBranchAddress("FbusRrb.Raster2.target.x", &rasterx);
+  //t1->SetBranchAddress("FbusRrb.Raster2.target.y", &rastery);
   double rast_curx, rast_cury;
   double rast_x, rast_y;
   double rast_x2; // raster x with new parameters
@@ -900,20 +900,24 @@ int main(int argc, char** argv){
 	  else vzflag=false;
 	}
 	else{ // Others
-	  if(fabs(vz_mean[0])<0.2){
+	  if(fabs(vz_mean[0])<0.25){
 	    vzflag=true;
 	  }
 	  else vzflag=false;
 	}
 	
 	if(tflag==5){
-	  if(fabs(ctime[0])<15.0 
-	     && fabs(rvz_cor - lvz_cor)<0.07 
+	  if(fabs(rvz_cor - lvz_cor)<0.07 
 	     && vzflag==true
 	     ){
-	    // ---- Filling data ------ //
-	    tnew->Fill(); // ---------- //
-	    //------------------------- //
+	    if(fabs(ctime[0])>3600.0){
+	      ctime[0] = ctime[0] - 3637.88;
+	    }
+	    if(fabs(ctime[0])<30.0){
+	      // ---- Filling data ------ //
+	      tnew->Fill(); // ---------- //
+	      //------------------------- //
+	    }
 	  }
 	}
 	else{
