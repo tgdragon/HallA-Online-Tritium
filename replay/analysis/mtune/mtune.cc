@@ -498,13 +498,23 @@ int main(int argc, char** argv){
       double dpk  = 0.0; // GeV/c
       
       if(vz_mean[0]<8.0e-2){
-	dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
-	dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
+	double holiang = -par_ep[2] + hrs_ang; holiang = -holiang;
+	dpep = -1.35758 * sin(-4.59571*holiang) + 2.09;    // MeV/c
+	holiang = -par_k[2] - hrs_ang; holiang = holiang;
+	dpk  = -1.31749 * sin(-4.61513*holiang ) + 2.0368; // MeV/c
+	
+	//dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
+	//dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
 
       }
       else {
-	dpep =  6.23e-3 * par_ep[2] + 0.403; // MeV/c
-	dpk  = -3.158e-2* par_k[2]  + 0.4058;// MeV/c
+	double holiang = -par_ep[2] + hrs_ang; holiang = -holiang;
+	dpep =  6.23e-3 * holiang + 0.403; // MeV/c
+	holiang = -par_k[2] - hrs_ang; holiang = holiang;
+	dpk  = 3.158e-2* holiang  + 0.4058;// MeV/c
+	
+	//dpep =  6.23e-3 * par_ep[2] + 0.403; // MeV/c
+	//dpk  = -3.158e-2* par_k[2]  + 0.4058;// MeV/c
       }
       dpep = dpep / 1000.0; // MeV/c --> GeV/c
       dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
@@ -676,13 +686,23 @@ int main(int argc, char** argv){
       double dpk  = 0.0; // GeV/c
       
       if(vz_mean_2[0]<8.0e-2){
-	dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
-	dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
+	double holiang = -par_ep[2] + hrs_ang; holiang = -holiang;
+	dpep = -1.35758 * sin(-4.59571*holiang) + 2.09;    // MeV/c
+	holiang = -par_k[2] - hrs_ang; holiang = holiang;
+	dpk  = -1.31749 * sin(-4.61513*holiang ) + 2.0368; // MeV/c
+	
+	//dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
+	//dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
 
       }
       else {
-	dpep =  6.23e-3 * par_ep[2] + 0.403; // MeV/c
-	dpk  = -3.158e-2* par_k[2]  + 0.4058;// MeV/c
+	double holiang = -par_ep[2] + hrs_ang; holiang = -holiang;
+	dpep =  6.23e-3 * holiang + 0.403; // MeV/c
+	holiang = -par_k[2] - hrs_ang; holiang = holiang;
+	dpk  = 3.158e-2* holiang  + 0.4058;// MeV/c
+	
+	//dpep =  6.23e-3 * par_ep[2] + 0.403; // MeV/c
+	//dpk  = -3.158e-2* par_k[2]  + 0.4058;// MeV/c
       }
       dpep = dpep / 1000.0; // MeV/c --> GeV/c
       dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
@@ -1192,13 +1212,23 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
       double dpk  = 0.0; // GeV/c
       
       if( avz[i]*Ztr+Ztm <8.0e-2){
-	dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
-	dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
+	double holiang = -par_ep[2] + hrs_ang; holiang = -holiang;
+	dpep = -1.35758 * sin(-4.59571*holiang) + 2.09;    // MeV/c
+	holiang = -par_k[2] - hrs_ang; holiang = holiang;
+	dpk  = -1.31749 * sin(-4.61513*holiang ) + 2.0368; // MeV/c
+	
+	//dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
+	//dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
 
       }
       else {
-	dpep =  6.23e-3 * par_ep[2] + 0.403; // MeV/c
-	dpk  = -3.158e-2* par_k[2]  + 0.4058;// MeV/c
+	double holiang = -par_ep[2] + hrs_ang; holiang = -holiang;
+	dpep =  6.23e-3 * holiang + 0.403; // MeV/c
+	holiang = -par_k[2] - hrs_ang; holiang = holiang;
+	dpk  = 3.158e-2* holiang  + 0.4058;// MeV/c
+
+	//dpep =  6.23e-3 * par_ep[2] + 0.403; // MeV/c
+	//dpk  = -3.158e-2* par_k[2]  + 0.4058;// MeV/c
       }
       dpep = dpep / 1000.0; // MeV/c --> GeV/c
       dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
