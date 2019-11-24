@@ -910,10 +910,10 @@ int main(int argc, char** argv){
 	  if(fabs(rvz_cor - lvz_cor)<0.07 
 	     && vzflag==true
 	     ){
-	    if(fabs(ctime[0])>3600.0){
+	    if(3600.0<ctime[0] && ctime[0]<3665){
 	      ctime[0] = ctime[0] - 3637.88;
 	    }
-	    if(fabs(ctime[0])<30.0){
+	    if(fabs(ctime[0])<25.0){
 	      // ---- Filling data ------ //
 	      tnew->Fill(); // ---------- //
 	      //------------------------- //
