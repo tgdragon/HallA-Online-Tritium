@@ -911,7 +911,8 @@ int main(int argc, char** argv){
 	     && vzflag==true
 	     ){
 	    if(3600.0<ctime[0] && ctime[0]<3665){
-	      ctime[0] = ctime[0] - 3637.88;
+	      if (dataflag==1)ctime[0] = ctime[0] - 3637.88 - 12.76;
+	      else ctime[0] = ctime[0] - 3637.88;
 	    }
 	    if(fabs(ctime[0])<25.0){
 	      // ---- Filling data ------ //
