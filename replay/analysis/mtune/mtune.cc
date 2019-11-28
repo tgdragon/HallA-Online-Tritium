@@ -59,10 +59,9 @@ const double  Ztm = -0.15,Ztr=0.35;
 
 
 const int npeak = 2;
-double pcent[npeak] = {0.0, 76.959};
-//double pcent[npeak] = {0.0, 76.15};
-//double pcent[npeak] = {0.0, 73.5}; 
-double pcent_real[npeak] = {0.0, 76.959};
+//double pcent[npeak] = {0.0, 76.959}; // org
+double pcent[npeak] = {0.9, 78.3};
+double pcent_real[npeak] = {0.0, 76.959}; // org
 double selection_width[npeak] = {7.0, 3.5};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
@@ -98,20 +97,20 @@ int main(int argc, char** argv){
   char RootFileName2[500];
   if(argc==1){
     cout << " nite=0; no tuning" << endl;
-    sprintf(RootFileName1,"h2_20190919.root");
-    sprintf(RootFileName2,"h22_20190919.root");
+    sprintf(RootFileName1,"h2_20191125.root");
+    sprintf(RootFileName2,"h22_20191124.root");
     //sprintf(RootFileName1,"h2_20190803.root");
     //sprintf(RootFileName2,"h22_20190803.root");
     nite = 0;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20190919.root");
-    sprintf(RootFileName2,"h22_20190919.root");
+    sprintf(RootFileName1,"h2_20191125.root");
+    sprintf(RootFileName2,"h22_20191124.root");
   }
   else if(argc==3){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20190919.root");
+    sprintf(RootFileName1,"h2_20191125.root");
     sprintf(RootFileName2,"%s",argv[2]);
   }
   else if(argc==4){
@@ -500,11 +499,13 @@ int main(int argc, char** argv){
       if(vz_mean[0]<8.0e-2){
 	double holiang = -par_ep[2] + hrs_ang; holiang = -holiang;
 	dpep = -1.35758 * sin(-4.59571*holiang) + 2.09;    // MeV/c
+	//cout << holiang << " " << dpep << endl;
 	holiang = -par_k[2] - hrs_ang; holiang = holiang;
 	dpk  = -1.31749 * sin(-4.61513*holiang ) + 2.0368; // MeV/c
 	
 	//dpep = -1.35758 * sin(-4.59571*par_ep[2]) + 2.09;   // MeV/c
 	//dpk  = -1.31749 * sin( 4.61513*par_k[2] ) + 2.0368; // MeV/c
+	//cout << holiang << " " << dpk << endl;
 
       }
       else {
