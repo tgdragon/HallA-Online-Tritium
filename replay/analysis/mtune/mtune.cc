@@ -59,14 +59,15 @@ const double  Ztm = -0.15,Ztr=0.35;
 
 
 const int npeak = 2;
-//double pcent[npeak] = {0.0, 76.959}; // org
-double pcent[npeak] = {0.9, 78.3};
+double pcent[npeak] = {0.0, 76.959}; // org
+//double pcent[npeak] = {0.9, 78.3};
 double pcent_real[npeak] = {0.0, 76.959}; // org
-double selection_width[npeak] = {7.0, 3.5};
+double selection_width[npeak] = {5.0, 3.5};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
-double selection_width_2[npeak2] = {6.5};
+//double selection_width_2[npeak2] = {6.5};
+double selection_width_2[npeak2] = {5.0};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
