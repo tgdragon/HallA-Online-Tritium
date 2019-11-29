@@ -14,13 +14,14 @@ from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures.process import ProcessPoolExecutor 
 import numpy as np
 
-nworkers=15
+nworkers=5
 #nworkers=15
-runfile = "all_replay.dat"
+#runfile = "all_replay.dat"
 #runfile = "h2_replay.dat"
 #runfile = "h22_replay.dat"
 #runfile = "He3_replay.dat"
 #runfile = "T2_replay.dat"
+runfile = "dummy_replay.dat"
 
 thisfile = "gogogo.py"
 

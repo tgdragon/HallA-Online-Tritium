@@ -317,7 +317,7 @@ int main(int argc, char** argv){
   tnew->Branch("runid", &run,   "runid/I");
   tnew->Branch("evid",  &evid,  "evid/I" );
   tnew->Branch("HALLA_p",  &hallap,    "HALLA_p/D");
-  //tnew->Branch("HALLA_dpp", &dpp ,     "HALLA_dpp/D");
+  tnew->Branch("HALLA_dpp", &dpp ,     "HALLA_dpp/D");
   tnew->Branch("R.a1.asum_c", &a1,     "R.a1.asum_c/D");
   tnew->Branch("R.a2.asum_c", &a2,     "R.a2.asum_c/D");
   //tnew->Branch("RTDC.F1FirstHit", &rf1tdc, "RTDC.F1FirstHit[64]/D");
