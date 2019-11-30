@@ -7,13 +7,13 @@
 
 const double me = 0.000511;
 const double mk = 0.493677;
-//const double mp = 0.938272;
-//const double mL = 1.115683;
+const double mp = 0.938272;
+const double mL = 1.115683;
 //const double mp = 2.80839133; // He3 mass
 //const double mL = 1.875612762 + 1.115683; // d+L
 //
-const double mp = 2.80892086;
-const double mL = 0.939565379*2.0 + 1.115683; // nn+L
+//const double mp = 2.80892086;
+//const double mL = 0.939565379*2.0 + 1.115683; // nn+L
 
 
 const double hrs_ang = 13.2 * 3.14159 / 180.;
@@ -43,7 +43,8 @@ void mm(){
   //TFile* f1 = new TFile("h2.root");
   //TFile* f1 = new TFile("H2/h2_20190912.root");
   //TFile* f1 = new TFile("H2/T2_H_20190912.root");
-  TFile* f1 = new TFile("He3.root");
+  //TFile* f1 = new TFile("He3.root");
+  TFile* f1 = new TFile("h2_20191129.root");
   TTree* t1 = (TTree*)f1->Get("tree");
   Double_t trig5;
   Double_t trig4;
@@ -67,6 +68,7 @@ void mm(){
   double th2[max], ph2[max];
   Int_t runnum;
   double hallap;
+  double halladpp;
   double r_s2_t_pads[max];
   double l_s2_t_pads[max];
   double r_s2_nthit;
@@ -97,6 +99,7 @@ void mm(){
   
   t1->SetBranchAddress("fEvtHdr.fRun", &runnum    );
   t1->SetBranchAddress("HALLA_p", &hallap );
+  t1->SetBranchAddress("HALLA_dpp", &halladpp );
   //t1->SetBranchAddress("DR.T1", &trig1    );
   //t1->SetBranchAddress("DR.T4", &trig4    );
   //t1->SetBranchAddress("DR.T5", &trig5    );
@@ -147,7 +150,7 @@ void mm(){
   
   
   //TCanvas* c1 = new TCanvas("c1","c1");
-  TH1F* h1  = new TH1F("h1","",200,-20.,20.0); // e'K+ coincidence
+  TH1F* h1  = new TH1F("h1","",400,-20.,20.0); // e'K+ coincidence
   h1->GetXaxis()->SetTitle("coin time (ns)");
   h1->GetYaxis()->SetTitle("Counts / 200 ps");
   h1->GetXaxis()->SetRangeUser(-14.0,17.);
@@ -163,12 +166,13 @@ void mm(){
   h1_acc->SetFillStyle(3001);
   h1_acc_shift->SetLineColor(9);
   
-  TH1F* h2  = new TH1F("h2","",300,-300,300.);
-  //TH1F* h2  = new TH1F("h2","",600,-300,300.);
-  //h2->GetXaxis()->SetTitle("M_{x} - M_{#Lambda} (MeV/c^{2})");
+  //TH1F* h2  = new TH1F("h2","",300,-300,300.);
+  TH1F* h2  = new TH1F("h2","",600,-300,300.);
+  h2->GetXaxis()->SetTitle("M_{x} - M_{#Lambda} (MeV/c^{2})");
   //h2->GetYaxis()->SetTitle("Counts / (2 MeV/c^{2})");
-  h2->GetXaxis()->SetTitle("-B_{#Lambda} (MeV)");
-  h2->GetYaxis()->SetTitle("Counts / 2 MeV");
+  //h2->GetXaxis()->SetTitle("-B_{#Lambda} (MeV)");
+  //h2->GetYaxis()->SetTitle("Counts / 2 MeV");
+  h2->GetYaxis()->SetTitle("Counts / MeV");
   h2->GetXaxis()->SetRangeUser(-100.0,200.0);
   h2->SetLineColor(1);
   TH1F* h2_acc = (TH1F*)h2->Clone("h2_acc");
@@ -250,6 +254,7 @@ void mm(){
   bool zR_selection = false;
   bool zL_selection = false;
   bool vz_selection =false;
+  bool beam_selection = false;
   bool acc1_selection = false;
   bool acc2_selection = false;
   bool acc3_selection = false;
@@ -264,7 +269,7 @@ void mm(){
   double mm, mm_1st_cor;
   double shift;
 
-  ent = 50000; // for test
+  //ent = 50000; // for test
   // ================================== //
   // ======== Main loop =============== //
   // ================================== //
@@ -306,7 +311,7 @@ void mm(){
     else zL_selection = false;
     
     if (fabs(rvz[0]-lvz[0])<0.03
-       	&& fabs(vz_mean[0])<0.10){
+       	&& fabs(vz_mean[0])<0.1){
       vz_selection =true;
     }
     else vz_selection = false;
@@ -322,6 +327,9 @@ void mm(){
     
     if(fabs(ctime[0])<1.0) ctime_selection = true;
     else  ctime_selection = false;
+
+    if(hallap>4.311 && 4.314>hallap && fabs(halladpp+8.2e-6)<0.00005) beam_selection = true;
+    else  beam_selection = false;
     
     if(abs(ctime[0]+5.0*rf_sep)<1.0) acc1_selection = true;
     else acc1_selection = false;
@@ -349,8 +357,9 @@ void mm(){
     if( //zR_selection     == true
 	//&& zL_selection  == true
        vz_selection == true
-	&& ac1_selection == true
-	&& ac2_selection == true 
+       && ac1_selection == true
+       && ac2_selection == true
+       && beam_selection == true
        //&& lcer_selection==true
 	){
       
@@ -556,7 +565,7 @@ double CalcMM(double ee, double* par_ep, double* par_k, double mt){
   px_ep = xpep * pz_ep;
   py_ep = ypep * pz_ep;
   TVector3 vec_ep (px_ep, py_ep, pz_ep);
-  vec_ep.RotateY(hrs_ang);
+  vec_ep.RotateX(hrs_ang);
   //double Eep = sqrt(vec_ep * vec_ep);
   double Eep = sqrt(pep*pep + me*me);
   
@@ -568,7 +577,7 @@ double CalcMM(double ee, double* par_ep, double* par_k, double mt){
   px_k = xpk * pz_k;
   py_k = ypk * pz_k;
   TVector3 vec_k (px_k, py_k, pz_k);
-  vec_k.RotateY(-hrs_ang);
+  vec_k.RotateX(-hrs_ang);
   //double Ek = sqrt(vec_k * vec_k);
   double Ek = sqrt(pk*pk + mk*mk);
   
