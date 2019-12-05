@@ -217,7 +217,7 @@ void ReplayCore(
 
   sprintf(outname,OutFileFormat,STD_REPLAY_OUTPUT_DIR.Data(),nrun);
 	
-	if(output_Debug==1){		
+  if(output_Debug==1){		
   		cout << "OutFileFormat =    " << OutFileFormat << endl;
   		cout << "ROOTFILE_DIR_PREFIX =   " << ROOTFILE_DIR_PREFIX << endl;
   		cout << "STD_REPLAY_OUTPUT_DIR =   " << STD_REPLAY_OUTPUT_DIR.Data() << endl;
@@ -408,8 +408,11 @@ cout << endl
 	
 	run->Close();
 	if (!oldrun) oldrun = run;
+	
+	/* // Comment out for test (TG, Dec 4, 2019)
         if (final_nev >= nev)
           exit = true; // event limit reached
+	*/
       }
     }
 
