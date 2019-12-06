@@ -910,11 +910,42 @@ int main(int argc, char** argv){
 	  if(fabs(rvz_cor - lvz_cor)<0.07 
 	     && vzflag==true
 	     ){
-	    if(3600.0<ctime[0] && ctime[0]<3665){
-	      if (dataflag==1)ctime[0] = ctime[0] - 3637.88 - 12.76;
-	      else ctime[0] = ctime[0] - 3637.88;
+	    //if(3600.0<ctime[0] && ctime[0]<3665){
+	    //  if (dataflag==1)ctime[0] = ctime[0] - 3637.88 - 12.76;
+	    //  else ctime[0] = ctime[0] - 3637.88;
+	    //}
+	    if(dataflag==1){
+	      if(ctime[0]>1700.0 && 1850.0){
+		ctime[0] = ctime[0] - 1825.50;
+	      }
+	      else if (ctime[0]>3620.0 && ctime[0]<3678.0){
+		ctime[0] = ctime[0] - 3650.67;
+	      }
 	    }
-	    if(fabs(ctime[0])<25.0){
+	    else{
+	      if(ctime[0]>650.0 && 710.0){
+		ctime[0] = ctime[0] - 685.25;
+	      }
+	      else if (ctime[0]>1080.0 && ctime[0]<1175.0){
+		ctime[0] = ctime[0] - 1146.40;
+	      }
+	      else if (ctime[0]>2400.0 && ctime[0]<2535.0){
+		ctime[0] = ctime[0] - 2504.30;
+	      }
+	      else if (ctime[0]>2850.0 && ctime[0]<2990.0){
+		ctime[0] = ctime[0] - 2965.40;
+	      }
+	      else if (ctime[0]>3620.0 && ctime[0]<3659.0){
+		ctime[0] = ctime[0] - 3638.00;
+	      }
+	      
+	    }
+
+	    
+	    if(fabs(ctime[0])<50.0
+	       && run!=111508
+	       && run!=111537
+	       ){
 	      // ---- Filling data ------ //
 	      tnew->Fill(); // ---------- //
 	      //------------------------- //
