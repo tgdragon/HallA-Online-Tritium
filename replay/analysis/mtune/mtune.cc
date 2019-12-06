@@ -62,12 +62,12 @@ const int npeak = 2;
 double pcent[npeak] = {0.0, 76.959}; // org
 //double pcent[npeak] = {0.9, 78.3};
 double pcent_real[npeak] = {0.0, 76.959}; // org
-double selection_width[npeak] = {6.0, 6.0};
+double selection_width[npeak] = {5.5, 5.5};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
 //double selection_width_2[npeak2] = {6.5};
-double selection_width_2[npeak2] = {6.0};
+double selection_width_2[npeak2] = {5.5};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -98,20 +98,18 @@ int main(int argc, char** argv){
   char RootFileName2[500];
   if(argc==1){
     cout << " nite=0; no tuning" << endl;
-    sprintf(RootFileName1,"h2_20191125.root");
-    sprintf(RootFileName2,"h22_20191124.root");
-    //sprintf(RootFileName1,"h2_20190803.root");
-    //sprintf(RootFileName2,"h22_20190803.root");
+    sprintf(RootFileName1,"h2_20191206.root");
+    sprintf(RootFileName2,"h22_20191206.root");
     nite = 0;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191125.root");
-    sprintf(RootFileName2,"h22_20191124.root");
+    sprintf(RootFileName1,"h2_20191206.root");
+    sprintf(RootFileName2,"h22_20191206.root");
   }
   else if(argc==3){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191125.root");
+    sprintf(RootFileName1,"h2_20191206.root");
     sprintf(RootFileName2,"%s",argv[2]);
   }
   else if(argc==4){
@@ -1255,11 +1253,11 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==1 && peak_flag[i]==1){ // Sigma0 with H kinematics
-	w = 2.0;
+	w = 3.0;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==2){ // Lambda with T kinematics
-	w = 1.5;
+	w = 3.0;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       //if(tune_id[i]==1 && peak_flag[i]==0) chi2 = chi2/nL1;
