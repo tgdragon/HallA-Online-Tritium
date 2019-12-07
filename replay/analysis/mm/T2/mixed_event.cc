@@ -23,7 +23,7 @@ double nmix = 1;
 
 
 void mixed_event(){
-  TFile* f1 = new TFile("T2_20191129.root");
+  TFile* f1 = new TFile("../T2_20191206.root");
   TTree* t1 = (TTree*)f1->Get("tree");
   Double_t trig5;
   Double_t trig4;
@@ -143,16 +143,16 @@ void mixed_event(){
   h1_acc->SetFillStyle(3001);
   h1_acc_shift->SetLineColor(9);
 
-  //double xmin = -300.0, xmax = 300.0; int xbin = 300; // 2 MeV / bin
-  double xmin = -300.0, xmax = 300.0; int xbin = 600; // 1 MeV / bin
+  double xmin = -300.0, xmax = 300.0; int xbin = 300; // 2 MeV / bin
+  //double xmin = -300.0, xmax = 300.0; int xbin = 600; // 1 MeV / bin
   //double xmin = -300.0, xmax = 300.0; int xbin = 200; // 3 MeV / bin
   TH1F* h2  = new TH1F("h2","",xbin,xmin,xmax);
   //TH1F* h2  = new TH1F("h2","",600,-300,300.);
   //h2->GetXaxis()->SetTitle("M_{x} - M_{#Lambda} (MeV/c^{2})");
   //h2->GetYaxis()->SetTitle("Counts / (2 MeV/c^{2})");
   h2->GetXaxis()->SetTitle("-B_{#Lambda} (MeV)");
-  //h2->GetYaxis()->SetTitle("Counts / 2 MeV");
-  h2->GetYaxis()->SetTitle("Counts / MeV");
+  h2->GetYaxis()->SetTitle("Counts / 2 MeV");
+  //h2->GetYaxis()->SetTitle("Counts / MeV");
   //h2->GetYaxis()->SetTitle("Counts / 3 MeV");
   h2->GetXaxis()->SetRangeUser(-150.0,100.0);
   h2->SetLineColor(1);
@@ -617,7 +617,10 @@ void mixed_event(){
   h.Add(h1_acc);
   h.Add(h1_acc_shift);
   h.Add(h2);
-  h.Add(h2_acc);
+  h.Add(h2_acc2);
+  h.Add(h2_H);
+  h.Add(h2_H_acc2);
+  h.Add(h16);
   h.Add(h3);
   h.Add(h3_k);
   h.Add(h4);
