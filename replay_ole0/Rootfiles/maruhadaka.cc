@@ -942,7 +942,7 @@ int main(int argc, char** argv){
 	    }
 
 	    
-	    if(fabs(ctime[0])<50.0
+	    if(fabs(ctime[0])<25.0
 	       && run!=111508
 	       && run!=111537
 	       ){
