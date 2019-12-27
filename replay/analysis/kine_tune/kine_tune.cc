@@ -345,13 +345,13 @@ int main(int argc, char** argv){
   char name_kinepar[500];
   sprintf(name_kinepar,"./kinepar.dat"); 
   ifstream M_kinepar(name_kinepar);
-  double Pkine[2];
+  //double Pkine[2];
   //for (int i=0;i<nParamT/2;i++){
   for (int i=0;i<2;i++){
     double par=0.;
     int p=0;
     M_kinepar >> par;
-    Pkine[i] = par;
+    //Pkine[i] = par;
     OptPar[i+504] = par;
   }
   M_kinepar.close();
@@ -536,7 +536,8 @@ int main(int argc, char** argv){
       dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
       
       //hallap = hallap - dpe;
-      hallap = (hallap*Pkine[0])  - dpe;
+      //hallap = (hallap*Pkine[0])  - dpe;
+      hallap = (hallap*OptPar[504])  - dpe;
       par_ep[0] = par_ep[0] + dpep;
       par_k[0]  = par_k[0]  + dpk;
 
@@ -664,7 +665,7 @@ int main(int argc, char** argv){
 			     2);
       par_ep[0] = par_ep[0] * Momr + Momm;
       //par_ep[0] = par_ep[0] * HTkin_mom_scale; // T kinematics
-      par_ep[0] = par_ep[0] * HTkin_mom_scale * Pkine[1]; // T kinematics
+      par_ep[0] = par_ep[0] * HTkin_mom_scale * OptPar[505]; // T kinematics
       par_ep[1] = par_ep[1] * Xptr + Xptm;
       par_ep[2] = par_ep[2] * Yptr + Yptm;
       
@@ -726,7 +727,7 @@ int main(int argc, char** argv){
       dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
       
       //hallap_2 = hallap_2 - dpe
-      hallap_2 = (hallap_2*Pkine[0])  - dpe;
+      hallap_2 = (hallap_2*OptPar[504])  - dpe;
       par_ep[0] = par_ep[0] + dpep;
       par_k[0]  = par_k[0]  + dpk;
 
@@ -1120,8 +1121,8 @@ double tune(double* pa, int j)
   }
 
   for(int i=0 ; i<2 ; i++){
-    start[npar+504] = pa[npar+504];
-    step[npar+504] = pa[npar+504] * 5.0e-3; 
+    start[i+504] = pa[i+504];
+    step[i+504] = pa[i+504] * 5.0e-3; 
   }
   
   // ~~~ Chi-square ~~~~
