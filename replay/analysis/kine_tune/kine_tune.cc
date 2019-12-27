@@ -99,18 +99,18 @@ int main(int argc, char** argv){
   char RootFileName2[500];
   if(argc==1){
     cout << " nite=0; no tuning" << endl;
-    sprintf(RootFileName1,"h2_20191205_wide.root");
-    sprintf(RootFileName2,"h22_20191129.root");
+    sprintf(RootFileName1,"h2_20191212.root");
+    sprintf(RootFileName2,"h22_20191212.root");
     nite = 0;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191206.root");
-    sprintf(RootFileName2,"h22_20191206.root");
+    sprintf(RootFileName1,"h2_20191212.root");
+    sprintf(RootFileName2,"h22_20191212.root");
   }
   else if(argc==3){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191206.root");
+    sprintf(RootFileName1,"h2_20191212.root");
     sprintf(RootFileName2,"%s",argv[2]);
   }
   else if(argc==4){
