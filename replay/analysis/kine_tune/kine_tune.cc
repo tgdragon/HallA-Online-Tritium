@@ -62,12 +62,12 @@ const int npeak = 2;
 double pcent[npeak] = {0.0, 76.959}; // org
 //double pcent[npeak] = {0.9, 78.3};
 double pcent_real[npeak] = {0.0, 76.959}; // org
-double selection_width[npeak] = {4.0,4.0};
+double selection_width[npeak] = {3.0,3.0};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
 //double selection_width_2[npeak2] = {6.5};
-double selection_width_2[npeak2] = {4.0};
+double selection_width_2[npeak2] = {3.0};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -537,12 +537,13 @@ int main(int argc, char** argv){
       
       //hallap = hallap - dpe;
       //hallap = (hallap*Pkine[0])  - dpe;
-      hallap = (hallap*OptPar[504])  - dpe;
+      //hallap = (hallap*OptPar[504])  - dpe;
+      hallap = hallap;
       par_ep[0] = par_ep[0] + dpep;
       par_k[0]  = par_k[0]  + dpk;
 
       double mm;
-      mm = CalcMM(hallap, par_ep, par_k, mp);
+      mm = CalcMM((hallap*OptPar[504])-dpe, par_ep, par_k, mp);
       mm = (mm-mL)*1000.0;
       h2->Fill(mm);
       
@@ -584,7 +585,8 @@ int main(int argc, char** argv){
 	    //z_recon[ntune_event] = Zt[0]; // not scaled
 	    //cout << ntune_event << " " << mm << " " << peak_flag[ntune_event] << endl;
 
-	    beam_mom[ntune_event] = hallap + dpe; // NO mom loss correction
+	    //beam_mom[ntune_event] = hallap + dpe; // NO mom loss correction
+	    beam_mom[ntune_event] = hallap; // NO mom loss correction
 	    
 	    ntune_event++;
 
@@ -726,13 +728,15 @@ int main(int argc, char** argv){
       dpep = dpep / 1000.0; // MeV/c --> GeV/c
       dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
       
-      //hallap_2 = hallap_2 - dpe
-      hallap_2 = (hallap_2*OptPar[504])  - dpe;
+      //hallap_2 = hallap_2 - dpe;
+      //hallap_2 = (hallap_2*OptPar[504])  - dpe;
+      hallap_2 = hallap_2;
       par_ep[0] = par_ep[0] + dpep;
       par_k[0]  = par_k[0]  + dpk;
 
       double mm;
-      mm = CalcMM(hallap_2, par_ep, par_k, mp);
+      //mm = CalcMM(hallap_2, par_ep, par_k, mp);
+      mm = CalcMM((hallap_2*OptPar[504])-dpe, par_ep, par_k, mp);
       mm = (mm-mL)*1000.0;
       h2_2->Fill(mm);
       
@@ -767,7 +771,8 @@ int main(int argc, char** argv){
 	    //z_recon[ntune_event] = Zt[0]; // not scaled
 	    //cout << ntune_event << " " << mm << " " << peak_flag[ntune_event] << endl;
 
-	    beam_mom[ntune_event] = hallap_2 + dpe; // NO mom loss correction
+	    //beam_mom[ntune_event] = hallap_2 + dpe; // NO mom loss correction
+	    beam_mom[ntune_event] = hallap_2; // NO mom loss correction
 	    
 	    ntune_event++;
 
