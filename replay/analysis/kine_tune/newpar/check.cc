@@ -1,5 +1,5 @@
 /*
-  check.cc
+  mtune.cc
   This is a macro to optimize momentum/angle parameters
   
   Toshiyuki Gogami, Aug 4, 2019
@@ -62,17 +62,18 @@ const int npeak = 2;
 double pcent[npeak] = {0.0, 76.959}; // org
 //double pcent[npeak] = {0.9, 78.3};
 double pcent_real[npeak] = {0.0, 76.959}; // org
-double selection_width[npeak] = {5.5, 5.5};
+double selection_width[npeak] = {3.0,3.0};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
 //double selection_width_2[npeak2] = {6.5};
-double selection_width_2[npeak2] = {5.5};
+double selection_width_2[npeak2] = {3.0};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
 const int nParamT  = 252;  // Number of parameters (126 x 2); 4th
-const int nParamT2 = 504;  // Number of parameters (252 x 2); 5th
+//const int nParamT2 = 504;  // Number of parameters (252 x 2); 5th
+const int nParamT2 = 506;  // Number of parameters (252 x 2); 5th + 2 (for kinematic parameters)
 const int nmax = 3000;    // Number of events used for tuning
 
 double x[nmax],   y[nmax]; // Reft HRS
@@ -98,18 +99,18 @@ int main(int argc, char** argv){
   char RootFileName2[500];
   if(argc==1){
     cout << " nite=0; no tuning" << endl;
-    sprintf(RootFileName1,"h2_20191206.root");
-    sprintf(RootFileName2,"h22_20191206.root");
+    sprintf(RootFileName1,"h2_20191212.root");
+    sprintf(RootFileName2,"h22_20191212.root");
     nite = 0;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191206.root");
-    sprintf(RootFileName2,"h22_20191206.root");
+    sprintf(RootFileName1,"h2_20191212.root");
+    sprintf(RootFileName2,"h22_20191212.root");
   }
   else if(argc==3){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191206.root");
+    sprintf(RootFileName1,"h2_20191212.root");
     sprintf(RootFileName2,"%s",argv[2]);
   }
   else if(argc==4){
@@ -282,8 +283,8 @@ int main(int argc, char** argv){
   char name_Mmom_R[500];
   //sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); 
   //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
-  sprintf(name_Mmom_L,"newpar_lmom_0.dat"); 
-  sprintf(name_Mmom_R,"newpar_rmom_0.dat"); 
+  sprintf(name_Mmom_L,"newpar_lmom_14.dat"); 
+  sprintf(name_Mmom_R,"newpar_rmom_14.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   //double Pmom_L[nParamT], Pmom_R[nParamT];
@@ -341,6 +342,20 @@ int main(int argc, char** argv){
   Mxpt_L.close();
   Mypt_L.close();
 
+  char name_kinepar[500];
+  sprintf(name_kinepar,"./newpar_kine_14.dat"); 
+  ifstream M_kinepar(name_kinepar);
+  //double Pkine[2];
+  //for (int i=0;i<nParamT/2;i++){
+  for (int i=0;i<2;i++){
+    double par=0.;
+    int p=0;
+    M_kinepar >> par;
+    //Pkine[i] = par;
+    OptPar[i+504] = par;
+  }
+  M_kinepar.close();
+
   ntune_event = 0;
   
   TH1F* h1 = new TH1F("h1","",200,-10.0,10.0);
@@ -361,6 +376,7 @@ int main(int argc, char** argv){
   
   char tempc[500];
   char tempc2[500];
+  char tempc3[500];
   
   nL1 = 0;
   nS  = 0;
@@ -519,12 +535,15 @@ int main(int argc, char** argv){
       dpep = dpep / 1000.0; // MeV/c --> GeV/c
       dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
       
-      hallap = hallap - dpe;
+      //hallap = hallap - dpe;
+      //hallap = (hallap*Pkine[0])  - dpe;
+      //hallap = (hallap*OptPar[504])  - dpe;
+      hallap = hallap;
       par_ep[0] = par_ep[0] + dpep;
       par_k[0]  = par_k[0]  + dpk;
 
       double mm;
-      mm = CalcMM(hallap, par_ep, par_k, mp);
+      mm = CalcMM((hallap*OptPar[504])-dpe, par_ep, par_k, mp);
       mm = (mm-mL)*1000.0;
       h2->Fill(mm);
       
@@ -566,7 +585,8 @@ int main(int argc, char** argv){
 	    //z_recon[ntune_event] = Zt[0]; // not scaled
 	    //cout << ntune_event << " " << mm << " " << peak_flag[ntune_event] << endl;
 
-	    beam_mom[ntune_event] = hallap + dpe; // NO mom loss correction
+	    //beam_mom[ntune_event] = hallap + dpe; // NO mom loss correction
+	    beam_mom[ntune_event] = hallap; // NO mom loss correction
 	    
 	    ntune_event++;
 
@@ -646,7 +666,8 @@ int main(int argc, char** argv){
 			     (vz_mean_2[0]-Ztm)/Ztr,
 			     2);
       par_ep[0] = par_ep[0] * Momr + Momm;
-      par_ep[0] = par_ep[0] * HTkin_mom_scale; // T kinematics
+      //par_ep[0] = par_ep[0] * HTkin_mom_scale; // T kinematics
+      par_ep[0] = par_ep[0] * HTkin_mom_scale * OptPar[505]; // T kinematics
       par_ep[1] = par_ep[1] * Xptr + Xptm;
       par_ep[2] = par_ep[2] * Yptr + Yptm;
       
@@ -707,12 +728,15 @@ int main(int argc, char** argv){
       dpep = dpep / 1000.0; // MeV/c --> GeV/c
       dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
       
-      hallap_2 = hallap_2 - dpe;
+      //hallap_2 = hallap_2 - dpe;
+      //hallap_2 = (hallap_2*OptPar[504])  - dpe;
+      hallap_2 = hallap_2;
       par_ep[0] = par_ep[0] + dpep;
       par_k[0]  = par_k[0]  + dpk;
 
       double mm;
-      mm = CalcMM(hallap_2, par_ep, par_k, mp);
+      //mm = CalcMM(hallap_2, par_ep, par_k, mp);
+      mm = CalcMM((hallap_2*OptPar[504])-dpe, par_ep, par_k, mp);
       mm = (mm-mL)*1000.0;
       h2_2->Fill(mm);
       
@@ -747,7 +771,8 @@ int main(int argc, char** argv){
 	    //z_recon[ntune_event] = Zt[0]; // not scaled
 	    //cout << ntune_event << " " << mm << " " << peak_flag[ntune_event] << endl;
 
-	    beam_mom[ntune_event] = hallap_2 + dpe; // NO mom loss correction
+	    //beam_mom[ntune_event] = hallap_2 + dpe; // NO mom loss correction
+	    beam_mom[ntune_event] = hallap_2; // NO mom loss correction
 	    
 	    ntune_event++;
 
@@ -785,10 +810,12 @@ int main(int argc, char** argv){
     cout << endl;
     
     sprintf(tempc,  "./newpar/newpar_lmom_%d.dat",i); 
-    sprintf(tempc2, "./newpar/newpar_rmom_%d.dat",i); 
+    sprintf(tempc2, "./newpar/newpar_rmom_%d.dat",i);
+    sprintf(tempc3, "./newpar/newpar_kine_%d.dat",i); 
 
     ofstream * ofs1 = new ofstream(tempc);
     ofstream * ofs2 = new ofstream(tempc2);
+    ofstream * ofs3 = new ofstream(tempc3);
     int nppp = 0;
     const int nn = 5; // 4th order matrix using xf, xpf, y, ypf, and zt
     for(int i=0 ; i<nn+1 ; i++){
@@ -823,11 +850,14 @@ int main(int argc, char** argv){
 	}
       }
     }
+    *ofs3 << OptPar[504] << endl;
+    *ofs3 << OptPar[505] << endl;
     ofs1->close();
     ofs1->clear();
     ofs2->close();
     ofs2->clear();
-
+    ofs3->close();
+    ofs3->clear();
   }
   
   // =================================== //
@@ -1094,6 +1124,11 @@ double tune(double* pa, int j)
       }    
     }
   }
+
+  for(int i=0 ; i<2 ; i++){
+    start[i+504] = pa[i+504];
+    step[i+504] = pa[i+504] * 5.0e-3; 
+  }
   
   // ~~~ Chi-square ~~~~
   arglist[0] = 1;
@@ -1188,7 +1223,8 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
     par_ep[0] = par_ep[0]*Momr + Momm;
     
     if(tune_id[i]==2){
-      par_ep[0] = par_ep[0] * HTkin_mom_scale; // T kinematics
+      par_ep[0] = par_ep[0] * HTkin_mom_scale * param[505]; // T kinematics
+      
     }
     
     par_ep[1] = tgang_xp2[i];
@@ -1238,7 +1274,8 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
       par_k[0]  = par_k[0]  + dpk;
 
       double mm=0;
-      mm = CalcMM(beam_mom[i]-dpe, par_ep, par_k, mp);
+      mm = CalcMM(beam_mom[i]*param[504]-dpe, par_ep, par_k, mp);
+      //mm = CalcMM(beam_mom[i]-dpe, par_ep, par_k, mp);
       mm = (mm-mL)*1000.0;
       //cout << beam_mom[i] << " "
       //   << par_ep[0] << " " << par_ep[1] << " " << par_ep[2] << " "
