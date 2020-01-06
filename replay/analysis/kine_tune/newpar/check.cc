@@ -283,8 +283,8 @@ int main(int argc, char** argv){
   char name_Mmom_R[500];
   //sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); 
   //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
-  sprintf(name_Mmom_L,"newpar_lmom_14.dat"); 
-  sprintf(name_Mmom_R,"newpar_rmom_14.dat"); 
+  sprintf(name_Mmom_L,"newpar_lmom_9.dat"); 
+  sprintf(name_Mmom_R,"newpar_rmom_9.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   //double Pmom_L[nParamT], Pmom_R[nParamT];
@@ -343,7 +343,7 @@ int main(int argc, char** argv){
   Mypt_L.close();
 
   char name_kinepar[500];
-  sprintf(name_kinepar,"./newpar_kine_14.dat"); 
+  sprintf(name_kinepar,"./newpar_kine_9.dat"); 
   ifstream M_kinepar(name_kinepar);
   //double Pkine[2];
   //for (int i=0;i<nParamT/2;i++){
