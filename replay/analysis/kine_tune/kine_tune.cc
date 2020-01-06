@@ -62,12 +62,12 @@ const int npeak = 2;
 double pcent[npeak] = {0.0, 76.959}; // org
 //double pcent[npeak] = {0.9, 78.3};
 double pcent_real[npeak] = {0.0, 76.959}; // org
-double selection_width[npeak] = {3.0,3.0};
+double selection_width[npeak] = {2.5,2.5};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
 //double selection_width_2[npeak2] = {6.5};
-double selection_width_2[npeak2] = {3.0};
+double selection_width_2[npeak2] = {2.5};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -902,6 +902,7 @@ int main(int argc, char** argv){
     h.Add(c_chi2);
   }
   h.Write();
+  fnew->Close();
 
   app->Run();
   
@@ -1079,7 +1080,8 @@ double tune(double* pa, int j)
   const int nXpf=5;
   const int nYf=5;
   const int nYpf=5;
-  const int nZt=3; // The number of order is reduced for test (4-->3)
+  //const int nZt=3; // The number of order is reduced for test (4-->3)
+  const int nZt=5; // The number of order is increased (3-->5), 31Dec2019 
   //const int nZt=4;
   int npar=0;
   int a=0,b=0,c=0,d=0,e=0;
@@ -1096,14 +1098,19 @@ double tune(double* pa, int j)
 		  //step[npar] = 1.0e-2; 
 		  //step[npar] = 5.0e-2; 
 		  //step[npar] = pa[npar] * 0.05; // Sep2019
-		  step[npar] = pa[npar] * 5.0e-3; 
+		  step[npar] = pa[npar] * 5.0e-3;  //org
+		  //step[npar] = pa[npar] * 5.0e-2;  
+		  //step[npar] = 0.0;
 		  //step[npar] = 0.0; // no tuning for right
 		  start[npar+252] = pa[npar+252];
 		  //step[npar+252] = 1.0e-3;  
 		  //step[npar+252] = 1.0e-2;  
 		  //step[npar+252] = 5.0e-2;  
 		  //step[npar+252] = pa[npar+252]*0.05; // Sep2019
-		  step[npar+252] = pa[npar+252]*5.0e-3;  
+		  //step[npar+252] = pa[npar+252]*5.0e-4;  //org
+		  step[npar+252] = pa[npar+252]*5.0e-3;  //org
+		  //step[npar+252] = pa[npar+252]*5.0e-2;  
+		  //step[npar+252] = 0.0; // test, Dec 29, 2019 (Left off)
 		  //step[npar+252] = 0.0; // no tuning for Left
 		  if(step[npar]==0) step[npar]=0.05;
 		  if(step[npar+252]==0) step[npar+252]=0.05;
@@ -1127,7 +1134,9 @@ double tune(double* pa, int j)
 
   for(int i=0 ; i<2 ; i++){
     start[i+504] = pa[i+504];
-    step[i+504] = pa[i+504] * 5.0e-3; 
+    //step[i+504] = pa[i+504] * 5.0e-4; 
+    step[i+504] = pa[i+504] * 5.0e-3;  //org
+    //step[i+504] = pa[i+504] * 5.0e-2; 
   }
   
   // ~~~ Chi-square ~~~~
@@ -1286,15 +1295,15 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 
       double w = 1.0;
       if      (tune_id[i]==1 && peak_flag[i]==0){ // Lambda with H kinematics
-	w = 1.0;
+	w = 1.5;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==1 && peak_flag[i]==1){ // Sigma0 with H kinematics
-	w = 3.0;
+	w = 2.0;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==2){ // Lambda with T kinematics
-	w = 3.0;
+	w = 2.5;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       //if(tune_id[i]==1 && peak_flag[i]==0) chi2 = chi2/nL1;
