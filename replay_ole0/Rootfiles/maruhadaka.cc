@@ -499,6 +499,18 @@ int main(int argc, char** argv){
   }
   Mmom_R.close();
   
+  char name_kinepar[500];
+  sprintf(name_kinepar,"matrices/kine.dat"); 
+  ifstream M_kinepar(name_kinepar);
+  double Pkine[2];
+  for (int i=0;i<2;i++){
+    double par=0.;
+    int p=0;
+    M_kinepar >> par;
+    Pkine[i] = par;
+  }
+  M_kinepar.close();
+  
   char name_MctimeL[100];
   char name_MctimeR[100];
   sprintf(name_MctimeL,"matrices/ctimeL.dat"); 
@@ -801,7 +813,8 @@ int main(int argc, char** argv){
 	  mom2_own[0] = mom2_own[0];
 	}
 	else{ // T2 kinematics
-	  mom2_own[0] = mom2_own[0] * HTkin_mom_scale;
+	  //mom2_own[0] = mom2_own[0] * HTkin_mom_scale;
+	  mom2_own[0] = mom2_own[0] * HTkin_mom_scale * Pkine[1];
 	}
 	
 	// --- Right ---
@@ -854,12 +867,12 @@ int main(int argc, char** argv){
 	dpep = dpep / 1000.0; // MeV/c --> GeV/c
 	dpk  = dpk  / 1000.0; // MeV/c --> GeV/c
 	
-	hallap = hallap - dpe;
+	//hallap = hallap - dpe;
 	par_ep[0] = par_ep[0] + dpep;
 	par_k[0]  = par_k[0]  + dpk;
 	
 	
-	mm[0] = CalcMM(hallap, par_ep, par_k, mtar);
+	mm[0] = CalcMM( (hallap* Pkine[0]) - dpe, par_ep, par_k, mtar);
 	mm[0] = (mm[0]-mcore)*1000.0;
 	
 	
