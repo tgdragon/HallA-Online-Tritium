@@ -99,18 +99,18 @@ int main(int argc, char** argv){
   char RootFileName2[500];
   if(argc==1){
     cout << " nite=0; no tuning" << endl;
-    sprintf(RootFileName1,"h2_20191212.root");
-    sprintf(RootFileName2,"h22_20191212.root");
+    sprintf(RootFileName1,"h2_20200107.root");
+    sprintf(RootFileName2,"h22_20200107.root");
     nite = 0;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191212.root");
-    sprintf(RootFileName2,"h22_20191212.root");
+    sprintf(RootFileName1,"h2_20200107.root");
+    sprintf(RootFileName2,"h22_20200107.root");
   }
   else if(argc==3){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191212.root");
+    sprintf(RootFileName1,"h2_20200107.root");
     sprintf(RootFileName2,"%s",argv[2]);
   }
   else if(argc==4){
@@ -374,6 +374,9 @@ int main(int argc, char** argv){
   TH1F* h2_L_2 = (TH1F*)h2_2->Clone("h2_L_2");
   //TH1F* h2_S_2 = (TH1F*)h2_2->Clone("h2_S_h22");
   
+  TH1F* h3 = new TH1F("h3","",200,1200.,2000.);
+  
+  
   char tempc[500];
   char tempc2[500];
   char tempc3[500];
@@ -541,6 +544,9 @@ int main(int argc, char** argv){
       hallap = hallap;
       par_ep[0] = par_ep[0] + dpep;
       par_k[0]  = par_k[0]  + dpk;
+      
+      h3->Fill(par_k[0]*1000.);
+      //cout << par_ep[0] << endl;
 
       double mm;
       mm = CalcMM((hallap*OptPar[504])-dpe, par_ep, par_k, mp);
@@ -879,9 +885,14 @@ int main(int argc, char** argv){
   h2_L_2->SetLineColor(2);
   h2_L_2->Draw("same");
   
+  TCanvas*c5 = new TCanvas("c5","c5");
+  h3->Draw(); // right arm momentum 
+  
   TObjArray h(1);
   h.Add(c1);
   h.Add(c2);
+  h.Add(c3);
+  h.Add(c4);
   h.Add(h1);
   h.Add(h2);
   h.Add(h2_L);
@@ -902,9 +913,10 @@ int main(int argc, char** argv){
     h.Add(c_chi2);
   }
   h.Write();
-  fnew->Close();
+  //fnew->Close();
 
   app->Run();
+  
   
   return 0;
 } 
@@ -1098,8 +1110,8 @@ double tune(double* pa, int j)
 		  //step[npar] = 1.0e-2; 
 		  //step[npar] = 5.0e-2; 
 		  //step[npar] = pa[npar] * 0.05; // Sep2019
-		  step[npar] = pa[npar] * 5.0e-3;  //org
-		  //step[npar] = pa[npar] * 5.0e-2;  
+		  //step[npar] = pa[npar] * 5.0e-3;  //org
+		  step[npar] = pa[npar] * 5.0e-2;  
 		  //step[npar] = 0.0;
 		  //step[npar] = 0.0; // no tuning for right
 		  start[npar+252] = pa[npar+252];
@@ -1108,10 +1120,10 @@ double tune(double* pa, int j)
 		  //step[npar+252] = 5.0e-2;  
 		  //step[npar+252] = pa[npar+252]*0.05; // Sep2019
 		  //step[npar+252] = pa[npar+252]*5.0e-4;  //org
-		  step[npar+252] = pa[npar+252]*5.0e-3;  //org
-		  //step[npar+252] = pa[npar+252]*5.0e-2;  
+		  //step[npar+252] = pa[npar+252]*5.0e-3;  //org
+		  step[npar+252] = pa[npar+252]*5.0e-2;  
 		  //step[npar+252] = 0.0; // test, Dec 29, 2019 (Left off)
-		  //step[npar+252] = 0.0; // no tuning for Left
+		  step[npar+252] = 0.0; // no tuning for Left
 		  if(step[npar]==0) step[npar]=0.05;
 		  if(step[npar+252]==0) step[npar+252]=0.05;
 		}
@@ -1134,6 +1146,7 @@ double tune(double* pa, int j)
 
   for(int i=0 ; i<2 ; i++){
     start[i+504] = pa[i+504];
+    //step[i+504] = 0.0; // no tuning
     //step[i+504] = pa[i+504] * 5.0e-4; 
     step[i+504] = pa[i+504] * 5.0e-3;  //org
     //step[i+504] = pa[i+504] * 5.0e-2; 
@@ -1155,8 +1168,8 @@ double tune(double* pa, int j)
     
     //LLim[i] = pa[i] - pa[i]*0.8;
     //ULim[i] = pa[i] + pa[i]*0.8;
-    LLim[i] = pa[i] - 5.0; // temp
-    ULim[i] = pa[i] + 5.0; // temp
+    LLim[i] = pa[i] - 10.0; // temp
+    ULim[i] = pa[i] + 10.0; // temp
     
     minuit -> mnparm(i,pname,start[i],step[i],LLim[i],ULim[i],ierflg);
   }
@@ -1295,7 +1308,8 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 
       double w = 1.0;
       if      (tune_id[i]==1 && peak_flag[i]==0){ // Lambda with H kinematics
-	w = 1.5;
+	//w = 1.5;
+	w = 1.0;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==1 && peak_flag[i]==1){ // Sigma0 with H kinematics
@@ -1303,7 +1317,7 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==2){ // Lambda with T kinematics
-	w = 2.5;
+	w = 3.0;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       //if(tune_id[i]==1 && peak_flag[i]==0) chi2 = chi2/nL1;

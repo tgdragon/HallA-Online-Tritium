@@ -62,12 +62,12 @@ const int npeak = 2;
 double pcent[npeak] = {0.0, 76.959}; // org
 //double pcent[npeak] = {0.9, 78.3};
 double pcent_real[npeak] = {0.0, 76.959}; // org
-double selection_width[npeak] = {3.0,3.0};
+double selection_width[npeak] = {2.5,2.5};
 const int npeak2 = 1;
 double pcent_2[npeak2] = {0.0}; 
 double pcent_real_2[npeak2] = {0.0};
 //double selection_width_2[npeak2] = {6.5};
-double selection_width_2[npeak2] = {3.0};
+double selection_width_2[npeak2] = {2.5};
 int nL1, nS, nL2;
 
 //const int nParamT = 126;  // Number of parameters
@@ -99,18 +99,18 @@ int main(int argc, char** argv){
   char RootFileName2[500];
   if(argc==1){
     cout << " nite=0; no tuning" << endl;
-    sprintf(RootFileName1,"h2_20191212.root");
-    sprintf(RootFileName2,"h22_20191212.root");
+    sprintf(RootFileName1,"h2_20200107.root");
+    sprintf(RootFileName2,"h22_20200107.root");
     nite = 0;
   }
   else if(argc==2){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191212.root");
-    sprintf(RootFileName2,"h22_20191212.root");
+    sprintf(RootFileName1,"h2_20200107.root");
+    sprintf(RootFileName2,"h22_20200107.root");
   }
   else if(argc==3){
     nite = atoi(argv[1]);
-    sprintf(RootFileName1,"h2_20191212.root");
+    sprintf(RootFileName1,"h2_20200107.root");
     sprintf(RootFileName2,"%s",argv[2]);
   }
   else if(argc==4){
@@ -266,7 +266,7 @@ int main(int argc, char** argv){
   t2->SetBranchAddress("R.ps.asum_c", &ps_asum_2);
   t2->SetBranchAddress("ctime", &ctime_2);
   
-  TFile* fnew = new TFile("check_tune.root","recreate");
+  TFile* fnew = new TFile("check.root","recreate");
   //TTree* tnew = new TTree("tree","check for LHRS SS");
   //tnew->Branch("Xt",   &Xt,   "Xt/D");
   //tnew->Branch("Yt",   &Yt,   "Yt/D");
@@ -283,8 +283,8 @@ int main(int argc, char** argv){
   char name_Mmom_R[500];
   //sprintf(name_Mmom_L,"../matrices/mom_LHRS_4.dat"); 
   //sprintf(name_Mmom_R,"../matrices/mom_RHRS_4.dat"); 
-  sprintf(name_Mmom_L,"newpar_lmom_9.dat"); 
-  sprintf(name_Mmom_R,"newpar_rmom_9.dat"); 
+  sprintf(name_Mmom_L,"newpar_lmom_1.dat"); 
+  sprintf(name_Mmom_R,"newpar_rmom_1.dat"); 
   ifstream Mmom_L(name_Mmom_L);
   ifstream Mmom_R(name_Mmom_R);
   //double Pmom_L[nParamT], Pmom_R[nParamT];
@@ -343,7 +343,7 @@ int main(int argc, char** argv){
   Mypt_L.close();
 
   char name_kinepar[500];
-  sprintf(name_kinepar,"./newpar_kine_9.dat"); 
+  sprintf(name_kinepar,"./newpar_kine_1.dat"); 
   ifstream M_kinepar(name_kinepar);
   //double Pkine[2];
   //for (int i=0;i<nParamT/2;i++){
@@ -373,6 +373,9 @@ int main(int argc, char** argv){
   TH1F* h2_2 = new TH1F("h2_2","",200,-50.,150.0);
   TH1F* h2_L_2 = (TH1F*)h2_2->Clone("h2_L_2");
   //TH1F* h2_S_2 = (TH1F*)h2_2->Clone("h2_S_h22");
+  
+  TH1F* h3 = new TH1F("h3","",200,1200.,2000.);
+  
   
   char tempc[500];
   char tempc2[500];
@@ -541,6 +544,9 @@ int main(int argc, char** argv){
       hallap = hallap;
       par_ep[0] = par_ep[0] + dpep;
       par_k[0]  = par_k[0]  + dpk;
+      
+      h3->Fill(par_k[0]*1000.);
+      //cout << par_ep[0] << endl;
 
       double mm;
       mm = CalcMM((hallap*OptPar[504])-dpe, par_ep, par_k, mp);
@@ -879,9 +885,14 @@ int main(int argc, char** argv){
   h2_L_2->SetLineColor(2);
   h2_L_2->Draw("same");
   
+  TCanvas*c5 = new TCanvas("c5","c5");
+  h3->Draw(); // right arm momentum 
+  
   TObjArray h(1);
   h.Add(c1);
   h.Add(c2);
+  h.Add(c3);
+  h.Add(c4);
   h.Add(h1);
   h.Add(h2);
   h.Add(h2_L);
@@ -902,8 +913,10 @@ int main(int argc, char** argv){
     h.Add(c_chi2);
   }
   h.Write();
+  //fnew->Close();
 
   app->Run();
+  
   
   return 0;
 } 
@@ -1079,7 +1092,8 @@ double tune(double* pa, int j)
   const int nXpf=5;
   const int nYf=5;
   const int nYpf=5;
-  const int nZt=3; // The number of order is reduced for test (4-->3)
+  //const int nZt=3; // The number of order is reduced for test (4-->3)
+  const int nZt=5; // The number of order is increased (3-->5), 31Dec2019 
   //const int nZt=4;
   int npar=0;
   int a=0,b=0,c=0,d=0,e=0;
@@ -1096,15 +1110,20 @@ double tune(double* pa, int j)
 		  //step[npar] = 1.0e-2; 
 		  //step[npar] = 5.0e-2; 
 		  //step[npar] = pa[npar] * 0.05; // Sep2019
-		  step[npar] = pa[npar] * 5.0e-3; 
+		  step[npar] = pa[npar] * 5.0e-3;  //org
+		  //step[npar] = pa[npar] * 5.0e-2;  
+		  //step[npar] = 0.0;
 		  //step[npar] = 0.0; // no tuning for right
 		  start[npar+252] = pa[npar+252];
 		  //step[npar+252] = 1.0e-3;  
 		  //step[npar+252] = 1.0e-2;  
 		  //step[npar+252] = 5.0e-2;  
 		  //step[npar+252] = pa[npar+252]*0.05; // Sep2019
-		  step[npar+252] = pa[npar+252]*5.0e-3;  
-		  //step[npar+252] = 0.0; // no tuning for Left
+		  //step[npar+252] = pa[npar+252]*5.0e-4;  //org
+		  //step[npar+252] = pa[npar+252]*5.0e-3;  //org
+		  //step[npar+252] = pa[npar+252]*5.0e-2;  
+		  //step[npar+252] = 0.0; // test, Dec 29, 2019 (Left off)
+		  step[npar+252] = 0.0; // no tuning for Left
 		  if(step[npar]==0) step[npar]=0.05;
 		  if(step[npar+252]==0) step[npar+252]=0.05;
 		}
@@ -1127,7 +1146,10 @@ double tune(double* pa, int j)
 
   for(int i=0 ; i<2 ; i++){
     start[i+504] = pa[i+504];
-    step[i+504] = pa[i+504] * 5.0e-3; 
+    step[i+504] = 0.0; // no tuning
+    //step[i+504] = pa[i+504] * 5.0e-4; 
+    //step[i+504] = pa[i+504] * 5.0e-3;  //org
+    //step[i+504] = pa[i+504] * 5.0e-2; 
   }
   
   // ~~~ Chi-square ~~~~
@@ -1286,15 +1308,15 @@ void fcn(int &nPar, double* /*grad*/, double &fval, double* param, int /*iflag*/
 
       double w = 1.0;
       if      (tune_id[i]==1 && peak_flag[i]==0){ // Lambda with H kinematics
-	w = 1.0;
+	w = 1.5;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==1 && peak_flag[i]==1){ // Sigma0 with H kinematics
-	w = 3.0;
+	w = 2.0;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       else if (tune_id[i]==2){ // Lambda with T kinematics
-	w = 3.0;
+	w = 2.5;
 	chi2 = chi2 + (w * pow(residual/sigma,2.0)); // weight
       }
       //if(tune_id[i]==1 && peak_flag[i]==0) chi2 = chi2/nL1;
