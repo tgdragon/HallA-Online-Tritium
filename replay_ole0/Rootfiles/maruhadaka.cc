@@ -476,7 +476,8 @@ int main(int argc, char** argv){
   Myp_R.close();
   
   char name_Mmom_L[500];
-  sprintf(name_Mmom_L,"matrices/mom_LHRS_5_upto3.dat");
+  //sprintf(name_Mmom_L,"matrices/mom_LHRS_5_upto3.dat");
+  sprintf(name_Mmom_L,"matrices/mom_LHRS_5.dat");
   ifstream Mmom_L(name_Mmom_L);
   double Pmom_L[nParamT_5];
   for (int i=0;i<nParamT_5;i++){
@@ -488,7 +489,7 @@ int main(int argc, char** argv){
   Mmom_L.close();
   
   char name_Mmom_R[500];
-  sprintf(name_Mmom_R,"matrices/mom_RHRS_5_upto3.dat");
+  sprintf(name_Mmom_R,"matrices/mom_RHRS_5.dat");
   ifstream Mmom_R(name_Mmom_R);
   double Pmom_R[nParamT_5];
   for (int i=0;i<nParamT_5;i++){
@@ -714,10 +715,11 @@ int main(int argc, char** argv){
     // ------------------------------------------- //
     // ------ Aerogel Cherenkov selection -------- //
     // ------------------------------------------- //
-    if(//a1 > -10.0 && a1 < 30.0 
+    if(//a1 > -10.0 && a1 < 30.0 // for test
        a1 > -10.0 && a1 < 5.0 
        //&& a2 > 2.0 && a2 < 18.0){
        && a2 > 0.0 && a2 < 30.0){
+       //&& a2 > -5.0 && a2 < 50.0){ // for test
       acflag = true;
     }
     else acflag = false;
